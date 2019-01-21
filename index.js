@@ -37,6 +37,9 @@ client.aliases = new Enmap();
 // and makes things extremely easy for this purpose.
 client.settings = new Enmap({name: "settings"});
 
+// Import the quotes file to allow the quote system to work properly.
+const quotes = require("./modules/quotes.json");
+
 // We're doing real fancy node 8 async/await stuff here, and to do that
 // we need to wrap stuff in an anonymous function. It's annoying but it works.
 
