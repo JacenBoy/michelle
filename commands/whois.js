@@ -10,6 +10,8 @@ exports.run = async (client, message, args, level) => { // eslint-disable-line n
   } else {
     var userget;
   }
+
+  message.channel.send("I don't actually work yet lmao");
 };
   
 exports.conf = {
