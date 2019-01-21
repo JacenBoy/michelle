@@ -1,6 +1,10 @@
 # Michelle
 A Discord bot based on [Guide Bot](https://github.com/AnIdiotsGuide/guidebot). Aims to add features beneficial to anime servers.
 
+## Features
+* Quotes - Generate a random quote from a database.
+* Anime Search - Find information about a specific anime from Kitsu.
+
 ## Installing/Configuring
 These are not comprehensive instructions. However, Node-based bots are fairly straightforward to install. You need the latest version of Node.js installed to run the bot.
 
