@@ -1,7 +1,7 @@
 // Pulls a random quote from a JSON file and displays it.
 
   exports.run = async (client, message, args, level) => {
-    randquote = quotes.random();
+    randquote = client.quotes.random();
     client.logger.debug(`Quote: ${randquote.quote}`);
     client.logger.debug(`Attribution: ${randquote.attribution}`);
     const embed = {"embed": {"title": randquote.quote, "description": randquote.description}};
