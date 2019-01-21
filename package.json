@@ -13,7 +13,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/An-Idiots-Guide/guidebot.git"
+    "url": "git+https://github.com/JacenBoy/michelle.git"
   },
   "author": "JacenBoy <jacenboy1@gmail.com> (https://jacenboy.com)",
   "contributors": [
@@ -22,9 +22,9 @@
   ],
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/An-Idiots-Guide/guidebot/issues"
+    "url": "https://github.com/JacenBoy/michelle/issues"
   },
-  "homepage": "https://github.com/An-Idiots-Guide/guidebot#readme",
+  "homepage": "https://github.com/JacenBoy/michelle#readme",
   "dependencies": {
     "better-sqlite-pool": "^0.1.2",
     "chalk": "^2.3.0",
