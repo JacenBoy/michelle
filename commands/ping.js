@@ -1,8 +1,6 @@
-// "Pong" is overdone, so find a prettier ping response
-
 exports.run = async (client, message, args, level) => { // eslint-disable-line no-unused-vars
-  const msg = await message.channel.send("Ping?");
-  msg.edit(`Pong! Latency is ${msg.createdTimestamp - message.createdTimestamp}ms. API Latency is ${Math.round(client.ping)}ms`);
+  const msg = await message.channel.send("Pinging Discord");
+  msg.edit(`Reply from Discord: time=${msg.createdTimestamp - message.createdTimestamp}ms api-latency=${Math.round(client.ping)}ms`);
 };
 
 exports.conf = {
@@ -14,7 +12,7 @@ exports.conf = {
 
 exports.help = {
   name: "ping",
-  category: "Miscelaneous",
-  description: "It like... Pings. Then Pongs. And it's not Ping Pong.",
+  category: "System",
+  description: "Tests latency between the bot and Discord.",
   usage: "ping"
 };
