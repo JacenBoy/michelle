@@ -4,7 +4,7 @@
     randquote = client.quotes.random();
     client.logger.debug(`Quote: ${randquote.quote}`);
     client.logger.debug(`Attribution: ${randquote.attribution}`);
-    const embed = {"embed": {"description": randquote.quote, "description": randquote.attribution}};
+    const embed = {"embed": {"title": randquote.quote, "description": randquote.attribution}};
     message.channel.send(embed);
   };
   
