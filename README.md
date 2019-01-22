@@ -16,3 +16,6 @@ These are not comprehensive instructions. However, Node-based bots are fairly st
 2. From the command line, run `npm install` to install the required packages.
 3. Make a copy of `config.js.example` and rename it to `config.js`. Replace the owner ID with your user ID, and the token with your bot's token. Replace the prefix with a prefix of your choice.
 4. From the command line, run `npm start` to launch the bot. Make sure to invite it to your server.
+
+## Help
+If you have trouble with the bot, you can contact me on [Twitter (@jacenboy)](https://twitter.com/jacenboy), on [my Discord server](https://discord.gg/6wgy6jE), or by opening a bug report here on GitHub.
