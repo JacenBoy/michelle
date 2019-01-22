@@ -32,7 +32,7 @@ exports.run = async (client, message, args, level) => {
       "description": strsyn,
       "image": { "url": aniresult.posterImage.small },
       "fields": [
-        { "name": "Rating:", "value": `${anirating} % Approval`, "inline": true },
+        { "name": "Rating:", "value": `${anirating}% Approval`, "inline": true },
         { "name": "Episodes:", "value":  `${epcount.toString()} (${aniresult.subtype})`, "inline": true },
         { "name": "Status:", "value": anistatus, "inline": true }
       ]
@@ -43,7 +43,7 @@ exports.run = async (client, message, args, level) => {
 
 exports.conf = {
   enabled: true,
-  guildOnly: true,
+  guildOnly: false,
   aliases: [],
   permLevel: "User"
 };
