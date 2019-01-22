@@ -13,12 +13,11 @@ exports.run = async (client, message, args, level) => {
       }
     }
     client.kitsu.getUser(aniname, 0).then(results => {
-      var aniresult = results[0].attributes;
-      if (!aniresult.name) {
+      if (!results[0]) {
         message.channel.send("No results found");
         return;
       }
-
+      var aniresult = results[0].attributes;
       var userbio = aniresult.about || "No bio provided.";
       var followers = aniresult.followersCount || 0;
       var following = aniresult.followingCount || 0;
