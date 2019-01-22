@@ -1,5 +1,6 @@
 /* eslint-disable linebreak-style */
 /* eslint-disable no-unused-vars */
+/* eslint-disable no-redeclare */
 // Pulls a random quote from a JSON file and displays it.
 
 exports.run = async (client, message, args, level) => {

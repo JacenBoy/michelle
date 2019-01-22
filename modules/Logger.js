@@ -1,4 +1,6 @@
 /* eslint-disable linebreak-style */
+/* eslint-disable no-unused-vars */
+/* eslint-disable no-redeclare */
 /*
 Logger class for easy and aesthetically pleasing console logging 
 */
