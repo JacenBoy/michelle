@@ -18,32 +18,13 @@ exports.run = async (client, message, args, level) => {
       message.channel.send("No results found");
       return;
     }
-    var anititle = aniresult.titles.en;
-    if (!aniresult.titles.en) {
-      anititle = aniresult.titles.en_jp;
-    }
-    var strsyn;
-    if (aniresult.synopsis == "") {
-      strsyn = "No synopsis available";
-    } else {
-      strsyn = aniresult.synopsis;
-    }
+    var anititle = aniresult.titles.en || aniresult.titles.en_jp;
+    var anirating = aniresult.averageRating || 0;
+    var epcount = aniresult.episodeCount || 0;
+    var anistatus = aniresult.status == "tba" ? "TBA" : `${aniresult.status.charAt(0).toUpperCase()}${aniresult.status.substr(1).toLowerCase()}`;
+    var strsyn = aniresult.synopsis == "" ? "No synopsis available" : aniresult.synopsis;
     if (strsyn.length >= 1024) {
       strsyn = strsyn.substring(0, strsyn.lastIndexOf(" ", 1017)) + " (more)";
-    }
-    var anirating = aniresult.averageRating;
-    if (!anirating) {
-      anirating = 0;
-    }
-    var epcount = aniresult.episodeCount;
-    if (!epcount) {
-      epcount = 0;
-    }
-    var anistatus;
-    if (aniresult.status == "tba") {
-      anistatus = "TBA";
-    } else {
-      anistatus = `${aniresult.status.charAt(0).toUpperCase()}${aniresult.status.substr(1).toLowerCase()}`;
     }
     embed = { "embed": {
       "title": anititle,
