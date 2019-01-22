@@ -1,3 +1,6 @@
+/* eslint-disable linebreak-style */
+/* eslint-disable no-redeclare */
+/* eslint-disable no-unused-vars */
 /*
 whois - Show a usercard about a specified user. If no user is specified,
 show a usercard about the user who called the command.

@@ -1,3 +1,4 @@
+/* eslint-disable linebreak-style */
 /*
 The HELP command is used to display every command's name and description
 to the user, so that he may see what commands are available. The help

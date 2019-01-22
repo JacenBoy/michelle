@@ -1,3 +1,4 @@
+/* eslint-disable linebreak-style */
 // This event executes when a new guild (server) is joined.
 
 module.exports = (client, guild) => {

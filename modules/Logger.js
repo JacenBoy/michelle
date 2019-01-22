@@ -1,3 +1,4 @@
+/* eslint-disable linebreak-style */
 /*
 Logger class for easy and aesthetically pleasing console logging 
 */
