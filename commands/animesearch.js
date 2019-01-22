@@ -24,7 +24,7 @@ exports.run = async (client, message, args, level) => {
           var anirating = aniresult.averageRating || 0;
           var epcount = aniresult.episodeCount || 0;
           var anistatus = aniresult.status == "tba" ? "TBA" : `${aniresult.status.charAt(0).toUpperCase()}${aniresult.status.substr(1).toLowerCase()}`;
-          fieldarry[i] = { "name": anititle, "value": `Rating: ${anirating.toString()}% Approval\nEpisodes${epcount.toString()}\nStatus: ${anistatus}\n[Kitsu.io](https://kitsu.io/anime/${aniresult.slug})`};
+          fieldarry[i] = { "name": anititle, "value": `Rating: ${anirating.toString()}%\nEpisodes: ${epcount.toString()}\nStatus: ${anistatus}\n[Kitsu.io](https://kitsu.io/anime/${aniresult.slug})`};
       }
       embed = { "embed": { "title": "Search Results", "description": "\u200b", "fields": fieldarry } }
       message.channel.send(embed);
