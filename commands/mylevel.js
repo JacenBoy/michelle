@@ -1,3 +1,4 @@
+/* eslint-disable linebreak-style */
 // Possibly take this out, but no real harm in keeping it
 
 exports.run = async (client, message, args, level) => {
