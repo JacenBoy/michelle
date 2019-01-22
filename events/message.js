@@ -51,7 +51,7 @@ module.exports = async (client, message) => {
 
   if (level < client.levelCache[cmd.conf.permLevel]) {
     if (settings.systemNotice === "true") {
-      return message.react(':x:')
+      return message.react('❌')
     } else {
       return;
     }
