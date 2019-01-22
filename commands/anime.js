@@ -32,8 +32,8 @@ exports.run = async (client, message, args, level) => {
       "description": strsyn,
       "image": { "url": aniresult.posterImage.small },
       "fields": [
-        { "name": "Rating:", "value": anirating + "% Approval", "inline": true },
-        { "name": "Episodes:", "value":  epcount.toString() + " (" + aniresult.subtype + ")", "inline": true },
+        { "name": "Rating:", "value": `${anirating} % Approval`, "inline": true },
+        { "name": "Episodes:", "value":  `${epcount.toString()} (${aniresult.subtype})`, "inline": true },
         { "name": "Status:", "value": anistatus, "inline": true }
       ]
     } };
