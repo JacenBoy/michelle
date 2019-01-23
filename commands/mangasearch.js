@@ -15,6 +15,7 @@ exports.run = async (client, message, args, level) => {
     client.kitsu.searchManga(aniname, 0).then(results => {
       if (!results[0].attributes.titles) {
         message.channel.send("No results found");
+        client.logger.warn(`No manga found for search term "${aniname}"`);
         return;
       }
       var fieldarry = [];
@@ -28,6 +29,7 @@ exports.run = async (client, message, args, level) => {
       }
       embed = { "embed": { "title": "Search Results", "description": "\u200b", "fields": fieldarry } }
       message.channel.send(embed);
+      client.logger.log(`Results found for search term "${aniname}"`);
     });
   };
   

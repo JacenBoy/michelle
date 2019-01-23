@@ -15,6 +15,7 @@ exports.run = async (client, message, args, level) => {
     client.kitsu.getUser(aniname, 0).then(results => {
       if (!results[0]) {
         message.channel.send("No results found");
+        client.logger.warn(`No Kitsu user found with the username ${aniname}`);
         return;
       }
       var aniresult = results[0].attributes;
@@ -36,6 +37,7 @@ exports.run = async (client, message, args, level) => {
           ]
       } };
       message.channel.send(embed);
+      client.logger.log(`User ${aniresult.name} found on Kitsu`);
     });
   };
   
