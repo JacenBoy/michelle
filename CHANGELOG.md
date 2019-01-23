@@ -1,9 +1,7 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
-The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
-
-## 1.1 - Logging update (2019-23-2019)
+## 1.1 - Logging Update (2019-23-2019)
 - `m-support` command added
 - Added logging to various commands to assist with debugging and troubleshooting
 - Edited example config.js for streamlining
@@ -12,6 +10,9 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 ### 1.1.1
 - Changed format of changelog to be more friendly towards patch releases
 - Fixed [issue #21: Support command not sending message](https://github.com/JacenBoy/michelle/issues/21)
+
+### 1.1.2
+- Fixed [issue #23: Unhandled rejection on blank search](https://github.com/JacenBoy/michelle/issues/23)
 
 ## 1.0 - Initial Release (2019-1-22)
 - `m-anime` command added

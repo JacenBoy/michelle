@@ -4,6 +4,7 @@
 // Search Kitsu for multiple anime
 
 exports.run = async (client, message, args, level) => {
+  if (!args[0]) return message.channel.send('Please enter an anime name.');
     var embed;
     var aniname = "";
     for (var i=0;i<args.length;i++) {
