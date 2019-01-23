@@ -16,6 +16,7 @@ exports.run = async (client, message, args, level) => {
       var aniresult = results[0].attributes;
       if (!aniresult.titles) {
         message.channel.send("No results found");
+        client.logger.warn(`No manga found for search term "${aniname}"`);
         return;
       }
       var anititle = aniresult.titles.en || aniresult.titles.en_jp;
@@ -38,6 +39,8 @@ exports.run = async (client, message, args, level) => {
         ]
       } };
       message.channel.send(embed);
+      if (!anititle) client.logger.warn(`No English or Romaji title found for search term "${aniname}"`);
+      else client.logger.log(`Result found for search term "${aniname}": "${anititle}"`);
     });
   };
   
