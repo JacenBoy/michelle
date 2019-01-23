@@ -1,6 +1,9 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
+## 1.2 - The Great List-ening (In Development)
+- `m-list` command added
+
 ## 1.1 - Logging Update (2019-23-2019)
 - `m-support` command added
 - Added logging to various commands to assist with debugging and troubleshooting

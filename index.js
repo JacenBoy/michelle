@@ -40,6 +40,9 @@ client.aliases = new Enmap();
 // and makes things extremely easy for this purpose.
 client.settings = new Enmap({name: "settings"});
 
+// Include other custom Enmap collections.
+client.profiles = new Enmap({name: "profiles"});
+
 // Import the quotes file to allow the quote system to work properly.
 client.quotes = require("./modules/quotes.json");
 
