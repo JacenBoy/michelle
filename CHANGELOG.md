@@ -3,7 +3,7 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
-## 1.1.0 - Logging update (2019-23-2019)
+## 1.1 - Logging update (2019-23-2019)
 - `m-support` command added
 - Added logging to various commands to assist with debugging and troubleshooting
 - Edited example config.js for streamlining
@@ -13,7 +13,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - Changed format of changelog to be more friendly towards patch releases
 - Fixed [issue #21: Support command not sending message](https://github.com/JacenBoy/michelle/issues/21)
 
-## 1.0.0 - Initial Release (2019-1-22)
+## 1.0 - Initial Release (2019-1-22)
 - `m-anime` command added
 - `m-manga` command added
 - `m-animesearch` command added
@@ -24,7 +24,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - Replaced permissions error with a more compact emoji
 - Various style and consistency tweaks
 
-## 0.1.0 - Development Begins (2019-1-21)
+## 0.1 - Development Begins (2019-1-21)
 - [Guide Bot](https://github.com/AnIdiotsGuide/guidebot) base code added
 - Moved various commands to "System" category from "Miscelaneous"
 - Edited output of various commands to be a more professional format
