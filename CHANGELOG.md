@@ -17,6 +17,9 @@ All notable changes to this project will be documented in this file.
 ### 1.1.2
 - Fixed [issue #23: Unhandled rejection on blank search](https://github.com/JacenBoy/michelle/issues/23)
 
+### 1.1.3
+- Added integration with Discord Bot List
+
 ## 1.0 - Initial Release (2019-1-22)
 - `m-anime` command added
 - `m-manga` command added
