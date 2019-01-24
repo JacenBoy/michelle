@@ -1,10 +1,10 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
-## 1.2 - The Great List-ening (In Development)
+## 1.2 - The Great List-ening (2019-01-23)
 - `m-list` command added
 
-## 1.1 - Logging Update (2019-23-2019)
+## 1.1 - Logging Update (2019-01-23)
 - `m-support` command added
 - Added logging to various commands to assist with debugging and troubleshooting
 - Edited example config.js for streamlining
@@ -17,10 +17,7 @@ All notable changes to this project will be documented in this file.
 ### 1.1.2
 - Fixed [issue #23: Unhandled rejection on blank search](https://github.com/JacenBoy/michelle/issues/23)
 
-### 1.1.3
-- Added integration with Discord Bot List
-
-## 1.0 - Initial Release (2019-1-22)
+## 1.0 - Initial Release (2019-01-22)
 - `m-anime` command added
 - `m-manga` command added
 - `m-animesearch` command added
@@ -31,7 +28,7 @@ All notable changes to this project will be documented in this file.
 - Replaced permissions error with a more compact emoji
 - Various style and consistency tweaks
 
-## 0.1 - Development Begins (2019-1-21)
+## 0.1 - Development Begins (2019-01-21)
 - [Guide Bot](https://github.com/AnIdiotsGuide/guidebot) base code added
 - Moved various commands to "System" category from "Miscelaneous"
 - Edited output of various commands to be a more professional format
