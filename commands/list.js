@@ -5,9 +5,9 @@
 
 exports.run = async (client, message, args, level) => {
   if (!args[0]) return message.channel.send(`Improper format. Use \`${client.getSettings(message.guild.id).prefix}help list\` for assistance.`);
-  if (message.mentions.members.first()) {
+  if (message.mentions.users.first()) {
     // View mode - Return the mentioned user's lists, if available
-    var usermention = message.mentions.members.first();
+    var usermention = message.mentions.users.first();
     if (!client.profiles.has(usermention.id)) return message.channel.send(`No profile found for ${usermention.username}`);
     var curprofile = client.profiles.get(usermention.id);
     if (!curprofile.lists) return message.channel.send(`No profile found for ${usermention.username}`);
@@ -22,7 +22,7 @@ exports.run = async (client, message, args, level) => {
       i++;
     }
     if (curprofile.lists.anilist) {
-      fieldarray[i] = {"name": "AniList", "value": `[${curprofile.lists.anilist}](https://anilist.co/users/${curprofile.lists.anilist})`};
+      fieldarray[i] = {"name": "AniList", "value": `[${curprofile.lists.anilist}](https://anilist.co/user/${curprofile.lists.anilist})`};
       i++;
     }
     var embed = { "embed": {

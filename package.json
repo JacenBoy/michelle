@@ -1,6 +1,6 @@
 {
   "name": "michelle",
-  "version": "1.1.2",
+  "version": "1.2.0",
   "description": "A Discord bot heavily based on GuideBot",
   "main": "index.js",
   "scripts": {
@@ -27,10 +27,10 @@
   "homepage": "https://github.com/JacenBoy/michelle#readme",
   "dependencies": {
     "better-sqlite-pool": "^0.1.2",
-    "chalk": "^2.3.0",
+    "chalk": "^2.4.2",
     "discord.js": "^11.4.2",
-    "enmap": "^4.2.1",
-    "moment": "^2.20.1",
+    "enmap": "^4.7.0",
+    "moment": "^2.24.0",
     "moment-duration-format": "^2.2.0",
     "node-kitsu": "^1.1.1"
   }
