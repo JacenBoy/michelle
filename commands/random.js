@@ -10,11 +10,10 @@ exports.run = async (client, message, args, level) => {
     case "anime":
       var aniresult = {};
       client.logger.debug("Aniresult defined");
-      aniresult.titles = false;
       while (!aniresult.titles) {
-        aniresult.titles = false;
+        aniresult = {};
         client.logger.debug("Titles reset");
-        client.kitsu.listAnime(client.randInt(0, 10000)).then(results => {
+        client.kitsu.listAnime(client.randInt(0, 1000)).then(results => {
           try {
             aniresult = results[0].attributes;
             var anititle = aniresult.titles.en || aniresult.titles.en_jp;
@@ -38,7 +37,7 @@ exports.run = async (client, message, args, level) => {
             } };
           } catch (ex) {
             client.logger.debug("Something went wrong");
-            aniresult.titles = false;
+            aniresult.titles = {};
           }
         });
       }
