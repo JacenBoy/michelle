@@ -10,10 +10,13 @@ exports.run = async (client, message, args, level) => {
     case "anime":
       var anifound = false;
       while (!anifound) {
-        client.kitsu.listAnime( client.randInt(0, 10) ).then(results => {
+        var rnd = client.randInt(0, 10);
+        client.kitsu.listAnime(rnd).then(results => {
+          client.logger.debug(`Kitsu queried. Index number ${rnd}`);
           try {
             var aniresult = results[0].attributes;
             if (!aniresult.titles) throw "No result found.";
+            client.logger.debug("Result has been found.");
             var anititle = aniresult.titles.en || aniresult.titles.en_jp;
             var anirating = aniresult.averageRating || 0;
             var epcount = aniresult.episodeCount || 0;
@@ -35,6 +38,7 @@ exports.run = async (client, message, args, level) => {
             } };
             anifound = anititle ? true : false;
           } catch (ex) {
+            client.logger.debug(`Something went wrong: ${ex.message}`);
             // ¯\_(ツ)_/¯
           }
         });
