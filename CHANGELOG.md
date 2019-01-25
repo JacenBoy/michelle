@@ -1,9 +1,6 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
-## 1.3 - A Random Update (In Development)
-- `m-random` command added
-
 ## 1.2 - The Great List-ening (2019-01-23)
 - `m-list` command added
 
