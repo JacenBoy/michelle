@@ -9,7 +9,9 @@ exports.run = async (client, message, args, level) => {
   switch (args[0].toLowerCase()) {
     case "anime":
       var aniresult;
+      aniresult.titles = false;
       while (!aniresult.titles) {
+        aniresult.titles = false;
         client.kitsu.listAnime(client.randInt(0, 10000)).then(results => {
           try {
             aniresult = results[0].attributes;
@@ -33,14 +35,16 @@ exports.run = async (client, message, args, level) => {
               ]
             } };
           } catch (ex) {
-            // Ignore the error and keep rolling
+            aniresult.titles = false;
           }
         });
       }
       break;
     case "manga":
       var aniresult;
+      aniresult.titles = false;
       while (!aniresult.titles) {
+        aniresult.titles = false;
         client.kitsu.listManga(client.randInt(0, 10000)).then(results => {
           try {
             aniresult = results[0].attributes;
@@ -65,7 +69,7 @@ exports.run = async (client, message, args, level) => {
               ]
             } };
           } catch (ex) {
-            // Ignore the error and keep rolling
+            aniresult.titles = false;
           }
         });
       }
