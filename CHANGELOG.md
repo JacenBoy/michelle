@@ -4,6 +4,11 @@ All notable changes to this project will be documented in this file.
 ## 1.2 - The Great List-ening (2019-01-23)
 - `m-list` command added
 
+### 1.2.1
+- Added error for missing Romaji titles in `m-mangasearch`
+- Added randInt function
+- package-lock.json updates
+
 ## 1.1 - Logging Update (2019-01-23)
 - `m-support` command added
 - Added logging to various commands to assist with debugging and troubleshooting
