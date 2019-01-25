@@ -8,9 +8,12 @@ exports.run = async (client, message, args, level) => {
   var embed;
   switch (args[0].toLowerCase()) {
     case "anime":
+      client.logger.debug("Anime selected.");
       var anifound = false;
       while (!anifound) {
-        var rnd = client.randInt(0, 10);
+        client.logger.debug("Starting loop.");
+        //var rnd = client.randInt(0, 10);
+        var rnd = 0;
         client.kitsu.listAnime(rnd).then(results => {
           client.logger.debug(`Kitsu queried. Index number ${rnd}`);
           try {
