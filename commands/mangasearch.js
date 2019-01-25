@@ -27,6 +27,7 @@ exports.run = async (client, message, args, level) => {
           var epcount = aniresult.chapterCount || 0;
           var anistatus = aniresult.status == "tba" ? "TBA" : `${aniresult.status.charAt(0).toUpperCase()}${aniresult.status.substr(1).toLowerCase()}`;
           fieldarry[i] = { "name": anititle, "value": `Rating: ${anirating.toString()}%\nChapters: ${epcount.toString()}\nStatus: ${anistatus}\n[Kitsu.io](https://kitsu.io/manga/${aniresult.slug})`};
+          if (!anititle) return message.channel.send( { "embed": { "description": "An error occurred displaying the results of your search. This is a [known issue](https://github.com/JacenBoy/michelle/issues/15). Please try a different search." } } );
       }
       embed = { "embed": { "title": "Search Results", "description": "\u200b", "fields": fieldarry } }
       message.channel.send(embed);
