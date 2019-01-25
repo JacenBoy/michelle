@@ -8,10 +8,12 @@ exports.run = async (client, message, args, level) => {
   var embed;
   switch (args[0].toLowerCase()) {
     case "anime":
-      var aniresult;
+      var aniresult = {};
+      client.logger.debug("Aniresult defined");
       aniresult.titles = false;
       while (!aniresult.titles) {
         aniresult.titles = false;
+        client.logger.debug("Titles reset");
         client.kitsu.listAnime(client.randInt(0, 10000)).then(results => {
           try {
             aniresult = results[0].attributes;
@@ -35,13 +37,14 @@ exports.run = async (client, message, args, level) => {
               ]
             } };
           } catch (ex) {
+            client.logger.debug("Something went wrong");
             aniresult.titles = false;
           }
         });
       }
       break;
     case "manga":
-      var aniresult;
+      var aniresult = {};
       aniresult.titles = false;
       while (!aniresult.titles) {
         aniresult.titles = false;
