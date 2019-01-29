@@ -1,6 +1,6 @@
 {
   "name": "michelle",
-  "version": "1.2.2",
+  "version": "1.2.3",
   "description": "A Discord bot heavily based on GuideBot",
   "main": "index.js",
   "scripts": {
@@ -20,7 +20,7 @@
     "Evelyne Lachance <eslachance@gmail.com> (http://evie.codes)",
     "York (http://anidiots.guide)"
   ],
-  "license": "MIT",
+  "license": "GPL-3.0",
   "bugs": {
     "url": "https://github.com/JacenBoy/michelle/issues"
   },
