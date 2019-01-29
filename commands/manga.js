@@ -20,7 +20,7 @@ exports.run = async (client, message, args, level) => {
         client.logger.warn(`No manga found for search term "${aniname}"`);
         return;
       }
-      var anititle = aniresult.titles.en || aniresult.titles.en_jp;
+      var anititle = aniresult.titles.en || aniresult.titles.en_jp || aniresult.canonicalTitle;
       var anirating = aniresult.averageRating || 0;
       var epcount = aniresult.chapterCount || 0;
       var anistatus = aniresult.status == "tba" ? "TBA" : `${aniresult.status.charAt(0).toUpperCase()}${aniresult.status.substr(1).toLowerCase()}`;

@@ -9,6 +9,9 @@ All notable changes to this project will be documented in this file.
 - Added randInt function
 - package-lock.json updates
 
+### 1.2.2
+- Fixed [issue #15: Missing romaji titles](https://github.com/JacenBoy/michelle/issues/15)
+
 ## 1.1 - Logging Update (2019-01-23)
 - `m-support` command added
 - Added logging to various commands to assist with debugging and troubleshooting
