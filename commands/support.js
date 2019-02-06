@@ -6,7 +6,7 @@ exports.run = async (client, message, args, level) => {
   const embed = { "embed": { 
     "title": "Support Instructions",
     "description": `Having trouble with the bot? You can get help about a specific command with \`${client.getSettings(message.guild.id).prefix}help\`. If you think you've found a bug, you can report it [on GitHub](https://github.com/JacenBoy/michelle/issues), by contacting me [on Twitter](https://twitter.com/jacenboy), or by joining the [official support server](https://discord.gg/6wgy6jE).`
-  } }
+  } };
   message.channel.send(embed);
 };
   

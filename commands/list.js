@@ -37,26 +37,26 @@ exports.run = async (client, message, args, level) => {
       "user": message.author.id
     });
     switch (args[0].toLowerCase()) {
-      case 'kitsu':
+      case "kitsu":
         client.profiles.set(message.author.id, args[1] || false, "lists.kitsu");
         break;
-      case 'mal':
+      case "mal":
         client.profiles.set(message.author.id, args[1] || false, "lists.mal");
         break;
-      case 'anilist':
+      case "anilist":
         client.profiles.set(message.author.id, args[1] || false, "lists.anilist");
         break;
       default:
         return message.channel.send(`Improper format. Use \`${client.getSettings(message.guild.id).prefix}help list\` for assistance.`);
     }
-    message.channel.send('Anime list has been updated.');
+    message.channel.send("Anime list has been updated.");
   }
 };
   
 exports.conf = {
   enabled: true,
   guildOnly: true,
-  aliases: ['animelist','anilist'],
+  aliases: ["animelist","anilist"],
   permLevel: "User"
 };
   
