@@ -1,6 +1,12 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
+## 1.3 - Updatebooru (2019-02-06)
+- `m-booru` command added
+- [booru](https://www.npmjs.com/package/booru) wrapper added
+- Various package upgrades
+- Various styling fixes
+
 ## 1.2 - The Great List-ening (2019-01-23)
 - `m-list` command added
 

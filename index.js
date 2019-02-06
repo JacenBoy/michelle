@@ -49,8 +49,9 @@ client.profiles = new Enmap({name: "profiles"});
 // Import the quotes file to allow the quote system to work properly.
 client.quotes = require("./modules/quotes.json");
 
-// Add node-kitsu to the client.
+// Add other required packages.
 client.kitsu = require("node-kitsu");
+client.booru = require("booru");
 
 // We're doing real fancy node 8 async/await stuff here, and to do that
 // we need to wrap stuff in an anonymous function. It's annoying but it works.
