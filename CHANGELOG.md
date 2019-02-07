@@ -7,6 +7,10 @@ All notable changes to this project will be documented in this file.
 - Various package upgrades
 - Various styling fixes
 
+### 1.3.1
+- Added more useful title link for `m-booru` results
+- Comma separated tags instead of space separated
+
 ## 1.2 - The Great List-ening (2019-01-23)
 - `m-list` command added
 
