@@ -12,7 +12,7 @@ exports.run = async (client, message, args, level) => {
   }
   var tagarray = taglist.split(", ");
   for (var i=0;i<tagarray.length;i++) {
-    tagarray[i] = tagarray[i].replace(" ", "_");
+    tagarray[i] = tagarray[i].replace(/\ /g, "_");
   }
   client.booru.search(site, tagarray, {limit: 1, random: true}).then(img => {
     if (!img[0]) {

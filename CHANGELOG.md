@@ -11,6 +11,11 @@ All notable changes to this project will be documented in this file.
 - Added more useful title link for `m-booru` results
 - Comma separated tags instead of space separated
 
+### 1.3.2
+- `m-version` command added
+- `m-stats` reopened for use by all users
+- Fixed [issue #38: underscores not peroperly added](https://github.com/JacenBoy/michelle/issues/38)
+
 ## 1.2 - The Great List-ening (2019-01-23)
 - `m-list` command added
 
