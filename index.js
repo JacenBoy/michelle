@@ -49,6 +49,9 @@ client.profiles = new Enmap({name: "profiles"});
 // Import the quotes file to allow the quote system to work properly.
 client.quotes = require("./modules/quotes.json");
 
+// Require http to allow simle and dirty uptime monitoring
+var http = require('http');
+
 // Add other required packages.
 client.kitsu = require("node-kitsu");
 client.booru = require("booru");
@@ -90,6 +93,13 @@ const init = async () => {
 
   // Here we login the client.
   client.login(client.config.token);
+
+  // Start the HTTP server. This allows monitoring services to check if the bot
+  // is up or not.
+  http.createServer(function (req, res) {
+    res.write(`${client.user.username} is online.\nUsers: ${client.users.size}\nGuilds: ${client.guilds.size}`);
+    res.end();
+  }).listen(10000);
 
 // End top-level async/await function.
 };

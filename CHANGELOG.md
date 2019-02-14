@@ -16,6 +16,9 @@ All notable changes to this project will be documented in this file.
 - `m-stats` reopened for use by all users
 - Fixed [issue #38: underscores not peroperly added](https://github.com/JacenBoy/michelle/issues/38)
 
+### 1.3.3
+- Added status page for third-party services to check uptime
+
 ## 1.2 - The Great List-ening (2019-01-23)
 - `m-list` command added
 
