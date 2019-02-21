@@ -18,6 +18,7 @@ All notable changes to this project will be documented in this file.
 
 ### 1.3.3
 - Added status page for third-party services to check uptime
+- Tweaked `randInt` function
 
 ## 1.2 - The Great List-ening (2019-01-23)
 - `m-list` command added
