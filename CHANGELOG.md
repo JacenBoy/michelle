@@ -1,6 +1,12 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
+## 1.4 - A Random Update (2019-02-21)
+- `m-random` command added
+- Package updates
+- Changelog typo fixed
+- Error fixed in example config file
+
 ## 1.3 - Updatebooru (2019-02-06)
 - `m-booru` command added
 - [booru](https://www.npmjs.com/package/booru) wrapper added
@@ -14,7 +20,7 @@ All notable changes to this project will be documented in this file.
 ### 1.3.2
 - `m-version` command added
 - `m-stats` reopened for use by all users
-- Fixed [issue #38: underscores not peroperly added](https://github.com/JacenBoy/michelle/issues/38)
+- Fixed [issue #38: underscores not properly added](https://github.com/JacenBoy/michelle/issues/38)
 
 ### 1.3.3
 - Added status page for third-party services to check uptime
