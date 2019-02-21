@@ -8,6 +8,7 @@ A Discord bot based on [Guide Bot](https://github.com/AnIdiotsGuide/guidebot). A
 * Anime/Manga Search - Find information about a specific anime from Kitsu.
 * User Search - Find a specific user on Kitsu.
 * Anime List Tracking - Add your anime list for other people to find, or view other people's anime lists.
+* Random Anime - Get a random anime or manga recommended to you.
 * Fanart - Display fanart from Safebooru.
 
 ## Inviting Michelle
