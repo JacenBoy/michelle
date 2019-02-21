@@ -173,6 +173,6 @@ module.exports = (client) => {
   });
 
   client.randInt = (min, max) => {
-    return Math.floor(Math.random() * (max - min + 1) + min);
+    return Math.floor(Math.random() * (+max - +min)) + +min;
   };
 };
