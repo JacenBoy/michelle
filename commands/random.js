@@ -9,16 +9,12 @@ exports.run = async (client, message, args, level) => {
   var found = false;
   switch (args[0].toLowerCase()) {
     case "anime":
-      client.logger.debug("Anime selected.");
       while (!found) {
         var rnd = client.randInt(0,100000);
-        client.logger.debug(`Random number: ${rnd}`);
         var results = await client.kitsu.listAnime(rnd);
-        client.logger.debug("Querying Kitsu.");
         try {
           var aniresult = results[0].attributes;
           if (!aniresult.titles) throw "No result found";
-          client.logger.debug("Result has been found.");
           var anititle = aniresult.titles.en || aniresult.titles.en_jp || aniresult.canonicalTitle;
           var anirating = aniresult.averageRating || 0;
           var epcount = aniresult.episodeCount || 0;
@@ -38,24 +34,21 @@ exports.run = async (client, message, args, level) => {
               { "name": "Status:", "value": anistatus, "inline": true }
             ]
           } };
-          client.logger.debug("All is okay, ready to send.")
+          client.logger.log(`Anime sucesfully generated: ${anititle}`);
           found = true;
         } catch (ex) {
           // ¯\_(ツ)_/¯
+          client.logger.warn("Randomizing failed. Retrying.");
         }
       }
       break;
     case "manga":
-    client.logger.debug("Manga selected.");
     while (!found) {
       var rnd = client.randInt(0,100000);
-      client.logger.debug(`Random number: ${rnd}`);
       var results = await client.kitsu.listManga(rnd);
-      client.logger.debug("Querying Kitsu.");
       try {
         var aniresult = results[0].attributes;
         if (!aniresult.titles) throw "No result found";
-        client.logger.debug("Result has been found.");
         var anititle = aniresult.titles.en || aniresult.titles.en_jp || aniresult.canonicalTitle;
         var anirating = aniresult.averageRating || 0;
         var epcount = aniresult.chapterCount || 0;
@@ -75,10 +68,11 @@ exports.run = async (client, message, args, level) => {
             { "name": "Status:", "value": anistatus, "inline": true }
           ]
         } };
-        client.logger.debug("All is okay, ready to send.")
+        client.logger.log(`Manga sucesfully generated: ${anititle}`);
         found = true;
       } catch (ex) {
         // ¯\_(ツ)_/¯
+        client.logger.warn("Randomizing failed. Retrying.");
       }
     }
       break;
