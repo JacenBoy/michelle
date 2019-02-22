@@ -145,9 +145,10 @@ module.exports = (client) => {
     const XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;
     var xhttp = new XMLHttpRequest();
     xhttp.open("POST", `https://discordbotlist.com/api/bots/${client.user.id}/stats`, true);
-    xhttp.setRequestHeader("Content-type", "application/json");
+    xhttp.setRequestHeader("Content-Type", "application/json; charset=utf-8");
     xhttp.setRequestHeader("Authorization", `Bot ${token}`);
-    xhttp.send(JSON.stringify({"guilds": client.guilds.array().length, "users": client.users.array().length}));
+    const data = {"guilds": client.guilds.array().length, "users": client.users.array().length};
+    xhttp.send(JSON.stringify(data));
   };
 
   /* MISCELANEOUS NON-CRITICAL FUNCTIONS */
