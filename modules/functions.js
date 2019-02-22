@@ -141,6 +141,7 @@ module.exports = (client) => {
   // you'll have to make the necessary edits to config.js yourself.
 
   client.dblcomStats = async (token) => {
+    if (!client.user) return;
     const XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;
     var xhttp = new XMLHttpRequest();
     xhttp.open("POST", `https://discordbotlist.com/api/bots/${client.user.id}/stats`, true);
