@@ -11,4 +11,7 @@ module.exports = (client, guild) => {
   if (client.settings.has(guild.id)) {
     client.settings.delete(guild.id);
   }
+
+  // Manually send stats to DiscordBotList.com like some techinically illiterate moron
+  if (client.config.dblcomtoken) client.dblcomStats(client.config.dblcomtoken);
 };
