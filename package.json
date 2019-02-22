@@ -1,6 +1,6 @@
 {
   "name": "michelle",
-  "version": "1.4.2",
+  "version": "1.4.3",
   "description": "A Discord bot heavily based on GuideBot",
   "main": "index.js",
   "scripts": {
@@ -32,6 +32,7 @@
     "dblapi.js": "^2.3.0",
     "discord.js": "^11.4.2",
     "enmap": "^4.8.1",
+    "is-image-url": "^1.1.8",
     "moment": "^2.24.0",
     "moment-duration-format": "^2.2.0",
     "node-kitsu": "^1.1.1"

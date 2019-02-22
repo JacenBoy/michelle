@@ -140,7 +140,13 @@ module.exports = (client) => {
   // If you want to post stats to one of these botlists for whatever reason,
   // you'll have to make the necessary edits to config.js yourself.
 
-  
+  client.dblcomStats = async (token) => {
+    var xhttp = new XMLHttpRequest();
+    xhttp.open("POST", `https://discordbotlist.com/api/bots/${client.user.id}/stats`, true);
+    xhttp.setRequestHeader("Content-type", "application/json");
+    xhttp.setRequestHeader("Autorization", token);
+    xhttp.send(JSON.stringify({guilds: client.guilds.array().length, users: client.users.array().length}));
+  };
 
   /* MISCELANEOUS NON-CRITICAL FUNCTIONS */
   

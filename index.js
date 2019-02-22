@@ -26,6 +26,8 @@ client.config = require("./config.js");
 
 if (client.config.dbltoken) { const dbl = new DBL(client.config.dbltoken, client); }
 
+client.checkImage = require("is-image-url");
+
 // Require our logger
 client.logger = require("./modules/Logger");
 
