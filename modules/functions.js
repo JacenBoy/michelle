@@ -133,6 +133,13 @@ module.exports = (client) => {
     return false;
   };
 
+  /* API FUNCTIONS */
+  // In order to support the botlists with garbage APIs, we'll set up functions
+  // to post server counts to those botlists.
+
+  // If you want to post stats to one of these botlists for whatever reason,
+  // you'll have to make the necessary edits to config.js yourself.
+
   /* MISCELANEOUS NON-CRITICAL FUNCTIONS */
   
   // EXTENDING NATIVE TYPES IS BAD PRACTICE. Why? Because if JavaScript adds this
@@ -172,6 +179,7 @@ module.exports = (client) => {
     client.logger.error(`Unhandled rejection: ${err}`);
   });
 
+  // randInt - generates a random integer.
   client.randInt = (min, max) => {
     return Math.floor(Math.random() * (+max - +min)) + +min;
   };
