@@ -41,6 +41,7 @@ exports.run = async (client, message, args, level) => {
         } catch (ex) {
           // ¯\_(ツ)_/¯
           client.logger.warn("Randomizing failed. Retrying.");
+          await client.wait(1000);
         }
       }
       break;
@@ -76,6 +77,7 @@ exports.run = async (client, message, args, level) => {
         } catch (ex) {
           // ¯\_(ツ)_/¯
           client.logger.warn("Randomizing failed. Retrying.");
+          await client.wait(1000);
         }
       }
       break;
