@@ -22,12 +22,10 @@ exports.run = async (client, message, args, level) => {
     var fieldarry = [];
     for (var i=0;i<results.length;i++) {
       var aniresult = results[i].attributes;
-      var anititle = aniresult.titles.en || aniresult.titles.en_jp || aniresult.canonicalTitle;
-      var anirating = aniresult.averageRating || 0;
-      var epcount = aniresult.chapterCount || 0;
-      var anistatus = aniresult.status == "tba" ? "TBA" : `${aniresult.status.charAt(0).toUpperCase()}${aniresult.status.substr(1).toLowerCase()}`;
-      fieldarry[i] = { "name": anititle, "value": `Rating: ${anirating.toString()}%\nChapters: ${epcount.toString()}\nStatus: ${anistatus}\n[Kitsu.io](https://kitsu.io/manga/${aniresult.slug})`};
-      if (!anititle) return message.channel.send( { "embed": { "description": "An error occurred displaying the results of your search. This is a [known issue](https://github.com/JacenBoy/michelle/issues/15). Please try a different search." } } );
+      fieldarry[i] = {
+        "name": aniresult.titles.en || aniresult.titles.en_jp || aniresult.canonicalTitle,
+        "value": `Rating: ${aniresult.averageRating || 0}%\nChapters: ${aniresult.chapterCount || 0}\nStatus: ${aniresult.status == "tba" ? "TBA" : `${aniresult.status.charAt(0).toUpperCase()}${aniresult.status.substr(1).toLowerCase()}`}\n[Kitsu.io](https://kitsu.io/manga/${aniresult.slug})`
+      };
     }
     embed = { "embed": { "title": "Search Results", "description": "\u200b", "fields": fieldarry } };
     message.channel.send(embed);

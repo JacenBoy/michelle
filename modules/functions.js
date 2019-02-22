@@ -194,4 +194,15 @@ module.exports = (client) => {
   client.randInt = (min, max) => {
     return Math.floor(Math.random() * (+max - +min)) + +min;
   };
+
+  // cleanSyn - clean and shorten a synopsis to under 1024 characters
+  client.cleanSyn = (synin) => {
+    if (! /\S/.test(synin)) {
+      return "No synopsis provided"
+    }
+    if (synin.length >= 1024) {
+      return synin.substring(0, synin.lastIndexOf(" ", 1014)) + "... (more)";
+    }
+    return synin;
+  };
 };

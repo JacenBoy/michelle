@@ -20,28 +20,19 @@ exports.run = async (client, message, args, level) => {
       client.logger.warn(`No manga found for search term "${aniname}"`);
       return;
     }
-    var anititle = aniresult.titles.en || aniresult.titles.en_jp || aniresult.canonicalTitle;
-    var anirating = aniresult.averageRating || 0;
-    var epcount = aniresult.chapterCount || 0;
-    var anistatus = aniresult.status == "tba" ? "TBA" : `${aniresult.status.charAt(0).toUpperCase()}${aniresult.status.substr(1).toLowerCase()}`;
-    var strsyn = aniresult.synopsis == "" ? "No synopsis available" : aniresult.synopsis;
-    if (strsyn.length >= 1024) {
-      strsyn = strsyn.substring(0, strsyn.lastIndexOf(" ", 1017)) + " (more)";
-    }
     embed = { "embed": {
-      "title": anititle,
-      "url": "https://kitsu.io/manga/" + aniresult.slug,
-      "description": strsyn,
+      "title": aniresult.titles.en || aniresult.titles.en_jp || aniresult.canonicalTitle,
+      "url": `https://kitsu.io/manga/${aniresult.slug}`,
+      "description": client.cleanSyn(aniresult.synopsis),
       "image": { "url": aniresult.posterImage.small },
       "fields": [
-        { "name": "Rating:", "value": `${anirating}% Approval`, "inline": true },
-        { "name": "Chapters:", "value":  `${epcount.toString()} (${aniresult.subtype})`, "inline": true },
-        { "name": "Status:", "value": anistatus, "inline": true }
+        { "name": "Rating:", "value": `${aniresult.averageRating || 0}% Approval`, "inline": true },
+        { "name": "Chapters:", "value":  `${aniresult.chapterCount || 0} (${aniresult.subtype})`, "inline": true },
+        { "name": "Status:", "value": aniresult.status == "tba" ? "TBA" : `${aniresult.status.charAt(0).toUpperCase()}${aniresult.status.substr(1).toLowerCase()}`, "inline": true }
       ]
     } };
     message.channel.send(embed);
-    if (!anititle) client.logger.warn(`No English or Romaji title found for search term "${aniname}"`);
-    else client.logger.log(`Result found for search term "${aniname}": "${anititle}"`);
+    client.logger.log(`Result found for search term "${aniname}": "${aniresult.titles.en || aniresult.titles.en_jp || aniresult.canonicalTitle}"`);
   });
 };
   
