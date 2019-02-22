@@ -147,7 +147,7 @@ module.exports = (client) => {
     xhttp.open("POST", `https://discordbotlist.com/api/bots/${client.user.id}/stats`, true);
     xhttp.setRequestHeader("Content-type", "application/json");
     xhttp.setRequestHeader("Authorization", `Bot ${token}`);
-    xhttp.send({"guilds": client.guilds.array().length, "users": client.users.array().length});
+    xhttp.send(JSON.stringify({"guilds": client.guilds.array().length, "users": client.users.array().length}));
   };
 
   /* MISCELANEOUS NON-CRITICAL FUNCTIONS */
