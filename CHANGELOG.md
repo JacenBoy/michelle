@@ -7,6 +7,10 @@ All notable changes to this project will be documented in this file.
 - Changelog typo fixed
 - Error fixed in example config file
 
+### 1.4.1
+- Added message at beginning of `m-random` to let user know something is happening
+- package.js update to lastest stable version of node and npm
+
 ## 1.3 - Updatebooru (2019-02-06)
 - `m-booru` command added
 - [booru](https://www.npmjs.com/package/booru) wrapper added
