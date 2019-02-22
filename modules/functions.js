@@ -140,6 +140,8 @@ module.exports = (client) => {
   // If you want to post stats to one of these botlists for whatever reason,
   // you'll have to make the necessary edits to config.js yourself.
 
+  
+
   /* MISCELANEOUS NON-CRITICAL FUNCTIONS */
   
   // EXTENDING NATIVE TYPES IS BAD PRACTICE. Why? Because if JavaScript adds this

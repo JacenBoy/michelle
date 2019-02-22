@@ -11,6 +11,9 @@ All notable changes to this project will be documented in this file.
 - Added message at beginning of `m-random` to let user know something is happening
 - package.js update to lastest stable version of node and npm
 
+### 1.4.2
+- Added extra wait between retries of `m-random` to try to prevent an accidental DDoS
+
 ## 1.3 - Updatebooru (2019-02-06)
 - `m-booru` command added
 - [booru](https://www.npmjs.com/package/booru) wrapper added
