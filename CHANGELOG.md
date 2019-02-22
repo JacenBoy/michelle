@@ -16,6 +16,7 @@ All notable changes to this project will be documented in this file.
 
 ### 1.4.3
 - [is-image-url](https://www.npmjs.com/package/is-image-url) package added
+- [xmlhttprequest](https://www.npmjs.com/package/xmlhttprequest) package added
 - Tokens added to example config file
 - Function added to send stats to DiscordBotList.com
 
