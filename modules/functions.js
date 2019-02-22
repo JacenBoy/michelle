@@ -141,13 +141,13 @@ module.exports = (client) => {
   // you'll have to make the necessary edits to config.js yourself.
 
   client.dblcomStats = async (token) => {
+    if (!client.user) return;
     const XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;
     var xhttp = new XMLHttpRequest();
     xhttp.open("POST", `https://discordbotlist.com/api/bots/${client.user.id}/stats`, true);
     xhttp.setRequestHeader("Content-type", "application/json");
     xhttp.setRequestHeader("Authorization", `Bot ${token}`);
     xhttp.send(JSON.stringify({"guilds": client.guilds.array().length, "users": client.users.array().length}));
-    client.logger.debug(`DBL.com responded with status ${xhttp.status}: ${xhttp.statusText}`);
   };
 
   /* MISCELANEOUS NON-CRITICAL FUNCTIONS */
