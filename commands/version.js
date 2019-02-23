@@ -19,7 +19,7 @@ exports.conf = {
 };
 
 exports.help = {
-  name: "Version",
+  name: "version",
   category: "System",
   description: "Get the current version of the bot.",
   usage: "version"
