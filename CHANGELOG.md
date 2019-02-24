@@ -20,6 +20,11 @@ All notable changes to this project will be documented in this file.
 - Tokens added to example config file
 - Function added to send stats to DiscordBotList.com
 
+### 1.4.4
+- Various code tweaks
+- Fixed typo in `m-version` command
+- Replaced `m-help` with link to support site.
+
 ## 1.3 - Updatebooru (2019-02-06)
 - `m-booru` command added
 - [booru](https://www.npmjs.com/package/booru) wrapper added
