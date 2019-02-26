@@ -16,8 +16,8 @@ exports.run = (client, message, args, level) => {
   } else {
     // Show individual command's help.
     let command = args[0];
-    if (client.commands.has(command)) {
-      command = client.commands.get(command);
+    if (client.commands.has(command) || client.aliases.get(command)) {
+      command = client.commands.get(command) || client.commands.get(client.aliases.get(command));
       if (level < client.levelCache[command.conf.permLevel]) return;
       message.channel.send(`= ${command.help.name} = \n${command.help.description}\nusage:: ${command.help.usage}\naliases:: ${command.conf.aliases.join(", ")}\n= ${command.help.name} =`, {code:"asciidoc"});
     }
