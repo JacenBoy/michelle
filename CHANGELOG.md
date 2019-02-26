@@ -25,6 +25,11 @@ All notable changes to this project will be documented in this file.
 - Fixed typo in `m-version` command
 - Replaced `m-help` with link to support site.
 
+### 1.4.5
+- Minor code tweaks
+- `m-say` command added
+- Move changelog link to support site
+
 ## 1.3 - Updatebooru (2019-02-06)
 - `m-booru` command added
 - [booru](https://www.npmjs.com/package/booru) wrapper added
