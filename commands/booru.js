@@ -5,11 +5,7 @@
 
 exports.run = async (client, message, args, level) => {
   var site = (! ["dm","group"].includes(message.channel.type) ? (message.channel.nsfw ? "gb" : "sb") : "sb");
-  var taglist = "";
-  for (var i=0;i<args.length;i++) {
-    taglist += args[i];
-    if (i != args.length - 1) taglist += " ";
-  }
+  var taglist = args.join(" ");
   var tagarray = taglist.split(", ");
   for (var i=0;i<tagarray.length;i++) {
     tagarray[i] = tagarray[i].replace(/\ /g, "_");

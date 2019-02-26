@@ -6,13 +6,7 @@
 exports.run = async (client, message, args, level) => {
   if (!args[0]) return message.channel.send("Please enter a manga name.");
   var embed;
-  var aniname = "";
-  for (var i=0;i<args.length;i++) {
-    aniname += args[i];
-    if (i != args.length - 1) {
-      aniname += " ";
-    }
-  }
+  var aniname = args.join(" ");
   client.kitsu.searchManga(aniname, 0).then(results => {
     var aniresult = results[0].attributes;
     if (!aniresult.titles) {
