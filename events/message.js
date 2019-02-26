@@ -50,9 +50,7 @@ module.exports = async (client, message) => {
     return message.channel.send("This command is unavailable via private message. Please run this command in a guild.");
 
   if (level < client.levelCache[cmd.conf.permLevel]) {
-    if (settings.systemNotice === "true") {
-      return message.react('❌');
-    }
+    return message.react('❌');
   }
 
   // To simplify message arguments, the author's level is now put on level (not member so it is supported in DMs)
