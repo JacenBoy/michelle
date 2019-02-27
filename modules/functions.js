@@ -140,6 +140,7 @@ module.exports = (client) => {
   // If you want to post stats to one of these botlists for whatever reason,
   // you'll have to make the necessary edits to config.js yourself.
 
+  // DiscordBotList.com
   client.dblcomStats = async (token) => {
     if (!client.user) return;
     const XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;
@@ -150,6 +151,19 @@ module.exports = (client) => {
     const data = {"guilds": client.guilds.array().length, "users": client.users.array().length};
     xhttp.send(JSON.stringify(data));
   };
+
+  // Generic - Posts a generic XMLHTTPRequest in JSON. Usable for any bot lists
+  // not previously coded, or for other POST requests you might want to do.
+  client.postJson = async (url, headers, data) => {
+    const XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;
+    var xhttp = new XMLHttpRequest();
+    xhttp.open("POST", url, true);
+    xhttp.setRequestHeader("Content-Type", "application/json; charset=utf-8");
+    for (header of headers) {
+      xhttp.setRequestHeader(header.header, header.value);
+    }
+    return xhttp.send(JSON.stringify(data));
+  }
 
   /* MISCELANEOUS NON-CRITICAL FUNCTIONS */
   
@@ -189,6 +203,10 @@ module.exports = (client) => {
   process.on("unhandledRejection", err => {
     client.logger.error(`Unhandled rejection: ${err}`);
   });
+
+  /* MICHELLE-SPECIFIC FUNCTIONS */
+  // Various functions specific to Michelle. These are necessary for various
+  // command functions.
 
   // randInt - generates a random integer.
   client.randInt = (min, max) => {

@@ -4,9 +4,12 @@
 // Search Kitsu for multiple manga
 
 exports.run = async (client, message, args, level) => {
-  if (!args[0]) return message.channel.send("Please enter a manga name.");
+  if (!args[0]) {
+    var aniname = await client.awaitReply(message, "What is the name of the manga you want to search for?", 15000);
+    if (!aniname) return client.logger.warn(`${message.author.username}'s request timed out.`);
+  }
+  else var aniname = args.join(" ");
   var embed;
-  var aniname = args.join(" ");
   var results = await client.kitsu.searchManga(aniname, 0)
   if (!results[0].attributes.titles) {
     message.channel.send("No results found");

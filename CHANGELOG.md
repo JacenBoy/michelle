@@ -1,6 +1,11 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
+## 2.0 - That Makes It Twice As Good, Right? (In Development)
+- Revamp of permissions system to check user permissions instead of user roles
+- Various code tweaks
+- Arguments are no longer required. Missing arguments will be prompted for
+
 ## 1.4 - A Random Update (2019-02-21)
 - `m-random` command added
 - Package updates

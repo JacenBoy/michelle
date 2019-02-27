@@ -2,7 +2,10 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable no-redeclare */
 exports.run = async (client, message, args, level) => {// eslint-disable-line no-unused-vars
-  if (!args || args.length < 1) return message.reply("Must provide a command to reload. Derp.");
+  if (!args || args.length < 1) {
+    args[0] = await client.awaitReply(message, "What command do you want to reload?", 15000);
+    if (!args[0]) return client.logger.warn(`${message.author.username}'s request timed out.`);
+  }
 
   let response = await client.unloadCommand(args[0]);
   if (response) return message.reply(`Error Unloading: ${response}`);
