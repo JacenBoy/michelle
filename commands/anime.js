@@ -4,9 +4,12 @@
 // Search Kitsu for an anime
 
 exports.run = async (client, message, args, level) => {
-  if (!args[0]) return message.channel.send("Please enter an anime name.");
+  if (!args[0]) {
+    var aniname = await client.awaitReply(message, "What is the name of the anime you want to search for?", 15000);
+    if (!aniname) return client.logger.warn(`${message.author.username}'s request timed out.`);
+  }
+  else var aniname = args.join(" ");
   var embed;
-  var aniname = args.join(" ");
   var results = await client.kitsu.searchAnime(aniname, 0)
   var aniresult = results[0].attributes;
   if (!aniresult.titles) {
