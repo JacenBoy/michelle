@@ -1,7 +1,7 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
-## 2.0 - That Makes It Twice As Good, Right? (In Development)
+## 2.0 - That Makes It Twice As Good, Right? (2019-02-27)
 - Revamp of permissions system to check user permissions instead of user roles
 - Various code tweaks
 - Arguments are no longer required. Missing arguments will be prompted for
