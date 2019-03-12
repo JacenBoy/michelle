@@ -10,7 +10,7 @@ exports.run = async (client, message, args, level) => {
   for (var i=0;i<tagarray.length;i++) {
     tagarray[i] = tagarray[i].replace(/\ /g, "_");
   }
-  if (site == "sb") { tagarray = tagarray.push("-bikini", "-underwear"); }
+  if (site == "sb") { tagarray.push("-bikini", "-underwear"); }
   client.booru.search(site, tagarray, {limit: 1, random: true}).then(img => {
     if (!img[0]) {
       message.channel.send("No results found.");
