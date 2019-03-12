@@ -218,8 +218,8 @@ module.exports = (client) => {
     if (! /\S/.test(synin)) {
       return "No synopsis provided"
     }
-    if (synin.length >= 1024) {
-      return synin.substring(0, synin.lastIndexOf(" ", 1014)) + "... (more)";
+    if (synin.length >= 512) {
+      return synin.substring(0, synin.lastIndexOf(" ", 502)) + "... (more)";
     }
     return synin;
   };

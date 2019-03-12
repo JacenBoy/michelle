@@ -6,6 +6,11 @@ All notable changes to this project will be documented in this file.
 - Various code tweaks
 - Arguments are no longer required. Missing arguments will be prompted for
 
+### 2.0.1
+- node.js and npm updates
+- Reduce maximum synopsis length from 1024 characters to 512 characters
+- `m-booru` assumes `-bikini` and `-underwear` tags
+
 ## 1.4 - A Random Update (2019-02-21)
 - `m-random` command added
 - Package updates
