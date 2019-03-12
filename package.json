@@ -1,6 +1,6 @@
 {
   "name": "michelle",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "A Discord bot heavily based on GuideBot",
   "main": "index.js",
   "scripts": {
@@ -8,8 +8,8 @@
     "start": "node index.js"
   },
   "engines": {
-    "node": "10.15.1",
-    "npm": "6.8.0"
+    "node": "10.15.3",
+    "npm": "6.9.0"
   },
   "repository": {
     "type": "git",
