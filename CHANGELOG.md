@@ -11,6 +11,9 @@ All notable changes to this project will be documented in this file.
 - Reduce maximum synopsis length from 1024 characters to 512 characters
 - `m-booru` assumes `-bikini` and `-underwear` tags
 
+### 2.0.2
+- Updated status page to return JSON response
+
 ## 1.4 - A Random Update (2019-02-21)
 - `m-random` command added
 - Package updates

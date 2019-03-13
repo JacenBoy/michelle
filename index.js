@@ -99,7 +99,13 @@ const init = async () => {
   // Start the HTTP server. This allows monitoring services to check if the bot
   // is up or not.
   http.createServer(function (req, res) {
-    res.write(`${client.user.username} is online.\nUsers: ${client.users.size}\nGuilds: ${client.guilds.size}`);
+    res.writeHead(200, {"Content-Type": "application/json"});
+    res.write(JSON.stringify({
+      "username": client.user.username,
+      "version": process.env.npm_package_version,
+      "users": client.users.size,
+      "guilds": client.guilds.size
+    }));
     res.end();
   }).listen(10000);
 
