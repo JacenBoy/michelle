@@ -16,6 +16,9 @@ All notable changes to this project will be documented in this file.
 - Added additional error handling in the Kitsu commands to prevent crashes on downtime
 - Minor code tweaks
 
+### 2.0.3
+- Kitsu commands temporarily disabled until Kitsu comes back online or a new API is implemented
+
 ## 1.4 - A Random Update (2019-02-21)
 - `m-random` command added
 - Package updates
