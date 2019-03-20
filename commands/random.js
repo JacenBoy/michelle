@@ -13,7 +13,13 @@ exports.run = async (client, message, args, level) => {
       var msg = await message.channel.send("Please wait a moment...");
       while (!found) {
         var rnd = client.randInt(0,100000);
-        var results = await client.kitsu.listAnime(rnd);
+        try {
+          var results = await client.kitsu.listAnime(rnd);
+        } catch (ex) {
+          message.channel.send("An error occured running this command. This is likely due to an issue on Kitsu's end, and not an error with the bot. Please try your command again later.");
+          found = true;
+          return client.logger.err(`An error occurred with the command: ${ex}`);
+        }
         try {
           var aniresult = results[0].attributes;
           if (!aniresult.titles) throw "No result found";
@@ -41,7 +47,13 @@ exports.run = async (client, message, args, level) => {
       var msg = await message.channel.send("Please wait a moment...");
       while (!found) {
         var rnd = client.randInt(0,100000);
-        var results = await client.kitsu.listManga(rnd);
+        try {
+          var results = await client.kitsu.listManga(rnd);
+        } catch (ex) {
+          message.channel.send("An error occured running this command. This is likely due to an issue on Kitsu's end, and not an error with the bot. Please try your command again later.");
+          found = true;
+          return client.logger.err(`An error occurred with the command: ${ex}`);
+        }
         try {
           var aniresult = results[0].attributes;
           if (!aniresult.titles) throw "No result found";

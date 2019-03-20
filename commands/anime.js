@@ -10,7 +10,12 @@ exports.run = async (client, message, args, level) => {
   }
   else var aniname = args.join(" ");
   var embed;
-  var results = await client.kitsu.searchAnime(aniname, 0)
+  try {
+    var results = await client.kitsu.searchAnime(aniname, 0);
+  } catch (ex) {
+    message.channel.send("An error occured running this command. This is likely due to an issue on Kitsu's end, and not an error with the bot. Please try your command again later.");
+    return client.logger.err(`An error occurred with the command: ${ex}`);
+  }
   var aniresult = results[0].attributes;
   if (!aniresult.titles) {
     message.channel.send("No results found");
