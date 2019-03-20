@@ -13,6 +13,8 @@ All notable changes to this project will be documented in this file.
 
 ### 2.0.2
 - Updated status page to return JSON response
+- Added additional error handling in the Kitsu commands to prevent crashes on downtime
+- Minor code tweaks
 
 ## 1.4 - A Random Update (2019-02-21)
 - `m-random` command added
