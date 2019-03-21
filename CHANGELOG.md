@@ -1,10 +1,6 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
-## 2.0.4 - Emergency Patch: Jikan (In Development)
-- [node-myanimelist]() package added
-- `node-kitsu` code archived and replaced with MAL integration
-
 ## 2.0 - That Makes It Twice As Good, Right? (2019-02-27)
 - Revamp of permissions system to check user permissions instead of user roles
 - Various code tweaks
@@ -22,6 +18,11 @@ All notable changes to this project will be documented in this file.
 
 ### 2.0.3
 - Kitsu commands temporarily disabled until Kitsu comes back online or a new API is implemented
+
+### 2.0.4
+- [mal-scraper](https://www.npmjs.com/package/mal-scraper) package added
+- MAL code added. While ultimately unneeded, it will remain archived in case of a similar incident
+- Kitsu commands re-enabled
 
 ## 1.4 - A Random Update (2019-02-21)
 - `m-random` command added
