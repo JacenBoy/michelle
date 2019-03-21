@@ -1,6 +1,10 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
+## 2.0.4 - Emergency Patch: Jikan (In Development)
+- [node-myanimelist]() package added
+- `node-kitsu` code archived and replaced with MAL integration
+
 ## 2.0 - That Makes It Twice As Good, Right? (2019-02-27)
 - Revamp of permissions system to check user permissions instead of user roles
 - Various code tweaks
