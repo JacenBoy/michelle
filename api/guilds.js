@@ -6,16 +6,17 @@ exports.run = async (client, req, res, args) => {
     response.count = client.guilds.size;
     response.guilds = [];
     client.guilds.array().forEach(async g => {
-      if (!g.available) return;
+      if (!g.available || g.deleted) return;
       const owner = await g.fetchMember(g.ownerID);
       response.guilds.push({
         "id": g.id,
         "name": g.name,
         "icon": g.iconURL,
-        "members": g.memberCount,
+        "members": g.members.size,
+        "channels": g.channels.size,
         "owner": {
           "id": owner.id,
-          "name": owner.name,
+          "name": owner.username,
           "nickname": owner.nickname,
           "avatar": owner.user.avatarURL || owner.user.defaultAvatarURL
         }
