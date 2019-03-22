@@ -4,6 +4,11 @@ All notable changes to this project will be documented in this file.
 ## 2.1 - Michelle API (2019-03-22)
 - Introduced improved Michelle API. API is modular and modules can be added to the API folder.
 
+### 2.1.1
+- `m-apireset` command added
+- Additional API endpoints added
+- Tweaks made to API
+
 ## 2.0 - That Makes It Twice As Good, Right? (2019-02-27)
 - Revamp of permissions system to check user permissions instead of user roles
 - Various code tweaks
