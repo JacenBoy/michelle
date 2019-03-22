@@ -61,11 +61,6 @@ module.exports = async (client, message) => {
   while (args[0] && args[0][0] === "-") {
     message.flags.push(args.shift().slice(1));
   }
-
-  // Temporary patch - Warn the user when they try to use a Kitsu command
-  if (cmd.help.category.toLowerCase() == "kitsu") {
-    return message.channel.send("The command you attempted to use requires the Kitsu API, which is currently offline. Please do not report this error. We are working to replace the Kitsu API with a different anime list.");
-  }
   
   // If the command exists, **AND** the user has permission, run it.
   client.logger.cmd(`[CMD] ${client.config.permLevels.find(l => l.level === level).name} ${message.author.username} (${message.author.id}) ran command ${cmd.help.name}`);

@@ -19,6 +19,11 @@ All notable changes to this project will be documented in this file.
 ### 2.0.3
 - Kitsu commands temporarily disabled until Kitsu comes back online or a new API is implemented
 
+### 2.0.4
+- [mal-scraper](https://www.npmjs.com/package/mal-scraper) package added
+- MAL code added. While ultimately unneeded, it will remain archived in case of a similar incident
+- Kitsu commands re-enabled
+
 ## 1.4 - A Random Update (2019-02-21)
 - `m-random` command added
 - Package updates
