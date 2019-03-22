@@ -113,7 +113,7 @@ const init = async () => {
   client.login(client.config.token);
 
   // Create the HTTP listener for our API
-  http.createServer(function (req, res) {
+  http.createServer(async (req, res) => {
     var url = require("url");
     var u = url.parse(req.url);
     var args = u.pathname.toLowerCase().split("/");
@@ -125,7 +125,12 @@ const init = async () => {
       return;
     }
     client.logger.cmd(`An API request was made for the endpoint: ${endpoint.name}`);
-    endpoint.run(client, req, res, args);
+    try {
+      await endpoint.run(client, req, res, args);
+    } catch (ex) {
+      res.writeHead(500);
+      client.logger.error(`An error occured: ${ex}`);
+    }
     res.end();
   }).listen(client.config.apiport || 80);
 

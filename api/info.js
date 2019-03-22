@@ -8,4 +8,4 @@ exports.run = async (client, req, res, args) => {
     "users": client.users.size,
     "guilds": client.guilds.size
   }));
-}
+};
