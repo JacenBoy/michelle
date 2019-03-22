@@ -39,6 +39,7 @@ require("./modules/functions.js")(client);
 // catalogued, listed, etc.
 client.commands = new Enmap();
 client.aliases = new Enmap();
+client.endpoints = new Enmap();
 
 // Now we integrate the use of Evie's awesome Enhanced Map module, which
 // essentially saves a collection to disk. This is great for per-server configs,
@@ -86,6 +87,21 @@ const init = async () => {
     client.on(eventName, event.bind(null, client));
   });
 
+  // Load our API endpoints
+  const apiFiles = await readdir("./api/");
+  client.logger.log(`Loading a total of ${apiFiles.length} API endpoints.`);
+  apiFiles.forEach(f => {
+    if (!f.endsWith(".js")) return;
+    const endpointname = f.split(".")[0];
+    try {
+      client.logger.log(`Loading API module: ${endpointname}`);
+      const apimod = require(`./api/${endpointname}.js`);
+      client.endpoints.set(endpointname, apimod);
+    } catch (ex) {
+      client.logger.error(`Unable to load API module ${endpointname}: ${ex}`);
+    }
+  });
+
   // Generate a cache of client permissions for pretty perm names in commands.
   client.levelCache = {};
   for (let i = 0; i < client.config.permLevels.length; i++) {
@@ -96,18 +112,22 @@ const init = async () => {
   // Here we login the client.
   client.login(client.config.token);
 
-  // Start the HTTP server. This allows monitoring services to check if the bot
-  // is up or not.
+  // Create the HTTP listener for our API
   http.createServer(function (req, res) {
-    res.writeHead(200, {"Content-Type": "application/json"});
-    res.write(JSON.stringify({
-      "username": client.user.username,
-      "version": process.env.npm_package_version,
-      "users": client.users.size,
-      "guilds": client.guilds.size
-    }));
+    var url = require("url");
+    var u = url.parse(req.url);
+    var args = u.pathname.toLowerCase().split("/");
+    args.shift(); // Remove empty argument
+    const endpoint = client.endpoints.get(!args[0] ? "info" : args.shift());
+    if (!endpoint) {
+      res.writeHead(400);
+      res.end();
+      return;
+    }
+    client.logger.cmd(`An API request was made for the endpoint: ${endpoint.name}`);
+    endpoint.run(client, req, res, args);
     res.end();
-  }).listen(10000);
+  }).listen(client.config.apiport || 80);
 
 // End top-level async/await function.
 };
