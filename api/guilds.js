@@ -16,7 +16,7 @@ exports.run = async (client, req, res, args) => {
         "channels": g.channels.size,
         "owner": {
           "id": owner.id,
-          "name": owner.username,
+          "name": owner.user.username,
           "nickname": owner.nickname,
           "avatar": owner.user.avatarURL || owner.user.defaultAvatarURL
         }

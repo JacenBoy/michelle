@@ -9,6 +9,11 @@ All notable changes to this project will be documented in this file.
 - Additional API endpoints added
 - Tweaks made to API
 
+### 2.1.2
+- Logger updated to log to file.
+- Minor tweak to command loader
+- mal-scraper package updated
+
 ## 2.0 - That Makes It Twice As Good, Right? (2019-02-27)
 - Revamp of permissions system to check user permissions instead of user roles
 - Various code tweaks
