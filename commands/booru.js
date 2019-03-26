@@ -11,13 +11,13 @@ exports.run = async (client, message, args, level) => {
     tagarray[i] = tagarray[i].replace(/\ /g, "_");
   }
   if (site == "sb") { tagarray.push("-bikini", "-underwear"); }
-  client.booru.search(site, tagarray, {limit: 1, random: true}).then(img => {
-    if (!img[0]) {
-      message.channel.send("No results found.");
-      client.logger.warn(`No results found for tags: ${tagarray.join(", ")}`);
-      return;
-    }
-    if (img[0].tags.includes("webm")) return message.channel.send({"embed": { "description": "The randomly selected image is a webm video, which cannot be displayed. This is a [known issue](https://github.com/JacenBoy/michelle/issues/33). Please do not report this error."}});
+  if (site == "gb") { tagarray.push("-webm"); }
+  var img = await client.booru.search(site, tagarray, {limit: 1, random: true});
+  if (!img[0]) {
+    message.channel.send("No results found.");
+    client.logger.warn(`No results found for tags: ${tagarray.join(", ")}`);
+    return;
+  }
     const embed = {"embed": {
       "title": `${site == "gb" ? "Gelbooru" : "Safebooru"} #${img[0].id}`,
       "url": `https://${site == "sb" ? "safebooru.org" : "gelbooru.com"}/index.php?page=post&s=view&id=${img[0].id}`,
@@ -27,7 +27,6 @@ exports.run = async (client, message, args, level) => {
     }};
     client.logger.log(`${site == "gb" ? "Gelbooru" : "Safebooru"} #${img[0].id} found for tags: ${tagarray.join(", ")}`);
     message.channel.send(embed);
-  });
 };
 
 exports.conf = {
