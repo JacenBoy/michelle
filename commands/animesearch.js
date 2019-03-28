@@ -4,6 +4,7 @@
 // Search Kitsu for multiple anime
 
 exports.run = async (client, message, args, level) => {
+  const kitsu = require("node-kitsu");
   if (!args[0]) {
     var aniname = await client.awaitReply(message, "What is the name of the anime you want to search for?", 15000);
     if (!aniname) return client.logger.warn(`${message.author.username}'s request timed out.`);
@@ -11,7 +12,7 @@ exports.run = async (client, message, args, level) => {
   else var aniname = args.join(" ");
   var embed;
   try {
-    var results = await client.kitsu.searchAnime(aniname, 0);
+    var results = await kitsu.searchAnime(aniname, 0);
   } catch (ex) {
     message.channel.send("An error occured running this command. This is likely due to an issue on Kitsu's end, and not an error with the bot. Please try your command again later.");
     return client.logger.err(`An error occurred with the command: ${ex}`);

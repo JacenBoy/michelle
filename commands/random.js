@@ -4,6 +4,7 @@
 // Get a random anime
 
 exports.run = async (client, message, args, level) => {
+  const kitsu = require("node-kitsu");
   if (!args[0]) return message.channel.send("Missing argument. Please specify either anime or manga.");
   var embed;
   var msg;
@@ -14,7 +15,7 @@ exports.run = async (client, message, args, level) => {
       while (!found) {
         var rnd = client.randInt(0,100000);
         try {
-          var results = await client.kitsu.listAnime(rnd);
+          var results = await kitsu.listAnime(rnd);
         } catch (ex) {
           message.channel.send("An error occured running this command. This is likely due to an issue on Kitsu's end, and not an error with the bot. Please try your command again later.");
           found = true;
@@ -48,7 +49,7 @@ exports.run = async (client, message, args, level) => {
       while (!found) {
         var rnd = client.randInt(0,100000);
         try {
-          var results = await client.kitsu.listManga(rnd);
+          var results = await kitsu.listManga(rnd);
         } catch (ex) {
           message.channel.send("An error occured running this command. This is likely due to an issue on Kitsu's end, and not an error with the bot. Please try your command again later.");
           found = true;

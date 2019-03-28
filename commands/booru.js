@@ -4,6 +4,7 @@
 // Get a random image from a booru
 
 exports.run = async (client, message, args, level) => {
+  const booru = require("booru");
   var site = (! ["dm","group"].includes(message.channel.type) ? (message.channel.nsfw ? "gb" : "sb") : "sb");
   var taglist = args.join(" ");
   var tagarray = taglist.split(", ");
@@ -12,7 +13,7 @@ exports.run = async (client, message, args, level) => {
   }
   if (site == "sb") { tagarray.push("-bikini", "-underwear"); }
   if (site == "gb") { tagarray.push("-webm"); }
-  var img = await client.booru.search(site, tagarray, {limit: 1, random: true});
+  var img = await booru.search(site, tagarray, {limit: 1, random: true});
   if (!img[0]) {
     message.channel.send("No results found.");
     client.logger.warn(`No results found for tags: ${tagarray.join(", ")}`);
