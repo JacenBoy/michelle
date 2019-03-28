@@ -26,7 +26,7 @@ exports.run = async (client, message, args, level) => {
       "url": results[0].url,
       "image": { "url": results[0].thumbnail },
       "fields": [
-        { "name": "Similarity", "value": results[0].similarity },
+        { "name": "Similarity", "value": results[0].similarity.toString() },
         { "name": "Artist", "value": results[0].original.data.creator || `${results[0].original.data.member_name} (${results[0].original.data.member_id})` }
       ]
     } };
