@@ -10,6 +10,7 @@ A Discord bot based on [Guide Bot](https://github.com/AnIdiotsGuide/guidebot). A
 * Anime List Tracking - Add your anime list for other people to find, or view other people's anime lists.
 * Random Anime - Get a random anime or manga recommended to you.
 * Fanart - Display fanart from Safebooru.
+* Reverse lookup - Find the original source to a piece of fanart.
 
 ## Inviting Michelle
 If you want to add Michelle to your server, you can do so using [this invite link](https://discordapp.com/oauth2/authorize?client_id=536935359775506444&scope=bot&permissions=379968). Use `m-help` to get started using the bot. Alternatively, you can self-host the bot if you want.
