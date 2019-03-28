@@ -20,11 +20,11 @@ exports.run = async (client, message, args, level) => {
   var reply;
   if (results[0].rating > 1) {
     reply = { "embed": {
-      "title": `${results[0].data.title || `Image from ${results[0].site}`} (NSFW)`
+      "title": `${results[0].original.data.title || `Image from ${results[0].site}`} (NSFW)`
     } };
   } else {
     reply = { "embed": {
-      "title": results[0].data.title || `Image from ${results[0].site}`,
+      "title": results[0].original.data.title || `Image from ${results[0].site}`,
       "url": results[0].url,
       "image": { "url": results[0].thumbnail }
     } };
