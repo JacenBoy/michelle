@@ -2,7 +2,7 @@
 All notable changes to this project will be documented in this file.
 
 ## 2.2 - Sauce Pls (In Development)
-- [saucenao](https://www.npmjs.com/package/saucenao) package added
+- [sagiri](https://www.npmjs.com/package/sagiri) package added
 - `m-source` command added
 - Various code tweaks
 

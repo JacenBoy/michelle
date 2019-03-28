@@ -39,7 +39,7 @@ exports.conf = {
 
 exports.help = {
   name: "booru",
-  category: "Anime",
+  category: "Fanart",
   description: "Pull up a random image from Safebooru, or Gelbooru in NSFW chats",
   usage: "booru [tag 1, tag 2,...]"
 };
