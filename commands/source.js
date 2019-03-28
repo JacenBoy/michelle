@@ -16,7 +16,17 @@ exports.run = async (client, message, args, level) => {
   }
 
   var results = await saucenao.getSauce(args[0]);
-  client.logger.debug(JSON.stringify(results));
+  //client.logger.debug(JSON.stringify(results));
+  const reply = { "embed": {} };
+  if (results[0].rating > 1) {
+    reply.embed.title = `${results[0].data.title || `Image from ${results[0].site}`} (NSFW)`;
+  } else {
+    reply.embed.title = results[0].data.title || `Image from ${results[0].site}`;
+    reply.embed.url = results[0].url;
+    reply.embed.image = { "url": results[0].thumbnail };
+  }
+  message.channel.send(reply);
+  client.logger.log(`Result from ${results[0].site} found for ${args[0]}`);
 };
 
 exports.conf = {
