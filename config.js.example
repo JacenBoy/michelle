@@ -13,6 +13,9 @@ const config = {
   "dbltoken": false,
   "dblcomtoken": false,
   "bodtoken": false,
+  "saucetoken": "mfa.VkO_2G4Qv3T--NO--lWetW_tjND--TOKEN--QFTm6YGtzq9PH--4U--tG0",
+
+  "apiport": 80,
 
   // Default per-server settings. New guilds have these settings. 
 
@@ -20,7 +23,7 @@ const config = {
   // VIA COMMANDS IN THE GUILD.
   
   "defaultSettings" : {
-    "prefix": "-",
+    "prefix": "m-",
     "modRole": "Moderator",
     "adminRole": "Administrator"
   },

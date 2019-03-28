@@ -26,8 +26,6 @@ client.config = require("./config.js");
 
 if (client.config.dbltoken) { const dbl = new DBL(client.config.dbltoken, client); }
 
-client.checkImage = require("is-image-url");
-
 // Require our logger
 client.logger = require("./modules/Logger");
 
@@ -54,10 +52,6 @@ client.quotes = require("./modules/quotes.json");
 
 // Require http to allow simle and dirty uptime monitoring
 var http = require('http');
-
-// Add other required packages.
-client.kitsu = require("node-kitsu");
-client.booru = require("booru");
 
 // We're doing real fancy node 8 async/await stuff here, and to do that
 // we need to wrap stuff in an anonymous function. It's annoying but it works.

@@ -1,6 +1,11 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
+## 2.2 - Sauce Pls (2019-03-28)
+- [sagiri](https://www.npmjs.com/package/sagiri) package added
+- `m-source` command added
+- Various code tweaks
+
 ## 2.1 - Michelle API (2019-03-22)
 - Introduced improved Michelle API. API is modular and modules can be added to the API folder.
 
