@@ -16,10 +16,27 @@ exports.run = async (client, message, args, level) => {
   }
 
   var results = await saucenao.getSauce(args[0]);
-  client.logger.debug(JSON.stringify(results));
-  var reply;
-  if (results[0].rating > 1 && !message.channel.nsfw) {
+  //client.logger.debug(JSON.stringify(results));
+  var reply = { "embed": {
+    "title": results[0].original.data.title || `Image from ${results[0].site}`,
+    "url": results[0].url,
+    "image": { "url": results[0].thumbnail },
+    "fields": [
+      { "name": "Similarity", "value": results[0].similarity.toString() },
+      { "name": "Artist", "value": results[0].original.data.creator || `${results[0].original.data.member_name} (${results[0].original.data.member_id})` }
+    ]
+  } };
+  /*if (results[0].rating > 1 && !message.channel.nsfw) {
     return message.channel.send("Only NSFW sources were found for this image. Either run the command in an NSFW channel or try a higher quality image.");
+  } else if (results[0].rating == 0) {
+    reply = { "embed": {
+      "title": `${results[0].original.data.title || `Image from ${results[0].site}`} (Unknown Rating)`,
+      "url": results[0].url,
+      "fields": [
+        { "name": "Similarity", "value": results[0].similarity.toString() },
+        { "name": "Artist", "value": results[0].original.data.creator || `${results[0].original.data.member_name} (${results[0].original.data.member_id})` }
+      ]
+    } };
   } else {
     reply = { "embed": {
       "title": results[0].original.data.title || `Image from ${results[0].site}`,
@@ -30,7 +47,7 @@ exports.run = async (client, message, args, level) => {
         { "name": "Artist", "value": results[0].original.data.creator || `${results[0].original.data.member_name} (${results[0].original.data.member_id})` }
       ]
     } };
-  }
+  }*/
   message.channel.send(reply);
   client.logger.log(`Result from ${results[0].site} found for ${args[0]}`);
 };

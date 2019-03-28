@@ -1,7 +1,7 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
-## 2.2 - Sauce Pls (In Development)
+## 2.2 - Sauce Pls (2019-03-28)
 - [sagiri](https://www.npmjs.com/package/sagiri) package added
 - `m-source` command added
 - Various code tweaks
