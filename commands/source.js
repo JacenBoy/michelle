@@ -18,15 +18,17 @@ exports.run = async (client, message, args, level) => {
   var results = await saucenao.getSauce(args[0]);
   client.logger.debug(JSON.stringify(results));
   var reply;
-  if (results[0].rating > 1) {
-    reply = { "embed": {
-      "title": `${results[0].original.data.title || `Image from ${results[0].site}`} (NSFW)`
-    } };
+  if (results[0].rating > 1 && !message.channel.nsfw) {
+    return message.channel.send("Only NSFW sources were found for this image. Either run the command in an NSFW channel or try a higher quality image.");
   } else {
     reply = { "embed": {
       "title": results[0].original.data.title || `Image from ${results[0].site}`,
       "url": results[0].url,
-      "image": { "url": results[0].thumbnail }
+      "image": { "url": results[0].thumbnail },
+      "fields": [
+        { "name": "Similarity", "value": results[0].similarity },
+        { "name": "Artist", "value": results[0].original.data.creator || `${results[0].original.data.member_name} (${results[0].original.data.member_id})` }
+      ]
     } };
   }
   message.channel.send(reply);
