@@ -1,13 +1,13 @@
 /* eslint-disable linebreak-style */
 /* eslint-disable no-unused-vars */
 /* eslint-disable no-redeclare */
-// Command Description
+// Find the source of an image
 
 exports.run = async (client, message, args, level) => {
   args[1] = args[1] == "list" ? 5 : 1;
   const checkImage = require("is-image-url");
   const Sagiri = require("sagiri");
-  const saucenao = new Sagiri(client.config.saucetoken, {"getRating": "true", "numRes": args[1]});
+  const saucenao = new Sagiri(client.config.saucetoken, {"getRating": true, "numRes": args[1]});
 
   if (!checkImage(args[0])) {
     message.channel.send("The URL you specified is not an image. Please check your URL.");
