@@ -5,7 +5,4 @@
 
 module.exports = (client, guild) => {
   client.logger.cmd(`[GUILD JOIN] ${guild.name} (${guild.id}) added the bot. Owner: ${guild.owner.user.tag} (${guild.owner.user.id})`);
-
-  // Manually send stats to DiscordBotList.com like some techinically illiterate moron
-  if (client.config.dblcomtoken) client.dblcomStats(client.config.dblcomtoken);
 };
