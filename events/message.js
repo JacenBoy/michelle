@@ -42,15 +42,20 @@ module.exports = async (client, message) => {
   const cmd = client.commands.get(command) || client.commands.get(client.aliases.get(command));
   // using this const varName = thing OR otherthign; is a pretty efficient
   // and clean way to grab one of 2 values!
-  if (!cmd) return;
+  if (!cmd) return client.logger.warn(`[CMD] ${client.config.permLevels.find(l => l.level === level).name} ${message.author.username} (${message.author.id}) attempted command ${command} (Does not exist)`);;
 
   // Some commands may not be useable in DMs. This check prevents those commands from running
   // and return a friendly error message.
-  if (cmd && !message.guild && cmd.conf.guildOnly)
-    return message.channel.send("This command is unavailable via private message. Please run this command in a guild.");
+  if (cmd && !message.guild && cmd.conf.guildOnly) {
+    client.logger.warn(`[CMD] ${client.config.permLevels.find(l => l.level === level).name} ${message.author.username} (${message.author.id}) attempted command ${cmd.help.name} (Guild only)`);
+    message.channel.send("This command is unavailable via private message. Please run this command in a guild.");
+    return;
+  }
 
   if (level < client.levelCache[cmd.conf.permLevel]) {
-    return message.react('❌');
+    client.logger.warn(`[CMD] ${client.config.permLevels.find(l => l.level === level).name} ${message.author.username} (${message.author.id}) attempted command ${cmd.help.name} (Insufficient permissions)`);
+    message.react('❌');
+    return;
   }
 
   // To simplify message arguments, the author's level is now put on level (not member so it is supported in DMs)
