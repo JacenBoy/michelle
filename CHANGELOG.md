@@ -6,6 +6,10 @@ All notable changes to this project will be documented in this file.
 - `m-source` command added
 - Various code tweaks
 
+### 2.2.1
+- Added function to send stats to Bots On Discord
+- Package updates
+
 ## 2.1 - Michelle API (2019-03-22)
 - Introduced improved Michelle API. API is modular and modules can be added to the API folder.
 
