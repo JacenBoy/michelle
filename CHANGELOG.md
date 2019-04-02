@@ -14,6 +14,10 @@ All notable changes to this project will be documented in this file.
 - Tweaks to inferior bot stat APIs
 - Log failed commands
 
+### 2.2.3
+- Disable everyone pings
+- Package updates
+
 ## 2.1 - Michelle API (2019-03-22)
 - Introduced improved Michelle API. API is modular and modules can be added to the API folder.
 

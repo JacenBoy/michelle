@@ -17,7 +17,7 @@ const DBL = require("dblapi.js");
 // This is your client. Some people call it `bot`, some people call it `self`,
 // some might call it `cootchie`. Either way, when you see `client.something`,
 // or `bot.something`, this is what we're refering to. Your client.
-const client = new Discord.Client();
+const client = new Discord.Client({disableEveryone: true});
 
 // Here we load the config file that contains our token and our prefix values.
 client.config = require("./config.js");
