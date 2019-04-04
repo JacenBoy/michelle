@@ -11,12 +11,8 @@ exports.run = async (client, message, args, level) => {
   }
   else var aniname = args.join(" ");
   var embed;
-  try {
-    var results = await kitsu.searchAnime(aniname, 0);
-  } catch (ex) {
-    message.channel.send("An error occured running this command. This is likely due to an issue on Kitsu's end, and not an error with the bot. Please try your command again later.");
-    return client.logger.err(`An error occurred with the command: ${ex}`);
-  }
+
+  var results = await kitsu.searchAnime(aniname, 0);
   if (!results[0].attributes.titles) {
     message.channel.send("No results found");
     client.logger.warn(`No anime found for search term "${aniname}"`);
@@ -24,6 +20,7 @@ exports.run = async (client, message, args, level) => {
   }
   var fieldarry = [];
   for (var i=0;i<results.length;i++) {
+    var aniresult = results[i].attributes;
     fieldarry[i] = {
       "name": aniresult.titles.en || aniresult.titles.en_jp || aniresult.canonicalTitle,
       "value": `Rating: ${aniresult.averageRating || 0}%\nEpisodes: ${aniresult.episodeCount || 0}\nStatus: ${aniresult.status == "tba" ? "TBA" : `${aniresult.status.charAt(0).toUpperCase()}${aniresult.status.substr(1).toLowerCase()}`}\n[Kitsu.io](https://kitsu.io/anime/${aniresult.slug})`

@@ -42,7 +42,7 @@ module.exports = async (client, message) => {
   const cmd = client.commands.get(command) || client.commands.get(client.aliases.get(command));
   // using this const varName = thing OR otherthign; is a pretty efficient
   // and clean way to grab one of 2 values!
-  if (!cmd) return client.logger.warn(`[CMD] ${client.config.permLevels.find(l => l.level === level).name} ${message.author.username} (${message.author.id}) attempted command ${command} (Does not exist)`);;
+  if (!cmd) return client.logger.warn(`[CMD] ${client.config.permLevels.find(l => l.level === level).name} ${message.author.username} (${message.author.id}) attempted command ${command} (Does not exist)`);
 
   // Some commands may not be useable in DMs. This check prevents those commands from running
   // and return a friendly error message.
@@ -54,7 +54,7 @@ module.exports = async (client, message) => {
 
   if (level < client.levelCache[cmd.conf.permLevel]) {
     client.logger.warn(`[CMD] ${client.config.permLevels.find(l => l.level === level).name} ${message.author.username} (${message.author.id}) attempted command ${cmd.help.name} (Insufficient permissions)`);
-    message.react('❌');
+    message.react("❌");
     return;
   }
 

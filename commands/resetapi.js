@@ -11,7 +11,7 @@ exports.run = async (client, message, args, level) => {
       client.logger.log(`Ending API module: ${e.name}`);
       delete require.cache[require.resolve(`../api/${e.name}.js`)];
     } catch (ex) {
-      client.logger.error(`Unable to end API module ${endpointname}: ${ex}`);
+      client.logger.error(`Unable to end API module ${e.name}: ${ex}`);
     }
   });
 
