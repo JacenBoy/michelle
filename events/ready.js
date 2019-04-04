@@ -4,7 +4,7 @@
 module.exports = async client => {
   // Manually send stats to DiscordBotList.com and Bots On Discord like some techinically illiterate moron
   setInterval( () => {
-    if (client.config.dblcomtoken) client.dblcomStats(client.config.dblcomtoken)
+    if (client.config.dblcomtoken) client.dblcomStats(client.config.dblcomtoken);
     if (client.config.bodtoken) client.bodStats(client.config.bodtoken);
   }, 5 * 60 * 1000);
 

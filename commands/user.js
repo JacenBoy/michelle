@@ -24,32 +24,32 @@ exports.run = async (client, message, args, level) => {
   }
   var aniresult = results[0].attributes;
   embed = { "embed": {
-      "title": aniresult.name,
-      "description": aniresult.about || "No bio provided.",
-      "color": client.colorInt("#fd8320"),
-      "url": `https://kitsu.io/users/${aniresult.slug}`,
-      "thumbnail": { "url": aniresult.avatar.large },
-      "fields": [
-          { "name": "Followers:", "value": aniresult.followersCount || 0, "inline": true },
-          { "name": "Following:", "value": aniresult.followingCount || 0, "inline": true },
-          { "name": "Posts:", "value": aniresult.postsCount || 0, "inline": true },
-          { "name": "Reactions:", "value": aniresult.mediaReactionsCount || 0, "inline": true }
-      ]
+    "title": aniresult.name,
+    "description": aniresult.about || "No bio provided.",
+    "color": client.colorInt("#fd8320"),
+    "url": `https://kitsu.io/users/${aniresult.slug}`,
+    "thumbnail": { "url": aniresult.avatar.large },
+    "fields": [
+      { "name": "Followers:", "value": aniresult.followersCount || 0, "inline": true },
+      { "name": "Following:", "value": aniresult.followingCount || 0, "inline": true },
+      { "name": "Posts:", "value": aniresult.postsCount || 0, "inline": true },
+      { "name": "Reactions:", "value": aniresult.mediaReactionsCount || 0, "inline": true }
+    ]
   } };
   message.channel.send(embed);
   client.logger.log(`User ${aniresult.name} found on Kitsu`);
-  };
+};
   
-  exports.conf = {
-    enabled: true,
-    guildOnly: false,
-    aliases: [],
-    permLevel: "User"
-  };
-  
-  exports.help = {
-    name: "user",
-    category: "Kitsu",
-    description: "Show information about a user on Kitsu.",
-    usage: "user [username]"
-  };
+exports.conf = {
+  enabled: true,
+  guildOnly: false,
+  aliases: [],
+  permLevel: "User"
+};
+
+exports.help = {
+  name: "user",
+  category: "Kitsu",
+  description: "Show information about a user on Kitsu.",
+  usage: "user [username]"
+};

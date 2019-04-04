@@ -51,7 +51,7 @@ client.profiles = new Enmap({name: "profiles"});
 client.quotes = require("./modules/quotes.json");
 
 // Require http to allow simle and dirty uptime monitoring
-var http = require('http');
+var http = require("http");
 
 // We're doing real fancy node 8 async/await stuff here, and to do that
 // we need to wrap stuff in an anonymous function. It's annoying but it works.
