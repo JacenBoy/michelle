@@ -18,6 +18,9 @@ All notable changes to this project will be documented in this file.
 - Disable everyone pings
 - Package updates
 
+### 2.2.4
+- Add colors to embed responses
+
 ## 2.1 - Michelle API (2019-03-22)
 - Introduced improved Michelle API. API is modular and modules can be added to the API folder.
 

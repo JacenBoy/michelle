@@ -26,6 +26,7 @@ exports.run = async (client, message, args, level) => {
   embed = { "embed": {
       "title": aniresult.name,
       "description": aniresult.about || "No bio provided.",
+      "color": client.colorInt("#fd8320"),
       "url": `https://kitsu.io/users/${aniresult.slug}`,
       "thumbnail": { "url": aniresult.avatar.large },
       "fields": [

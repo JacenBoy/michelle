@@ -218,7 +218,7 @@ module.exports = (client) => {
 
   /* MICHELLE-SPECIFIC FUNCTIONS */
   // Various functions specific to Michelle. These are necessary for various
-  // command functions.
+  // command functions. For the most part, these are for code readability.
 
   // randInt - generates a random integer.
   client.randInt = (min, max) => {
@@ -234,5 +234,10 @@ module.exports = (client) => {
       return synin.substring(0, synin.lastIndexOf(" ", 502)) + "... (more)";
     }
     return synin;
+  };
+
+  // colorInt - Turn a standard hex color code into a decinal for embeds.
+  client.colorInt = (hexin) => {
+    return parseInt(hexin.split("#")[1], 16);
   };
 };

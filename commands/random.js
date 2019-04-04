@@ -28,6 +28,7 @@ exports.run = async (client, message, args, level) => {
             "title": aniresult.titles.en || aniresult.titles.en_jp || aniresult.canonicalTitle,
             "url": `https://kitsu.io/anime/${aniresult.slug}`,
             "description": client.cleanSyn(aniresult.synopsis),
+            "color": client.colorInt("#fd8320"),
             "image": { "url": aniresult.posterImage.small },
             "fields": [
               { "name": "Rating:", "value": `${aniresult.averageRating || 0}% Approval`, "inline": true },
@@ -62,6 +63,7 @@ exports.run = async (client, message, args, level) => {
             "title": aniresult.titles.en || aniresult.titles.en_jp || aniresult.canonicalTitle,
             "url": `https://kitsu.io/manga/${aniresult.slug}`,
             "description": client.cleanSyn(aniresult.synopsis),
+            "color": client.colorInt("#fd8320"),
             "image": { "url": aniresult.posterImage.small },
             "fields": [
               { "name": "Rating:", "value": `${aniresult.averageRating || 0}% Approval`, "inline": true },

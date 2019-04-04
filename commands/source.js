@@ -20,6 +20,7 @@ exports.run = async (client, message, args, level) => {
   var reply = { "embed": {
     "title": results[0].original.data.title || `Image from ${results[0].site}`,
     "url": results[0].url,
+    "color": client.colorInt("#1d1d1d"),
     "image": { "url": results[0].thumbnail },
     "fields": [
       { "name": "Similarity", "value": results[0].similarity.toString() },

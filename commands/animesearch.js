@@ -29,7 +29,7 @@ exports.run = async (client, message, args, level) => {
       "value": `Rating: ${aniresult.averageRating || 0}%\nEpisodes: ${aniresult.episodeCount || 0}\nStatus: ${aniresult.status == "tba" ? "TBA" : `${aniresult.status.charAt(0).toUpperCase()}${aniresult.status.substr(1).toLowerCase()}`}\n[Kitsu.io](https://kitsu.io/anime/${aniresult.slug})`
     };
   }
-  embed = { "embed": { "title": "Search Results", "description": "\u200b", "fields": fieldarry } };
+  embed = { "embed": { "title": "Search Results", "description": "\u200b", "color": client.colorInt("#fd8320"), "fields": fieldarry } };
   message.channel.send(embed);
   client.logger.log(`Results found for search term "${aniname}"`);
 };
