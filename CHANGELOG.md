@@ -23,6 +23,10 @@ All notable changes to this project will be documented in this file.
 - Fixed bugs with `m-animesearch` and `m-resetapi`
 - Minor style tweaks
 
+### 2.2.5
+- API endpoint added
+- Package updates
+
 ## 2.1 - Michelle API (2019-03-22)
 - Introduced improved Michelle API. API is modular and modules can be added to the API folder.
 

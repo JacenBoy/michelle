@@ -171,11 +171,11 @@ module.exports = (client) => {
     var xhttp = new XMLHttpRequest();
     xhttp.open("POST", url, true);
     xhttp.setRequestHeader("Content-Type", "application/json; charset=utf-8");
-    for (header of headers) {
+    for (var header of headers) {
       xhttp.setRequestHeader(header.header, header.value);
     }
     return xhttp.send(JSON.stringify(data));
-  }
+  };
 
   /* MISCELANEOUS NON-CRITICAL FUNCTIONS */
   
@@ -228,7 +228,7 @@ module.exports = (client) => {
   // cleanSyn - clean and shorten a synopsis to under 1024 characters
   client.cleanSyn = (synin) => {
     if (! /\S/.test(synin)) {
-      return "No synopsis provided"
+      return "No synopsis provided";
     }
     if (synin.length >= 512) {
       return synin.substring(0, synin.lastIndexOf(" ", 502)) + "... (more)";
