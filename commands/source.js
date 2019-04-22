@@ -24,7 +24,7 @@ exports.run = async (client, message, args, level) => {
     "image": { "url": results[0].thumbnail },
     "fields": [
       { "name": "Similarity", "value": results[0].similarity.toString() },
-      { "name": "Artist", "value": results[0].original.data.creator || `${results[0].original.data.member_name} (${results[0].original.data.member_id})` }
+      { "name": "Artist", "value": `${results[0].original.data.creator}` || `${results[0].original.data.member_name} (${results[0].original.data.member_id})` }
     ]
   } };
   /*if (results[0].rating > 1 && !message.channel.nsfw) {
