@@ -15,7 +15,7 @@ exports.run = async (client, message, args, level) => {
     var results = await kitsu.getUser(aniname, 0);
   } catch (ex) {
     message.channel.send("An error occured running this command. This is likely due to an issue on Kitsu's end, and not an error with the bot. Please try your command again later.");
-    return client.logger.err(`An error occurred with the command: ${ex}`);
+    return client.logger.error(`An error occurred with the command: ${ex}`);
   }
   if (!results[0]) {
     message.channel.send("No results found");

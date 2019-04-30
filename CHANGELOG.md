@@ -31,8 +31,11 @@ All notable changes to this project will be documented in this file.
 - Fixed issue with `m-source` not outputting
 - Package updates
 
+### 2.2.7
+- Backend logging bug fixes
+
 ## 2.1 - Michelle API (2019-03-22)
-- Introduced improved Michelle API. API is modular and modules can be added to the API folder.
+- Introduced improved Michelle API. API is modular and modules can be added to the API folder
 
 ### 2.1.1
 - `m-apireset` command added
