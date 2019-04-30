@@ -19,7 +19,7 @@ exports.run = async (client, message, args, level) => {
         } catch (ex) {
           message.channel.send("An error occured running this command. This is likely due to an issue on Kitsu's end, and not an error with the bot. Please try your command again later.");
           found = true;
-          return client.logger.err(`An error occurred with the command: ${ex}`);
+          return client.logger.error(`An error occurred with the command: ${ex}`);
         }
         try {
           var aniresult = results[0].attributes;
@@ -54,7 +54,7 @@ exports.run = async (client, message, args, level) => {
         } catch (ex) {
           message.channel.send("An error occured running this command. This is likely due to an issue on Kitsu's end, and not an error with the bot. Please try your command again later.");
           found = true;
-          return client.logger.err(`An error occurred with the command: ${ex}`);
+          return client.logger.error(`An error occurred with the command: ${ex}`);
         }
         try {
           var aniresult = results[0].attributes;
