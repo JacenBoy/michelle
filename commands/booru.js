@@ -1,6 +1,3 @@
-/* eslint-disable linebreak-style */
-/* eslint-disable no-unused-vars */
-/* eslint-disable no-redeclare */
 // Get a random image from a booru
 
 exports.run = async (client, message, args, level) => {
@@ -9,7 +6,7 @@ exports.run = async (client, message, args, level) => {
   var taglist = args.join(" ");
   var tagarray = taglist.split(", ");
   for (var i=0;i<tagarray.length;i++) {
-    tagarray[i] = tagarray[i].replace(/\ /g, "_");
+    tagarray[i] = tagarray[i].replace(/\s/g, "_");
   }
   if (site == "sb") { tagarray.push("-bikini", "-underwear"); }
   if (site == "gb") { tagarray.push("-webm"); }

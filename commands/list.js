@@ -1,6 +1,3 @@
-/* eslint-disable linebreak-style */
-/* eslint-disable no-unused-vars */
-/* eslint-disable no-redeclare */
 // Add/view anime lists
 
 exports.run = async (client, message, args, level) => {

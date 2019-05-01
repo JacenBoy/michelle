@@ -1,7 +1,4 @@
-/* eslint-disable linebreak-style */
-/* eslint-disable no-unused-vars */
-/* eslint-disable no-redeclare */
-exports.run = async (client, message, args, level) => {// eslint-disable-line no-unused-vars
+exports.run = async (client, message, args, level) => {
   if (!args || args.length < 1) {
     args[0] = await client.awaitReply(message, "What command do you want to reload?", 15000);
     if (!args[0]) return client.logger.warn(`${message.author.username}'s request timed out.`);

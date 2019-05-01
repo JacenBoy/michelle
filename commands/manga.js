@@ -1,6 +1,3 @@
-/* eslint-disable linebreak-style */
-/* eslint-disable no-unused-vars */
-/* eslint-disable no-redeclare */
 // Search Kitsu for a manga
 
 exports.run = async (client, message, args, level) => {

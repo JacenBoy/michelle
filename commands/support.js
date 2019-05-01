@@ -1,6 +1,3 @@
-/* eslint-disable linebreak-style */
-/* eslint-disable no-unused-vars */
-/* eslint-disable no-redeclare */
 // Gives users instructions for getting help with the bot
 exports.run = async (client, message, args, level) => {
   const embed = { "embed": { 

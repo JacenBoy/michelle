@@ -1,6 +1,3 @@
-/* eslint-disable linebreak-style */
-/* eslint-disable no-unused-vars */
-/* eslint-disable no-redeclare */
 // Display the current version of the bot.
 
 exports.run = async (client, message, args, level) => {
