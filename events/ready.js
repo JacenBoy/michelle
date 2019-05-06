@@ -1,6 +1,3 @@
-/* eslint-disable linebreak-style */
-/* eslint-disable no-unused-vars */
-/* eslint-disable no-redeclare */
 module.exports = async client => {
   // Manually send stats to DiscordBotList.com and Bots On Discord like some techinically illiterate moron
   setInterval( () => {

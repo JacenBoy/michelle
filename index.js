@@ -1,6 +1,3 @@
-/* eslint-disable linebreak-style */
-/* eslint-disable no-unused-vars */
-/* eslint-disable no-redeclare */
 // This will check if the node version you are running is the required
 // Node version, if it isn't it will throw the following error to inform
 // you.
@@ -46,6 +43,7 @@ client.settings = new Enmap({name: "settings"});
 
 // Include other custom Enmap collections.
 client.profiles = new Enmap({name: "profiles"});
+client.horny = new Enmap({name: "horny"});
 
 // Import the quotes file to allow the quote system to work properly.
 client.quotes = require("./modules/quotes.json");
@@ -112,7 +110,12 @@ const init = async () => {
     var u = url.parse(req.url);
     var args = u.pathname.toLowerCase().split("/");
     args.shift(); // Remove empty argument
-    const endpoint = client.endpoints.get(!args[0] ? "info" : args.shift());
+    if (!args[0]) {
+      res.writeHead(400);
+      res.end();
+      return;
+    }
+    const endpoint = client.endpoints.get(args.shift());
     if (!endpoint) {
       res.writeHead(400);
       res.end();
@@ -123,7 +126,7 @@ const init = async () => {
       await endpoint.run(client, req, res, args);
     } catch (ex) {
       res.writeHead(500);
-      client.logger.error(`An error occured: ${ex}`);
+      client.logger.error(`API request failed: ${ex}`);
     }
     res.end();
   }).listen(client.config.apiport || 80);

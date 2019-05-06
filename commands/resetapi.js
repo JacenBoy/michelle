@@ -1,6 +1,3 @@
-/* eslint-disable linebreak-style */
-/* eslint-disable no-unused-vars */
-/* eslint-disable no-redeclare */
 // Reset the API endpoints. Useful for loading new endpoints.
 
 exports.run = async (client, message, args, level) => {

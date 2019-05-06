@@ -1,6 +1,3 @@
-/* eslint-disable linebreak-style */
-/* eslint-disable no-unused-vars */
-/* eslint-disable no-redeclare */
 // Make the bot say something in chat.
 
 exports.run = async (client, message, args, level) => {

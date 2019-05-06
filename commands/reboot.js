@@ -1,7 +1,4 @@
-/* eslint-disable linebreak-style */
-/* eslint-disable no-unused-vars */
-/* eslint-disable no-redeclare */
-exports.run = async (client, message, args, level) => {// eslint-disable-line no-unused-vars
+exports.run = async (client, message, args, level) => {
   await message.reply("the bot is shutting down.");
   client.commands.forEach( async cmd => {
     await client.unloadCommand(cmd);

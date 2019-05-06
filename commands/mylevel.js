@@ -1,6 +1,3 @@
-/* eslint-disable linebreak-style */
-/* eslint-disable no-unused-vars */
-/* eslint-disable no-redeclare */
 // Possibly take this out, but no real harm in keeping it
 
 exports.run = async (client, message, args, level) => {
