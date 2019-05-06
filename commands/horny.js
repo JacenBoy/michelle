@@ -4,7 +4,7 @@ require("moment-duration-format");
 exports.run = async (client, message, args, level) => {
   if (client.config.specialServers.indexOf(message.guild.id) == -1) return;
   if (!message.mentions.users.first()) return;
-  const user = message.mentions.first();
+  const user = message.mentions.users.first();
   if (!client.horny.has(user.id)) {
     client.horny.set(user.id, moment());
     message.channel.send(`This is the first officially recorded time ${user.username} has been horny`);
