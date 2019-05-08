@@ -49,6 +49,8 @@ module.exports = async (client, message) => {
     return;
   }
 
+  if (cmd.conf.special && client.config.specialServers.indexOf(message.guild.id) == -1) return;
+
   if (level < client.levelCache[cmd.conf.permLevel]) {
     client.logger.warn(`[CMD] ${client.config.permLevels.find(l => l.level === level).name} ${message.author.username} (${message.author.id}) attempted command ${cmd.help.name} (Insufficient permissions)`);
     message.react("❌");
