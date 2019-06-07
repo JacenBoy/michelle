@@ -39,6 +39,7 @@ exports.run = async (client, message, args, level) => {
 exports.conf = {
   enabled: false,
   guildOnly: false,
+  special: false,
   aliases: [],
   permLevel: "User"
 };

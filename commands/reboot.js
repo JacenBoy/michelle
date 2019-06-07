@@ -9,6 +9,7 @@ exports.run = async (client, message, args, level) => {
 exports.conf = {
   enabled: true,
   guildOnly: false,
+  special: false,
   aliases: ["stop", "shutdown", "restart"],
   permLevel: "Bot Admin"
 };
