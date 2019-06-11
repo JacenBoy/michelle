@@ -3,7 +3,7 @@
 exports.run = async (client, message, args, level) => {
   const embed = { "embed": {
     "title": client.user.username == "Michelle" ? "Michelle" : `${client.user.username} (Based on Michelle)`,
-    "description": `Version: ${process.env.npm_package_version}\n[Changelog](https://michelle.jacenboy.com/changelog)`,
+    "description": `Version: ${process.env.npm_package_version}\n[Changelog](https://github.com/JacenBoy/michelle/blob/master/CHANGELOG.md)`,
     "color": client.colorInt("#fca2cd")
   } };
   message.channel.send(embed);
