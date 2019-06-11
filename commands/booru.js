@@ -8,7 +8,7 @@ exports.run = async (client, message, args, level) => {
   for (var i=0;i<tagarray.length;i++) {
     tagarray[i] = tagarray[i].replace(/\s/g, "_");
   }
-  if (site == "sb") { tagarray.push("-bikini", "-underwear"); }
+  //if (site == "sb") { tagarray.push("-bikini", "-underwear"); }
   if (site == "gb") { tagarray.push("-webm"); }
   var img = await booru.search(site, tagarray, {limit: 1, random: true});
   if (!img[0]) {

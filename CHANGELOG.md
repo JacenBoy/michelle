@@ -34,6 +34,11 @@ All notable changes to this project will be documented in this file.
 ### 2.2.7
 - Backend logging bug fixes
 
+### 2.2.8
+- Private command framework added
+- Removed restrictions for Safebooru searches
+- Package updates
+
 ## 2.1 - Michelle API (2019-03-22)
 - Introduced improved Michelle API. API is modular and modules can be added to the API folder
 
