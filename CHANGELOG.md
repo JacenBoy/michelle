@@ -1,10 +1,12 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
-### 3.0 - Inside Joke (In development)
+## 3.0 - Inside Joke (In development)
 - Private command framework added
 - Removed restrictions for Safebooru searches
 - Move changelog link back to GitHub
+- Update to bot list stats function
+- Remove timestamp from Booru results
 - Package updates
 
 ## 2.2 - Sauce Pls (2019-03-28)
