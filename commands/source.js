@@ -20,7 +20,7 @@ exports.run = async (client, message, args, level) => {
     "color": client.colorInt("#1d1d1d"),
     "image": { "url": results[0].thumbnail },
     "fields": [
-      { "name": "Similarity", "value": results[0].similarity.toString() },
+      { "name": "Similarity", "value": `${results[0].similarity}` },
       { "name": "Artist", "value": `${results[0].original.data.creator}` || `${results[0].original.data.member_name} (${results[0].original.data.member_id})` }
     ]
   } };

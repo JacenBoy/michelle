@@ -39,12 +39,12 @@ module.exports = async (client, message) => {
   const cmd = client.commands.get(command) || client.commands.get(client.aliases.get(command));
   // using this const varName = thing OR otherthign; is a pretty efficient
   // and clean way to grab one of 2 values!
-  if (!cmd) return client.logger.warn(`[CMD] ${client.config.permLevels.find(l => l.level === level).name} ${message.author.username} (${message.author.id}) attempted command ${command} (Does not exist)`);
+  if (!cmd) return; //client.logger.warn(`[CMD] ${client.config.permLevels.find(l => l.level === level).name} ${message.author.username} (${message.author.id}) attempted command ${command} (Does not exist)`);
 
   // Some commands may not be useable in DMs. This check prevents those commands from running
   // and return a friendly error message.
   if (cmd && !message.guild && cmd.conf.guildOnly) {
-    client.logger.warn(`[CMD] ${client.config.permLevels.find(l => l.level === level).name} ${message.author.username} (${message.author.id}) attempted command ${cmd.help.name} (Guild only)`);
+    //client.logger.warn(`[CMD] ${client.config.permLevels.find(l => l.level === level).name} ${message.author.username} (${message.author.id}) attempted command ${cmd.help.name} (Guild only)`);
     message.channel.send("This command is unavailable via private message. Please run this command in a guild.");
     return;
   }
@@ -52,7 +52,7 @@ module.exports = async (client, message) => {
   if (cmd.conf.special && client.config.specialServers.indexOf(message.guild.id) == -1) return;
 
   if (level < client.levelCache[cmd.conf.permLevel]) {
-    client.logger.warn(`[CMD] ${client.config.permLevels.find(l => l.level === level).name} ${message.author.username} (${message.author.id}) attempted command ${cmd.help.name} (Insufficient permissions)`);
+    //client.logger.warn(`[CMD] ${client.config.permLevels.find(l => l.level === level).name} ${message.author.username} (${message.author.id}) attempted command ${cmd.help.name} (Insufficient permissions)`);
     message.react("❌");
     return;
   }

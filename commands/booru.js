@@ -8,7 +8,7 @@ exports.run = async (client, message, args, level) => {
   for (var i=0;i<tagarray.length;i++) {
     tagarray[i] = tagarray[i].replace(/\s/g, "_");
   }
-  if (site == "sb") { tagarray.push("-bikini", "-underwear"); }
+  //if (site == "sb") { tagarray.push("-bikini", "-underwear"); }
   if (site == "gb") { tagarray.push("-webm"); }
   var img = await booru.search(site, tagarray, {limit: 1, random: true});
   if (!img[0]) {
@@ -21,8 +21,7 @@ exports.run = async (client, message, args, level) => {
     "url": `https://${site == "sb" ? "safebooru.org" : "gelbooru.com"}/index.php?page=post&s=view&id=${img[0].id}`,
     "color": client.colorInt(site == "sb" ? "#84a8b9" : "#006ffa"),
     "image": {"url": img[0].file_url},
-    "footer": {"text":`Score: ${img[0].score}`},
-    "timestamp": img[0].createdAt.toString()
+    "footer": {"text":`Score: ${img[0].score}`}
   }};
   client.logger.log(`${site == "gb" ? "Gelbooru" : "Safebooru"} #${img[0].id} found for tags: ${tagarray.join(", ")}`);
   message.channel.send(embed);

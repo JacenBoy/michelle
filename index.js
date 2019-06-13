@@ -44,6 +44,7 @@ client.settings = new Enmap({name: "settings"});
 // Include other custom Enmap collections.
 client.profiles = new Enmap({name: "profiles"});
 client.horny = new Enmap({name: "horny"});
+client.owners = new Enmap({name: "owners"});
 
 // Import the quotes file to allow the quote system to work properly.
 client.quotes = require("./modules/quotes.json");
