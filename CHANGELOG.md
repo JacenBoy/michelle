@@ -1,7 +1,7 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
-## 3.0 - Inside Joke (In development)
+## 3.0 - Inside Joke (2019-06-13)
 - Private command framework added
 - Removed restrictions for Safebooru searches
 - Move changelog link back to GitHub
