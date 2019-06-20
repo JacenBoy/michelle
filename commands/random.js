@@ -22,7 +22,7 @@ exports.run = async (client, message, args, level) => {
           var aniresult = results[0].attributes;
           if (!aniresult.titles) throw "No result found";
           embed = { "embed": {
-            "title": aniresult.titles.en || aniresult.titles.en_jp || aniresult.canonicalTitle,
+            "title": aniresult.canonicalTitle || aniresult.titles.en || aniresult.titles.en_jp,
             "url": `https://kitsu.io/anime/${aniresult.slug}`,
             "description": client.cleanSyn(aniresult.synopsis),
             "color": client.colorInt("#fd8320"),
@@ -33,7 +33,7 @@ exports.run = async (client, message, args, level) => {
               { "name": "Status:", "value": aniresult.status == "tba" ? "TBA" : `${aniresult.status.charAt(0).toUpperCase()}${aniresult.status.substr(1).toLowerCase()}`, "inline": true }
             ]
           } };
-          client.logger.log(`Anime sucesfully generated: ${aniresult.titles.en || aniresult.titles.en_jp || aniresult.canonicalTitle}`);
+          client.logger.log(`Anime sucesfully generated: ${embed.embed.title}`);
           found = true;
         } catch (ex) {
           // ¯\_(ツ)_/¯
@@ -57,7 +57,7 @@ exports.run = async (client, message, args, level) => {
           var aniresult = results[0].attributes;
           if (!aniresult.titles) throw "No result found";
           embed = { "embed": {
-            "title": aniresult.titles.en || aniresult.titles.en_jp || aniresult.canonicalTitle,
+            "title": aniresult.canonicalTitle || aniresult.titles.en || aniresult.titles.en_jp,
             "url": `https://kitsu.io/manga/${aniresult.slug}`,
             "description": client.cleanSyn(aniresult.synopsis),
             "color": client.colorInt("#fd8320"),
@@ -68,7 +68,7 @@ exports.run = async (client, message, args, level) => {
               { "name": "Status:", "value": aniresult.status == "tba" ? "TBA" : `${aniresult.status.charAt(0).toUpperCase()}${aniresult.status.substr(1).toLowerCase()}`, "inline": true }
             ]
           } };
-          client.logger.log(`Manga sucesfully generated: ${aniresult.titles.en || aniresult.titles.en_jp || aniresult.canonicalTitle}`);
+          client.logger.log(`Manga sucesfully generated: ${embed.embed.title}`);
           found = true;
         } catch (ex) {
           // ¯\_(ツ)_/¯
