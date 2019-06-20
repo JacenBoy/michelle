@@ -21,7 +21,7 @@ exports.run = async (client, message, args, level) => {
     return;
   }
   embed = { "embed": {
-    "title": aniresult.titles.en || aniresult.titles.en_jp || aniresult.canonicalTitle,
+    "title": aniresult.canonicalTitle || aniresult.titles.en || aniresult.titles.en_jp,
     "url": `https://kitsu.io/anime/${aniresult.slug}`,
     "description": client.cleanSyn(aniresult.synopsis),
     "color": client.colorInt("#fd8320"),
@@ -33,7 +33,7 @@ exports.run = async (client, message, args, level) => {
     ]
   } };
   message.channel.send(embed);
-  client.logger.log(`Result found for search term "${aniname}": "${aniresult.titles.en || aniresult.titles.en_jp || aniresult.canonicalTitle}"`);
+  client.logger.log(`Result found for search term "${aniname}": "${embed.embed.title}"`);
 };
 
 exports.conf = {
