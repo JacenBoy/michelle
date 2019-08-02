@@ -15,6 +15,12 @@ const config = {
   "bodtoken": false,
   "saucetoken": "mfa.VkO_2G4Qv3T--NO--lWetW_tjND--TOKEN--QFTm6YGtzq9PH--4U--tG0",
 
+  // MangaDex user login because MangaDex doesn't have a usable API
+  "mangadex": {
+    "username": "",
+    "password": ""
+  },
+
   "apiport": 80,
 
   // Default per-server settings. New guilds have these settings. 
