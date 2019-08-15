@@ -7,15 +7,11 @@ exports.run = async (client, message, args, level) => {
   var fields = [];
   var i = 0;
   message.mentions.users.array().forEach(u => {
-    if (["68933869188943872", "152808814477836288"].includes(message.author.id)) u = message.author;
     if (!client.horny.has(u.id)) {
-      client.horny.set(u.id, {"lastTime": moment(), "totalCount": 1});
-      fields[i] = {"name": `${u.username} horny count: 1`, "value": `This is the first recorded time ${u.username} has been horny`};
+      fields[i] = {"name": `${u.username} horny count: 0`, "value": `There have been no recorded instances of ${u.username} being horny`};
     } else {
       const udata = client.horny.get(u.id);
-      udata.totalCount++;
       fields[i] = {"name": `${u.username} horny count: ${udata.totalCount}`, "value": `It has been ${moment.duration(moment().diff(udata.lastTime)).format("D [days] H [hours] m [minutes] s [seconds]")} since ${u.username} was last horny`};
-      client.horny.set(u.id, {"lastTime": moment(), "totalCount": udata.totalCount});
     }
     i++;
   });
@@ -26,13 +22,13 @@ exports.conf = {
   enabled: true,
   guildOnly: true,
   special: true,
-  aliases: [],
+  aliases: ["hc"],
   permLevel: "User"
 };
 
 exports.help = {
-  name: "horny",
+  name: "hornycheck",
   category: "Entertainment",
   description: "Find the last time a user was horny.",
-  usage: "horny [user tag]"
+  usage: "hc [user tag]"
 };
