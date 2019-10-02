@@ -9,7 +9,7 @@ exports.run = async (client, message, args, level) => {
     tagarray[i] = tagarray[i].replace(/\s/g, "_");
   }
   //if (site == "sb") { tagarray.push("-bikini", "-underwear"); }
-  if (site == "gb") { tagarray.push("-webm"); }
+  if (site == "gb") tagarray.push("-webm", "-mp4");
   var img = await booru.search(site, tagarray, {limit: 1, random: true});
   if (!img[0]) {
     message.channel.send("No results found.");

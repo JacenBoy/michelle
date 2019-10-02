@@ -16,6 +16,11 @@ All notable changes to this project will be documented in this file.
 - Backend command tweaks
 - Package updates
 
+### 3.0.3
+- Fixed [issue #88: mp4 will not play](https://github.com/JacenBoy/michelle/issues/88)
+- node.js and npm updates
+- Package updates
+
 ## 2.2 - Sauce Pls (2019-03-28)
 - [sagiri](https://www.npmjs.com/package/sagiri) package added
 - `m-source` command added
