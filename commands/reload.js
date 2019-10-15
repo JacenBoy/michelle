@@ -4,13 +4,15 @@ exports.run = async (client, message, args, level) => {
     if (!args[0]) return client.logger.warn(`${message.author.username}'s request timed out.`);
   }
 
-  let response = await client.unloadCommand(args[0]);
-  if (response) return message.reply(`Error Unloading: ${response}`);
+  const command = client.commands.get(args[0]) || client.commands.get(client.aliases.get(args[0]));
 
-  response = client.loadCommand(args[0]);
-  if (response) return message.reply(`Error Loading: ${response}`);
+  let response = await client.unloadCommand(command.help.name);
+  if (response) return message.channel.send(`Error Unloading: ${response}`);
 
-  message.reply(`The command \`${args[0]}\` has been reloaded`);
+  response = client.loadCommand(command.help.name);
+  if (response) return message.channel.send(`Error Loading: ${response}`);
+
+  message.channel.send(`The command \`${command.help.name}\` has been reloaded`);
 };
 
 exports.conf = {
