@@ -112,8 +112,16 @@ const init = async () => {
     var args = u.pathname.toLowerCase().split("/");
     args.shift(); // Remove empty argument
     if (!args[0]) {
-      res.writeHead(400);
-      res.end();
+      const getEndpoints = async () => {
+        const eplist = [];
+        Array.from(client.endpoints.values()).forEach(e => {
+          eplist.push(e.name);
+        });
+        return {"endpoints": eplist.length, "methods": eplist};
+      };
+      const alist = await getEndpoints();
+      res.writeHead(300, {"Content-Type": "application/json", "Location": "/info"});
+      res.end(JSON.stringify(alist));
       return;
     }
     const endpoint = client.endpoints.get(args.shift());
