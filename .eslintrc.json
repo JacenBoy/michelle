@@ -55,6 +55,7 @@
       }
     ],
     "no-unused-vars": "off",
-    "no-redeclare": "off"
+    "no-redeclare": "off",
+    "require-atomic-updates": "off"
   }
 }
