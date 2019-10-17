@@ -40,5 +40,5 @@ exports.help = {
   name: "source",
   category: "Fanart",
   description: "Get the cource of an image from its URL",
-  usage: "sauce [image url] <list>"
+  usage: "sauce [image url]"
 };

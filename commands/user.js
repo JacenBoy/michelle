@@ -2,10 +2,7 @@
 
 exports.run = async (client, message, args, level) => {
   const kitsu = require("node-kitsu");
-  if (!args[0]) {
-    var aniname = await client.awaitReply(message, "What is the name of the user you want to search for?", 15000);
-    if (!aniname) return client.logger.warn(`${message.author.username}'s request timed out.`);
-  }
+  if (!args[0]) return message.channel.send("Please specify a username.");
   else var aniname = args.join(" ");
   var embed;
   try {

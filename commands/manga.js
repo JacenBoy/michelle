@@ -2,10 +2,7 @@
 
 exports.run = async (client, message, args, level) => {
   const kitsu = require("node-kitsu");
-  if (!args[0]) {
-    var aniname = await client.awaitReply(message, "What is the name of the manga you want to search for?", 15000);
-    if (!aniname) return client.logger.warn(`${message.author.username}'s request timed out.`);
-  }
+  if (!args[0]) return message.channel.send("Please specify a manga name.");
   else var aniname = args.join(" ");
   var embed;
   try {
@@ -21,7 +18,7 @@ exports.run = async (client, message, args, level) => {
     return;
   }
   embed = { "embed": {
-    "title": aniresult.canonicalTitle || aniresult.titles.en || aniresult.titles.en_jp,
+    "title": aniresult.titles.en || aniresult.canonicalTitle || aniresult.titles.en_jp,
     "url": `https://kitsu.io/manga/${aniresult.slug}`,
     "description": client.cleanSyn(aniresult.synopsis),
     "color": client.colorInt("#fd8320"),

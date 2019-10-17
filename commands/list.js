@@ -1,39 +1,13 @@
 // Add/view anime lists
 
 exports.run = async (client, message, args, level) => {
-  if (!args[0]) {
-    var resp = await client.awaitReply(message, "Would you like to `view` someone's anime lists or `add` your own list?", 15000);
-    if (!resp) return client.logger.warn(`${message.author.username}'s request timed out.`);
-    switch (resp.toLowerCase()) {
-      case "view":
-        var mode = "view";
-        var ulist = await client.awaitReply(message, "Please tag the user whose list you want to see.", 15000);
-        if (!ulist) return client.logger.warn(`${message.author.username}'s request timed out.`);
-        ulist = ulist.replace(/<|>|@|!/gi, "");
-        client.logger.debug(ulist);
-        try {
-          var usermention = await client.fetchUser(ulist);
-          if (!usermention) return client.logger.warn(`${message.author.username}'s request was cancelled.`);
-        } catch (ex) {
-          return client.logger.warn(`${message.author.username}'s request was cancelled.`);
-        }
-        break;
-      case "add":
-        var mode = "add";
-        args[0] = await client.awaitReply(message, "Which site would you like to add? [MAL/Kitsu/AniList]", 15000);
-        if (!args[0]) return client.logger.warn(`${message.author.username}'s request timed out.`);
-        break;
-      default:
-        return client.logger.warn(`${message.author.username}'s request was cancelled.`);
-    }
-  } else {
-    if (message.mentions.users.first()) {
-      var mode = "view";
-      var usermention = message.mentions.users.first();
-    }
-    else {
-      var mode = "add";
-    }
+  if (!args[0]) return message.channel.send(`Improper format. Use \`${client.getSettings(message.guild.id).prefix}help list\` for assistance.`);
+  if (message.mentions.users.first()) {
+    var mode = "view";
+    var usermention = message.mentions.users.first();
+  }
+  else {
+    var mode = "add";
   }
 
   if (mode == "view") {
@@ -68,22 +42,13 @@ exports.run = async (client, message, args, level) => {
     });
     switch (args[0].toLowerCase()) {
       case "kitsu":
-        if (!args[1]) args[1] = await client.awaitReply(message, "Please enter your Kitsu username, or `clear` to remove it from your profile.", 15000);
-        if (!args[1]) return client.logger.warn(`${message.author.username}'s request timed out.`);
-        if (args[1].toLowerCase() == "clear") args[1] = false;
-        client.profiles.set(message.author.id, args[1] || false, "lists.kitsu");
+        client.profiles.set(message.author.id, args[1].toLowerCase() == "clear" ? false : args[1], "lists.kitsu");
         break;
       case "mal":
-        if (!args[1]) args[1] = await client.awaitReply(message, "Please enter your MyAnimeList username, or `clear` to remove it from your profile.", 15000);
-        if (!args[1]) return client.logger.warn(`${message.author.username}'s request timed out.`);
-        if (args[1].toLowerCase() == "clear") args[1] = false;
-        client.profiles.set(message.author.id, args[1] || false, "lists.mal");
+        client.profiles.set(message.author.id, args[1].toLowerCase() == "clear" ? false : args[1], "lists.mal");
         break;
       case "anilist":
-        if (!args[1]) args[1] = await client.awaitReply(message, "Please enter your AniList username, or `clear` to remove it from your profile.", 15000);
-        if (!args[1]) return client.logger.warn(`${message.author.username}'s request timed out.`);
-        if (args[1].toLowerCase() == "clear") args[1] = false;
-        client.profiles.set(message.author.id, args[1] || false, "lists.anilist");
+        client.profiles.set(message.author.id, args[1].toLowerCase() == "clear" ? false : args[1], "lists.anilist");
         break;
       default:
         return message.channel.send(`Improper format. Use \`${client.getSettings(message.guild.id).prefix}help list\` for assistance.`);
