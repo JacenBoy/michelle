@@ -26,6 +26,14 @@ All notable changes to this project will be documented in this file.
 - Minor backend improvements
 - Package updates
 
+### 3.0.5
+- Arguments are no longer optional
+- Added new quotes
+- Adjusted priority of titles in `m-anime`, `m-animesearch`, `m-manga`, and `m-mangasearch` results 
+- Added new API method
+- Minor API tweaks
+- Minor backend tweaks
+
 ## 2.2 - Sauce Pls (2019-03-28)
 - [sagiri](https://www.npmjs.com/package/sagiri) package added
 - `m-source` command added
