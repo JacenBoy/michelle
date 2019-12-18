@@ -27,17 +27,17 @@
   "homepage": "https://michelle.jacenboy.com",
   "dependencies": {
     "better-sqlite-pool": "^0.2.2",
-    "booru": "^2.0.3",
+    "booru": "^2.0.4",
     "chalk": "^2.4.2",
     "dblapi.js": "^2.3.0",
     "discord.js": "^11.5.1",
-    "enmap": "^5.2.0",
+    "enmap": "^5.2.3",
     "is-image-url": "^1.1.8",
-    "mal-scraper": "^2.6.4",
+    "mal-scraper": "^2.6.6",
     "moment": "^2.24.0",
     "moment-duration-format": "^2.3.2",
     "node-kitsu": "^1.1.1",
-    "sagiri": "^2.0.2",
+    "sagiri": "^2.0.3",
     "xmlhttprequest": "^1.8.0"
   }
 }
