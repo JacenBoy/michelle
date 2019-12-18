@@ -21,6 +21,12 @@ const config = {
     "password": ""
   },
 
+  // Streamable login for use with the Streamable API
+  "streamable": {
+    "username": "",
+    "password": ""
+  },
+
   "apiport": 80,
 
   // Default per-server settings. New guilds have these settings. 
