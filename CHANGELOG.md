@@ -1,7 +1,7 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
-## 3.1 - A Video Is Worth 1000 Words ()
+## 3.1 - A Video Is Worth 1000 Words (2019-12-18)
 - `m-clip` command added
 - `m-quote` command depricated
 - Backend fix for `m-eval` command
