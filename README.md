@@ -1,7 +1,7 @@
 # Michelle
 A Discord bot based on [Guide Bot](https://github.com/AnIdiotsGuide/guidebot). Aims to add features beneficial to anime servers.
 
-[![Discord Bots](https://discordbots.org/api/widget/status/536935359775506444.svg)](https://discordbots.org/bot/536935359775506444) [![Discord Bots](https://discordbots.org/api/widget/lib/536935359775506444.svg?noavatar=true)](https://discordbots.org/bot/536935359775506444) [![Discord Bots](https://discordbots.org/api/widget/owner/536935359775506444.svg?noavatar=true)](https://discordbots.org/bot/536935359775506444)
+[![Discord Bots](https://top.gg/api/widget/status/536935359775506444.svg)](https://top.gg/bot/536935359775506444) [![Discord Bots](https://top.gg/api/widget/servers/536935359775506444.svg?noavatar=true)](https://top.gg/bot/536935359775506444) [![Discord Bots](https://top.gg/api/widget/lib/536935359775506444.svg?noavatar=true)](https://top.gg/bot/536935359775506444) [![Discord Bots](https://top.gg/api/widget/owner/536935359775506444.svg?noavatar=true)](https://top.gg/bot/536935359775506444)
 
 ## Features
 * Quotes - Generate a random quote from a database.
