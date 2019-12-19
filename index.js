@@ -46,8 +46,9 @@ client.profiles = new Enmap({name: "profiles"});
 client.horny = new Enmap({name: "horny"});
 client.owners = new Enmap({name: "owners"});
 
-// Import the quotes file to allow the quote system to work properly.
+// Import the quotes and clips files to allow the quote and clip systems to work properly.
 client.quotes = require("./modules/quotes.json");
+client.clips = require("./modules/clips.json");
 
 // Require http to allow simle and dirty uptime monitoring
 var http = require("http");

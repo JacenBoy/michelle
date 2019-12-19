@@ -79,7 +79,7 @@ module.exports = (client) => {
   client.clean = async (client, text) => {
     if (text && text.constructor.name == "Promise")
       text = await text;
-    if (typeof evaled !== "string")
+    if (typeof text !== "string")
       text = require("util").inspect(text, {depth: 1});
 
     text = text
@@ -236,5 +236,12 @@ module.exports = (client) => {
   // colorInt - Turn a standard hex color code into a decinal for embeds.
   client.colorInt = (hexin) => {
     return parseInt(hexin.split("#")[1], 16);
+  };
+
+  // pad - Zero pad a number
+  client.pad = (n, width, z) => {
+    z = z || '0';
+    n = n + '';
+    return n.length >= width ? n : new Array(width - n.length + 1).join(z) + n;
   };
 };
