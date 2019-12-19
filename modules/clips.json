@@ -17,5 +17,145 @@
     "season": 2,
     "episode": 6,
     "isSpoiler": false
+  },
+
+  {
+    "id": "g0btd",
+    "jpid": false,
+    "title": "Not My Daughter",
+    "source": "A Certain Scientific Railgun",
+    "season": 1,
+    "episode": 6,
+    "isSpoiler": false
+  },
+
+  {
+    "id": "2t6fy",
+    "jpid": false,
+    "title": "I Won't Cry",
+    "source": "Love Live! School Idol Project",
+    "season": 2,
+    "episode": 11,
+    "isSpoiler": true
+  },
+
+  {
+    "id": "t4py3",
+    "jpid": false,
+    "title": "Nico Nico Nii",
+    "source": "Love Live! School Idol Project",
+    "season": 1,
+    "episode": 5,
+    "isSpoiler": false
+  },
+
+  {
+    "id": "870ih",
+    "jpid": false,
+    "title": "Armband Chase",
+    "source": "Love Live! School Idol Project",
+    "season": 2,
+    "episode": 2,
+    "isSpoiler": false
+  },
+
+  {
+    "id": "dcquh",
+    "jpid": false,
+    "title": "Halloween Strategy Meeting",
+    "source": "Love Live! School Idol Project",
+    "season": 2,
+    "episode": 3,
+    "isSpoiler": false
+  },
+
+  {
+    "id": "qxw21",
+    "jpid": false,
+    "title": "Costumes",
+    "source": "Love Live! Sunshine!!",
+    "season": 1,
+    "episode": 2,
+    "isSpoiler": false
+  },
+
+  {
+    "id": "ecqle",
+    "jpid": false,
+    "title": "Meeting The First-Years",
+    "source": "Love Live! Sunshine!!",
+    "season": 1,
+    "episode": 1,
+    "isSpoiler": false
+  },
+
+  {
+    "id": "mqv6i",
+    "jpid": false,
+    "title": "Fallen Angel Idols",
+    "source": "Love Live! Sunshine!!",
+    "season": 1,
+    "episode": 5,
+    "isSpoiler": false
+  },
+
+  {
+    "id": "v7iyc",
+    "jpid": false,
+    "title": "Dia's Scream",
+    "source": "Love Live! Sunshine!!",
+    "season": 1,
+    "episode": 9,
+    "isSpoiler": false
+  },
+
+  {
+    "id": "w40rq",
+    "jpid": false,
+    "title": "How long are you going to sit there crying?",
+    "source": "A Certain Scientific Railgun",
+    "season": 1,
+    "episode": 23,
+    "isSpoiler": true
+  },
+
+  {
+    "id": "v6avj",
+    "jpid": false,
+    "title": "Kuroko vs Trick Art",
+    "source": "A Certain Scientific Railgun",
+    "season": 1,
+    "episode": 9,
+    "isSpoiler": true
+  },
+
+  {
+    "id": "3zlv3",
+    "jpid": false,
+    "title": "Naming a Cat",
+    "source": "A Certain Scientific Railgun",
+    "season": 2,
+    "episode": 12,
+    "isSpoiler": false
+  },
+
+  {
+    "id": "db8vf",
+    "jpid": false,
+    "title": "Sisters",
+    "source": "A Certain Scientific Railgun",
+    "season": 2,
+    "episode": 4,
+    "isSpoiler": false
+  },
+  
+  {
+    "id": "hpqaz",
+    "jpid": false,
+    "title": "You're Not Defective",
+    "source": "A Certain Scientific Railgun",
+    "season": 1,
+    "episode": 10,
+    "isSpoiler": true
   }
 ]
