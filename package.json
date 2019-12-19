@@ -1,6 +1,6 @@
 {
   "name": "michelle",
-  "version": "3.1.0",
+  "version": "3.1.1",
   "description": "A Discord bot heavily based on GuideBot",
   "main": "index.js",
   "scripts": {
@@ -27,7 +27,7 @@
   "homepage": "https://michelle.jacenboy.com",
   "dependencies": {
     "better-sqlite-pool": "^0.2.2",
-    "booru": "^2.0.4",
+    "booru": "<=2.0.3",
     "chalk": "^2.4.2",
     "dblapi.js": "^2.3.0",
     "discord.js": "^11.5.1",
