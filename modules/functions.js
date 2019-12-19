@@ -209,8 +209,12 @@ module.exports = (client) => {
     //process.exit(1);
   });
 
-  process.on("unhandledRejection", err => {
+  /*process.on("unhandledRejection", err => {
     client.logger.error(`Unhandled rejection: ${err}`);
+  });*/
+
+  process.on('unhandledRejection', (reason, p) => {
+    console.error(`Unhandled rejection: \n${reason}\nStack:\n${reason.stack}\nPromise:\n${require('util').inspect(p, { depth: 2 })}`)
   });
 
   /* MICHELLE-SPECIFIC FUNCTIONS */

@@ -10,6 +10,11 @@ All notable changes to this project will be documented in this file.
 ### 3.1.1
 - Rollback of update to `booru` package
 
+### 3.1.2
+- Package updates
+- Updated `m-source` for support with Sagiri v3
+- Improved logging of unhandled rejections
+
 ## 3.0 - Inside Joke (2019-06-13)
 - Private command framework added
 - Removed restrictions for Safebooru searches
