@@ -6,7 +6,7 @@ exports.run = async (client, message, args, level) => {
   const embed = {"embed":{
     "title": randclip.title,
     "description": `${randclip.source} S${client.pad(randclip.season, 2)}E${client.pad(randclip.episode, 2)} ${randclip.isSpoiler ? "(Spoiler)" : ""}`,
-    "url": `https://streamable.com/${randclip.id}`,
+    "url": `https://streamable.com/${args[0].toLowerCase() == "jp" ? randclip.jpid || randclip.id : randclip.id}`,
     "image": {"url": `https://michelle.jacenboy.com/assets/thumbnails/${randclip.id}.png`}
   }};
   message.channel.send(embed);
