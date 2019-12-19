@@ -5,6 +5,7 @@ A Discord bot based on [Guide Bot](https://github.com/AnIdiotsGuide/guidebot). A
 
 ## Features
 * Quotes - Generate a random quote from a database.
+* Clips - Watch a random anime clip from a curated database.
 * Anime/Manga Search - Find information about a specific anime from Kitsu.
 * User Search - Find a specific user on Kitsu.
 * Anime List Tracking - Add your anime list for other people to find, or view other people's anime lists.
