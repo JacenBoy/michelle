@@ -4,7 +4,6 @@ exports.run = async (client, message, args, level) => {
   const kitsu = require("node-kitsu");
   if (!args[0]) return message.channel.send("Please specify a username.");
   else var aniname = args.join(" ");
-  var embed;
   try {
     var results = await kitsu.getUser(aniname, 0);
   } catch (ex) {
@@ -17,7 +16,7 @@ exports.run = async (client, message, args, level) => {
     return;
   }
   var aniresult = results[0].attributes;
-  embed = { "embed": {
+  message.channel.send({"embed": {
     "title": aniresult.name,
     "description": aniresult.about || "No bio provided.",
     "color": client.colorInt("#fd8320"),
@@ -29,8 +28,7 @@ exports.run = async (client, message, args, level) => {
       { "name": "Posts:", "value": aniresult.postsCount || 0, "inline": true },
       { "name": "Reactions:", "value": aniresult.mediaReactionsCount || 0, "inline": true }
     ]
-  } };
-  message.channel.send(embed);
+  }});
   client.logger.log(`User ${aniresult.name} found on Kitsu`);
 };
   

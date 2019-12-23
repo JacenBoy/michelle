@@ -13,8 +13,7 @@ exports.run = async (client, message, args, level) => {
   }
 
   var results = await saucenao(args[0]);
-  client.logger.debug(JSON.stringify(results));
-  var reply = { "embed": {
+  message.channel.send({"embed": {
     "title": results[0].raw.data.title || `Image from ${results[0].site}`,
     "url": results[0].url,
     "color": client.colorInt("#1d1d1d"),
@@ -23,8 +22,7 @@ exports.run = async (client, message, args, level) => {
       { "name": "Similarity", "value": `${results[0].similarity}` },
       { "name": "Artist", "value": `${results[0].raw.data.creator || `${results[0].raw.data.member_name} (${results[0].raw.data.member_id})`}` }
     ]
-  } };
-  message.channel.send(reply);
+  }});
   client.logger.log(`Result from ${results[0].site} found for ${args[0]}`);
 };
 

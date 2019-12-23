@@ -4,7 +4,6 @@ exports.run = async (client, message, args, level) => {
   const kitsu = require("node-kitsu");
   if (!args[0]) return message.channel.send("Please specify an anime name.");
   else var aniname = args.join(" ");
-  var embed;
 
   var results = await kitsu.searchAnime(aniname, 0);
   if (!results[0].attributes.titles) {
@@ -20,8 +19,12 @@ exports.run = async (client, message, args, level) => {
       "value": `Rating: ${aniresult.averageRating || 0}%\nEpisodes: ${aniresult.episodeCount || 0}\nStatus: ${aniresult.status == "tba" ? "TBA" : `${aniresult.status.charAt(0).toUpperCase()}${aniresult.status.substr(1).toLowerCase()}`}\n[Kitsu.io](https://kitsu.io/anime/${aniresult.slug})`
     };
   }
-  embed = { "embed": { "title": "Search Results", "description": "\u200b", "color": client.colorInt("#fd8320"), "fields": fieldarry } };
-  message.channel.send(embed);
+  message.channel.send({"embed": {
+    "title": "Search Results",
+    "description": "\u200b",
+    "color": client.colorInt("#fd8320"),
+    "fields": fieldarry
+  }});
   client.logger.log(`Results found for search term "${aniname}"`);
 };
   

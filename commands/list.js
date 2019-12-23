@@ -1,4 +1,6 @@
 // Add/view anime lists
+const mongoose = require("mongoose");
+const List = require("../models/list.js");
 
 exports.run = async (client, message, args, level) => {
   if (!args[0]) return message.channel.send(`Improper format. Use \`${client.getSettings(message.guild.id).prefix}help list\` for assistance.`);
@@ -12,43 +14,41 @@ exports.run = async (client, message, args, level) => {
 
   if (mode == "view") {
     // View mode - Return the mentioned user's lists, if available
-    if (!client.profiles.has(usermention.id)) return message.channel.send(`No profile found for ${usermention.username}`);
-    var curprofile = client.profiles.get(usermention.id);
-    if (!curprofile.lists) return message.channel.send(`No profile found for ${usermention.username}`);
-    var fieldarray = [];
-    var i = 0;
-    if (curprofile.lists.kitsu) {
-      fieldarray[i] = {"name": "Kitsu", "value": `[${curprofile.lists.kitsu}](https://kitsu.io/users/${curprofile.lists.kitsu})`};
-      i++;
-    }
-    if (curprofile.lists.mal) {
-      fieldarray[i] = {"name": "MyAnimeList", "value": `[${curprofile.lists.mal}](https://myanimelist.net/profile/${curprofile.lists.mal})`};
-      i++;
-    }
-    if (curprofile.lists.anilist) {
-      fieldarray[i] = {"name": "AniList", "value": `[${curprofile.lists.anilist}](https://anilist.co/user/${curprofile.lists.anilist})`};
-      i++;
-    }
-    var embed = { "embed": {
-      "title": `${usermention.username}'s Anime Lists`,
-      "thumbnail": { "url": usermention.avatarURL || usermention.defaultAvatarURL },
-      "fields": fieldarray
-    } };
-    message.channel.send(embed);
+    List.findById(usermention.id).exec((err, result) => {
+      if (!result) return message.channel.send(`No profile found for ${usermention.username}`);
+      var fieldarray = [];
+      var i = 0;
+      if (result.kitsu) {
+        fieldarray[i] = {"name": "Kitsu", "value": `[${result.kitsu}](https://kitsu.io/users/${result.kitsu})`};
+        i++;
+      }
+      if (result.mal) {
+        fieldarray[i] = {"name": "MyAnimeList", "value": `[${result.mal}](https://myanimelist.net/profile/${result.mal})`};
+        i++;
+      }
+      if (result.anilist) {
+        fieldarray[i] = {"name": "AniList", "value": `[${result.anilist}](https://anilist.co/user/${result.kitsu})`};
+        i++;
+      }
+      message.channel.send({"embed": {
+        "title": `${usermention.username}'s Anime Lists`,
+        "thumbnail": { "url": usermention.avatarURL || usermention.defaultAvatarURL },
+        "fields": fieldarray
+      }});
+    });
   } else {
     // Add mode - Add a list to the user's profile
-    client.profiles.ensure(message.author.id, {
-      "user": message.author.id
-    });
     switch (args[0].toLowerCase()) {
       case "kitsu":
-        client.profiles.set(message.author.id, args[1].toLowerCase() == "clear" ? false : args[1], "lists.kitsu");
+      case "hummingbird":
+        await List.update({"_id": message.author.id}, {"kitsu": `${args[1].toLowerCase() == "clear" ? "" : args[1]}`}, {upsert: true});
         break;
       case "mal":
-        client.profiles.set(message.author.id, args[1].toLowerCase() == "clear" ? false : args[1], "lists.mal");
+      case "myanimelist":
+        await List.update({"_id": message.author.id}, {"mal": `${args[1].toLowerCase() == "clear" ? "" : args[1]}`}, {upsert: true});
         break;
       case "anilist":
-        client.profiles.set(message.author.id, args[1].toLowerCase() == "clear" ? false : args[1], "lists.anilist");
+        await List.update({"_id": message.author.id}, {"anilist": `${args[1].toLowerCase() == "clear" ? "" : args[1]}`}, {upsert: true});
         break;
       default:
         return message.channel.send(`Improper format. Use \`${client.getSettings(message.guild.id).prefix}help list\` for assistance.`);

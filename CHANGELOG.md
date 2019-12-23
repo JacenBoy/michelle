@@ -1,6 +1,11 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
+## 4.0 - Mongo Update (2019-12-23)
+- `mongoose` package added
+- Migrating `m-quote`, `m-clip`, and `m-list` to MongoDB
+- Minor code cleanup
+
 ## 3.1 - A Video Is Worth 1000 Words (2019-12-18)
 - `m-clip` command added
 - `m-quote` command depricated
