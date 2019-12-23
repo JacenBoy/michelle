@@ -13,7 +13,6 @@ exports.run = async (client, message, args, level) => {
   }
 
   var results = await saucenao(args[0]);
-  client.logger.debug(JSON.stringify(results));
   message.channel.send({"embed": {
     "title": results[0].raw.data.title || `Image from ${results[0].site}`,
     "url": results[0].url,

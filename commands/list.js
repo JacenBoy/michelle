@@ -15,7 +15,6 @@ exports.run = async (client, message, args, level) => {
   if (mode == "view") {
     // View mode - Return the mentioned user's lists, if available
     List.findById(usermention.id).exec((err, result) => {
-      client.logger.debug(result);
       if (!result) return message.channel.send(`No profile found for ${usermention.username}`);
       var fieldarray = [];
       var i = 0;
