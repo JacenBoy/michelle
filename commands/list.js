@@ -29,12 +29,11 @@ exports.run = async (client, message, args, level) => {
       fieldarray[i] = {"name": "AniList", "value": `[${curprofile.lists.anilist}](https://anilist.co/user/${curprofile.lists.anilist})`};
       i++;
     }
-    var embed = { "embed": {
+    message.channel.send({"embed": {
       "title": `${usermention.username}'s Anime Lists`,
       "thumbnail": { "url": usermention.avatarURL || usermention.defaultAvatarURL },
       "fields": fieldarray
-    } };
-    message.channel.send(embed);
+    }});
   } else {
     // Add mode - Add a list to the user's profile
     client.profiles.ensure(message.author.id, {

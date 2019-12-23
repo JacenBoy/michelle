@@ -4,7 +4,6 @@ exports.run = async (client, message, args, level) => {
   const kitsu = require("node-kitsu");
   if (!args[0]) return message.channel.send("Please specify an anime name.");
   else var aniname = args.join(" ");
-  var embed;
   try {
     var results = await kitsu.searchAnime(aniname, 0);
   } catch (ex) {
@@ -17,7 +16,7 @@ exports.run = async (client, message, args, level) => {
     client.logger.warn(`No anime found for search term "${aniname}"`);
     return;
   }
-  embed = { "embed": {
+  message.channel.send({ "embed": {
     "title": aniresult.titles.en || aniresult.canonicalTitle || aniresult.titles.en_jp,
     "url": `https://kitsu.io/anime/${aniresult.slug}`,
     "description": client.cleanSyn(aniresult.synopsis),
@@ -28,9 +27,8 @@ exports.run = async (client, message, args, level) => {
       { "name": "Episodes:", "value":  `${aniresult.episodeCount || 0} (${aniresult.subtype})`, "inline": true },
       { "name": "Status:", "value": aniresult.status == "tba" ? "TBA" : `${aniresult.status.charAt(0).toUpperCase()}${aniresult.status.substr(1).toLowerCase()}`, "inline": true }
     ]
-  } };
-  message.channel.send(embed);
-  client.logger.log(`Result found for search term "${aniname}": "${embed.embed.title}"`);
+  }});
+  client.logger.log(`Result found for search term "${aniname}": "${aniresult.titles.en || aniresult.canonicalTitle || aniresult.titles.en_jp}"`);
 };
 
 exports.conf = {
