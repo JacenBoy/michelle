@@ -47,8 +47,8 @@ client.horny = new Enmap({name: "horny"});
 client.owners = new Enmap({name: "owners"});
 
 // Import the quotes and clips files to allow the quote and clip systems to work properly.
-client.quotes = require("./modules/quotes.json");
-client.clips = require("./modules/clips.json");
+//client.quotes = require("./modules/quotes.json");
+//client.clips = require("./modules/clips.json");
 
 // Open connection to MongoDB
 const mongoose = require("mongoose");
