@@ -50,6 +50,10 @@ client.owners = new Enmap({name: "owners"});
 client.quotes = require("./modules/quotes.json");
 client.clips = require("./modules/clips.json");
 
+// Open connection to MongoDB
+const mongoose = require("mongoose");
+client.mongoose = mongoose.connect(client.config.mongouri, {useNewUrlParser: true});
+
 // Require http to allow simle and dirty uptime monitoring
 var http = require("http");
 
