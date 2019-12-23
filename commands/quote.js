@@ -1,9 +1,20 @@
 // Pulls a random quote from a JSON file and displays it.
+const mongoose = require("mongoose");
+const Quote = require("../models/quotes.js");
 
 exports.run = async (client, message, args, level) => {
-  var randquote = client.quotes.random();
-  const embed = { "embed": { "description": randquote.quote, "fields": [ { "name": "-", "value": randquote.attribution } ] } };
-  message.channel.send(embed);
+  await Quote.countDocuments().exec((err, count) => {
+    var rnd = client.randInt(0, count-1);
+    Quote.findOne().skip(rnd).exec((err, result) => {
+      message.channel.send({"embed": {
+        "description": `"${result.quote}"`,
+        "fields": [{
+          "name": "-",
+          "value": `${result.attribution} ${result.source ? `, *${result.source}*` : ""}`
+        }]
+      }});
+    });
+  });
 };
   
 exports.conf = {
