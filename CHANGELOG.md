@@ -15,6 +15,10 @@ All notable changes to this project will be documented in this file.
 - Updated `m-source` for support with Sagiri v3
 - Improved logging of unhandled rejections
 
+### 3.1.3
+- Package updates
+- Improved logging for unhandled rejections
+
 ## 3.0 - Inside Joke (2019-06-13)
 - Private command framework added
 - Removed restrictions for Safebooru searches
