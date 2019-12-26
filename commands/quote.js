@@ -1,6 +1,6 @@
 // Pulls a random quote from a JSON file and displays it.
 const mongoose = require("mongoose");
-const Quote = require("../models/quotes.js");
+const Quote = require("../models/quote.js");
 
 exports.run = async (client, message, args, level) => {
   await Quote.countDocuments().exec((err, count) => {
