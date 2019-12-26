@@ -1,6 +1,6 @@
 {
   "name": "michelle",
-  "version": "4.0.0",
+  "version": "4.0.1",
   "description": "A Discord bot heavily based on GuideBot",
   "main": "index.js",
   "scripts": {
@@ -36,7 +36,7 @@
     "mal-scraper": "^2.6.6",
     "moment": "^2.24.0",
     "moment-duration-format": "^2.3.2",
-    "mongoose": "^5.8.2",
+    "mongoose": "^5.8.3",
     "node-kitsu": "^1.1.1",
     "sagiri": "^3.0.1",
     "xmlhttprequest": "^1.8.0"

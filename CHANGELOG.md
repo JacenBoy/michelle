@@ -6,6 +6,11 @@ All notable changes to this project will be documented in this file.
 - Migrating `m-quote`, `m-clip`, and `m-list` to MongoDB
 - Minor code cleanup
 
+### 4.0.1
+- Backend fixes
+- Minor command updates
+- Package updates
+
 ## 3.1 - A Video Is Worth 1000 Words (2019-12-18)
 - `m-clip` command added
 - `m-quote` command depricated
