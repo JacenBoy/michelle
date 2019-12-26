@@ -41,14 +41,14 @@ exports.run = async (client, message, args, level) => {
     switch (args[0].toLowerCase()) {
       case "kitsu":
       case "hummingbird":
-        await List.update({"_id": message.author.id}, {"kitsu": `${args[1].toLowerCase() == "clear" ? "" : args[1]}`}, {upsert: true});
+        await List.updateOne({"_id": message.author.id}, {"kitsu": `${args[1].toLowerCase() == "clear" ? "" : args[1]}`}, {upsert: true});
         break;
       case "mal":
       case "myanimelist":
-        await List.update({"_id": message.author.id}, {"mal": `${args[1].toLowerCase() == "clear" ? "" : args[1]}`}, {upsert: true});
+        await List.updateOne({"_id": message.author.id}, {"mal": `${args[1].toLowerCase() == "clear" ? "" : args[1]}`}, {upsert: true});
         break;
       case "anilist":
-        await List.update({"_id": message.author.id}, {"anilist": `${args[1].toLowerCase() == "clear" ? "" : args[1]}`}, {upsert: true});
+        await List.updateOne({"_id": message.author.id}, {"anilist": `${args[1].toLowerCase() == "clear" ? "" : args[1]}`}, {upsert: true});
         break;
       default:
         return message.channel.send(`Improper format. Use \`${client.getSettings(message.guild.id).prefix}help list\` for assistance.`);
