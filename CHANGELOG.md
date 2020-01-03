@@ -11,6 +11,12 @@ All notable changes to this project will be documented in this file.
 - Minor command updates
 - Package updates
 
+### 4.0.2
+- Updated logger to automatically create logs directory
+- Added stats reporting to discord.bots.gg
+- `m-quote` no longer depricated
+- Package updates
+
 ## 3.1 - A Video Is Worth 1000 Words (2019-12-18)
 - `m-clip` command added
 - `m-quote` command depricated
