@@ -7,6 +7,7 @@ const fs = require("fs");
 
 exports.log = (content, type = "log") => {
   const timestamp = `[${moment().format("YYYY-MM-DD HH:mm:ss")}]:`;
+  if (!fs.existsSync("./logs")) fs.mkdirSync("./logs");
   const stream = fs.createWriteStream(`./logs/${moment().format("YYYYMMDD")}.log`, {flags: "a"});
   switch (type) {
     case "log": {
