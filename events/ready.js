@@ -4,6 +4,7 @@ module.exports = async client => {
     client.statstimer = setInterval( () => {
       if (client.config.dblcomtoken) client.dblcomStats(client.config.dblcomtoken);
       if (client.config.bodtoken) client.bodStats(client.config.bodtoken);
+      if (client.config.dbggtoken) client.dbggStats(client.config.dbggtoken);
     }, 5 * 60 * 1000);
   }
 

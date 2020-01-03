@@ -161,6 +161,18 @@ module.exports = (client) => {
     xhttp.send(JSON.stringify(data));
   };
 
+  // discord.bots.gg
+  client.dbggStats = async (token) => {
+    if (!client.user) return;
+    const XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;
+    var xhttp = new XMLHttpRequest();
+    xhttp.open("POST", `https://discord.bots.gg/api/v1/bots/${client.user.id}/stats`, true);
+    xhttp.setRequestHeader("Content-Type", "application/json; charset=utf-8");
+    xhttp.setRequestHeader("Authorization", `${token}`);
+    const data = {"guildCount": client.guilds.array().length};
+    xhttp.send(JSON.stringify(data));
+  };
+
   // Generic - Posts a generic XMLHTTPRequest in JSON. Usable for any bot lists
   // not previously coded, or for other POST requests you might want to do.
   client.postJson = async (url, headers, data) => {
