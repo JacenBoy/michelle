@@ -17,11 +17,11 @@ A Discord bot based on [Guide Bot](https://github.com/AnIdiotsGuide/guidebot). A
 If you want to add Michelle to your server, you can do so using [this invite link](https://discordapp.com/oauth2/authorize?client_id=536935359775506444&scope=bot&permissions=379968). Use `m-help` to get started using the bot. Alternatively, you can self-host the bot if you want.
 
 ## Installing/Configuring
-Since the code is open source, you are free to host Michelle locally yourself if you prefer. These are not comprehensive instructions for self-hosting. However, Node-based bots are fairly straightforward to install. You need the latest version of Node.js installed to run the bot.
+Since the code is open source, you are free to host Michelle locally yourself if you prefer. These are not comprehensive instructions for self-hosting. However, Node-based bots are fairly straightforward to install. You need the latest version of Node.js installed to run the bot. You will also need a MongoDB database.
 
 1. Clone the repository onto the computer you want to run from.
 2. From the command line, run `npm install` to install the required packages.
-3. Make a copy of `config.js.example` and rename it to `config.js`. Replace the owner ID with your user ID, and the token with your bot's token. Replace the prefix with a prefix of your choice.
+3. Make a copy of `config.js.example` and rename it to `config.js`. Replace the placeholder options with your own.
 4. From the command line, run `npm start` to launch the bot. Make sure to invite it to your server.
 
 ## Help
