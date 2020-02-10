@@ -19,10 +19,5 @@ If you want to add Michelle to your server, you can do so using [this invite lin
 ## Installing/Configuring
 Self-hosting the bot is not officially supported. For a basic overview of the install process, check the [official documentation](https://michelle.jacenboy.com/self-host).
 
-1. Clone the repository onto the computer you want to run from.
-2. From the command line, run `npm install` to install the required packages.
-3. Make a copy of `config.js.example` and rename it to `config.js`. Replace the placeholder options with your own.
-4. From the command line, run `npm start` to launch the bot. Make sure to invite it to your server.
-
 ## Help
 If you have trouble with the bot, you can contact me on [Twitter (@jacenboy)](https://twitter.com/jacenboy), on [my Discord server](https://discord.gg/6wgy6jE), or by opening a bug report here on GitHub.
