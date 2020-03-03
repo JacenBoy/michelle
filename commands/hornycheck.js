@@ -2,7 +2,6 @@ const moment = require("moment");
 require("moment-duration-format");
 
 exports.run = async (client, message, args, level) => {
-  if (client.config.specialServers.indexOf(message.guild.id) == -1) return;
   if (!message.mentions.users.first()) return;
   var fields = [];
   var i = 0;

@@ -7,7 +7,7 @@ exports.run = async (client, req, res, args) => {
     response.id = botuser.id;
     response.name = botuser.username;
     response.discriminator = botuser.discriminator;
-    response.avatar = botuser.displayAvatarURL;
+    response.avatar = botuser.displayAvatarURL();
     return response;
   }
 

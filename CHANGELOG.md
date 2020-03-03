@@ -1,6 +1,12 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
+## 5.0 - Version 12 Update (2020-03-03)
+- Code updates to `discord.js` v12
+- Removed API endpoint
+- Package updates
+- Node and NPM updates
+
 ## 4.0 - Mongo Update (2019-12-23)
 - `mongoose` package added
 - Migrating `m-quote`, `m-clip`, and `m-list` to MongoDB

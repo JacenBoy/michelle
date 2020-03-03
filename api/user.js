@@ -2,14 +2,14 @@ exports.name="user";
 
 exports.run = async (client, req, res, args) => {
   if (!args[0]) return res.writeHead(400);
-  if (! await client.users.has(args[0])) return res.writeHead(404);
+  if (! await client.users.cache.has(args[0])) return res.writeHead(404);
   async function getResponse() {
-    var userinfo = await client.users.get(args[0]);
+    var userinfo = await client.users.fetch(args[0]);
     var response = {
       "id": userinfo.id,
       "name": userinfo.username,
       "discriminator": userinfo.discriminator,
-      "avatar": userinfo.displayAvatarURL,
+      "avatar": userinfo.displayAvatarURL(),
       "createdAt": userinfo.createdAt,
       "isBot": userinfo.bot,
       "status": userinfo.presence.status,

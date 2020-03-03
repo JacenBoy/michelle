@@ -32,7 +32,7 @@ exports.run = async (client, message, args, level) => {
       }
       message.channel.send({"embed": {
         "title": `${usermention.username}'s Anime Lists`,
-        "thumbnail": { "url": usermention.avatarURL || usermention.defaultAvatarURL },
+        "thumbnail": { "url": usermention.avatarURL() || usermention.defaultAvatarURL() },
         "fields": fieldarray
       }});
     });
