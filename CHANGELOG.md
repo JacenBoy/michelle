@@ -10,6 +10,9 @@ All notable changes to this project will be documented in this file.
 ### 5.0.1
 - Fixed errors with stat reporting APIs
 
+### 5.0.2
+- Package updates
+
 ## 4.0 - Mongo Update (2019-12-23)
 - `mongoose` package added
 - Migrating `m-quote`, `m-clip`, and `m-list` to MongoDB
