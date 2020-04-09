@@ -17,6 +17,11 @@ All notable changes to this project will be documented in this file.
 - Update to `mkdirp` to address vulnerability with `minimist` [(CVE-2020-7598)](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-7598)
 - Additional package updates
 
+### 5.0.4
+- Added `m-fund`
+- Added `FUNDING.yml`
+- Package updates
+
 ## 4.0 - Mongo Update (2019-12-23)
 - `mongoose` package added
 - Migrating `m-quote`, `m-clip`, and `m-list` to MongoDB
