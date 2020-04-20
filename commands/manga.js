@@ -7,8 +7,13 @@ exports.run = async (client, message, args, level) => {
   try {
     var results = await kitsu.searchManga(aniname, 0);
   } catch (ex) {
-    message.channel.send("An error occured running this command. This is likely due to an issue on Kitsu's end, and not an error with the bot. Please try your command again later.");
-    return client.logger.error(`An error occurred with the command: ${ex}`);
+    if (ex.message.indexOf("ERR_UNESCAPED_CHARACTERS") != -1) {
+      message.channel.send("This command only accepts English and Romaji titles. Please translate the title and try again.");
+      return client.logger.error(`An error occurred with the command: ${ex}`);
+    } else {
+      message.channel.send("An error occured running this command. This is likely due to an issue on Kitsu's end, and not an error with the bot. Please try your command again later.");
+      return client.logger.error(`An error occurred with the command: ${ex}`);
+    }
   }
   var aniresult = results[0].attributes;
   if (!aniresult.titles) {

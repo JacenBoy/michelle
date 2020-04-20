@@ -5,7 +5,17 @@ exports.run = async (client, message, args, level) => {
   if (!args[0]) return message.channel.send("Please specify an anime name.");
   else var aniname = args.join(" ");
 
-  var results = await kitsu.searchAnime(aniname, 0);
+  try {
+    var results = await kitsu.searchAnime(aniname, 0);
+  } catch (ex) {
+    if (ex.message.indexOf("ERR_UNESCAPED_CHARACTERS") != -1) {
+      message.channel.send("This command only accepts English and Romaji titles. Please translate the title and try again.");
+      return client.logger.error(`An error occurred with the command: ${ex}`);
+    } else {
+      message.channel.send("An error occured running this command. This is likely due to an issue on Kitsu's end, and not an error with the bot. Please try your command again later.");
+      return client.logger.error(`An error occurred with the command: ${ex}`);
+    }
+  }
   if (!results[0].attributes.titles) {
     message.channel.send("No results found");
     client.logger.warn(`No anime found for search term "${aniname}"`);

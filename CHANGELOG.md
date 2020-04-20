@@ -22,6 +22,10 @@ All notable changes to this project will be documented in this file.
 - Added `FUNDING.yml`
 - Package updates
 
+### 5.0.5
+- Added new error for using non-English characters in `m-anime`, `m-manga`, `m-animesearch`, and `m-mangasearch`
+- Package updates
+
 ## 4.0 - Mongo Update (2019-12-23)
 - `mongoose` package added
 - Migrating `m-quote`, `m-clip`, and `m-list` to MongoDB
