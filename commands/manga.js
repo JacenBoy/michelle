@@ -9,11 +9,10 @@ exports.run = async (client, message, args, level) => {
   } catch (ex) {
     if (ex.message.indexOf("ERR_UNESCAPED_CHARACTERS") != -1) {
       message.channel.send("This command only accepts English and Romaji titles. Please translate the title and try again.");
-      return client.logger.error(`An error occurred with the command: ${ex}`);
     } else {
       message.channel.send("An error occured running this command. This is likely due to an issue on Kitsu's end, and not an error with the bot. Please try your command again later.");
-      return client.logger.error(`An error occurred with the command: ${ex}`);
     }
+    return client.logger.error(`${ex}`);
   }
   var aniresult = results[0].attributes;
   if (!aniresult.titles) {
