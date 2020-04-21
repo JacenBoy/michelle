@@ -26,6 +26,13 @@ All notable changes to this project will be documented in this file.
 - Added new error for using non-English characters in `m-anime`, `m-manga`, `m-animesearch`, and `m-mangasearch`
 - Package updates
 
+### 5.0.6
+- [node-fetch](https://www.npmjs.com/package/node-fetch) package added
+- Improved logging of `m-eval` output
+- Added option to upload `m-eval` output to Hastebin
+- Code cleanup
+- Package updates
+
 ## 4.0 - Mongo Update (2019-12-23)
 - `mongoose` package added
 - Migrating `m-quote`, `m-clip`, and `m-list` to MongoDB

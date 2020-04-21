@@ -7,11 +7,27 @@
 // However it's, like, super ultra useful for troubleshooting and doing stuff
 // you don't want to put in a command.
 exports.run = async (client, message, args, level) => {
+  const fetch = require("node-fetch");
   const code = args.join(" ");
   try {
     const evaled = eval(code);
     const clean = await client.clean(client, evaled);
-    message.channel.send(`\`\`\`js\n${clean}\n\`\`\``);
+    if (clean.length > 1090) { 
+      try {
+        const {key} = await fetch("https://hasteb.in/documents", {
+          method: "POST",
+          body: clean,
+          headers: {"Content-Type": "application/json"}
+        }).then(res => res.json());
+        message.channel.send(`\`\`\`\nResponse too long. Uploaded output to https://hasteb.in/${key}.js.\n\`\`\``);
+      } catch (ex) {
+        client.logger.debug(clean);
+        message.channel.send("```\nResponse too long. Check the console for full output.\n```");
+      }
+      
+    } else {
+      message.channel.send(`\`\`\`js\n${clean}\n\`\`\``);
+    }
   } catch (err) {
     message.channel.send(`\`ERROR\` \`\`\`xl\n${await client.clean(client, err)}\n\`\`\``);
   }
