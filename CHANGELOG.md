@@ -1,6 +1,11 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
+## 5.1 - Are Visual Novels Games? (2020-04-22)
+- [vndb-api](https://www.npmjs.com/package/vndb-api) package added
+- `m-vn` command added
+- `m-vnsearch` command added
+
 ## 5.0 - Version 12 Update (2020-03-03)
 - Code updates to `discord.js` v12
 - Removed API endpoint
