@@ -1,9 +1,9 @@
 // Find the source of an image
+const checkImage = require("is-image-url");
+const Sagiri = require("sagiri");
 
 exports.run = async (client, message, args, level) => {
   args[1] = args[1] == "list" ? 5 : 1;
-  const checkImage = require("is-image-url");
-  const Sagiri = require("sagiri");
   const saucenao = Sagiri(client.config.saucetoken, {"results": args[1]});
 
   if (!checkImage(args[0])) {

@@ -9,6 +9,11 @@ All notable changes to this project will be documented in this file.
 ### 5.1.1
 - Improved error logging and reporting for `m-vn` and `m-vnsearch`
 
+### 5.1.2
+- Integrated VN support into `m-random`
+- Updating error responses
+- Code cleanup
+
 ## 5.0 - Version 12 Update (2020-03-03)
 - Code updates to `discord.js` v12
 - Removed API endpoint

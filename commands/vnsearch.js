@@ -1,8 +1,8 @@
 // Search for a visual novel on VNDB
+const VNDB = require("vndb-api");
+const moment = require("moment");
 
 exports.run = async (client, message, args, level) => {
-  const VNDB = require("vndb-api");
-  const moment = require("moment");
   if (!args[0]) return message.channel.send("Please specify an visual novel title.");
   else var vnname = args.join(" ");
   try {

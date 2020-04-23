@@ -1,7 +1,7 @@
 // Get a random image from a booru
+const booru = require("booru");
 
 exports.run = async (client, message, args, level) => {
-  const booru = require("booru");
   var site = (! ["dm","group"].includes(message.channel.type) ? (message.channel.nsfw ? "gb" : "sb") : "sb");
   var taglist = args.join(" ");
   var tagarray = taglist.split(", ");

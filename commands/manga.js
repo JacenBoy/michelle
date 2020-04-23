@@ -1,7 +1,7 @@
 // Search Kitsu for a manga
+const kitsu = require("node-kitsu");
 
 exports.run = async (client, message, args, level) => {
-  const kitsu = require("node-kitsu");
   if (!args[0]) return message.channel.send("Please specify a manga name.");
   else var aniname = args.join(" ");
   try {
@@ -10,7 +10,7 @@ exports.run = async (client, message, args, level) => {
     if (ex.message.indexOf("ERR_UNESCAPED_CHARACTERS") != -1) {
       message.channel.send("This command only accepts English and Romaji titles. Please translate the title and try again.");
     } else {
-      message.channel.send("An error occured running this command. This is likely due to an issue on Kitsu's end, and not an error with the bot. Please try your command again later.");
+      message.channel.send("An error occurred running this command. Please try again later.");
     }
     return client.logger.error(`${ex}`);
   }
