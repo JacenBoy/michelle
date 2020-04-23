@@ -9,7 +9,8 @@ exports.run = async (client, message, args, level) => {
     const vndb = new VNDB("michelle-vndb");
     var results = await vndb.query(`get vn basic,details (title~"${vnname}")`);
   } catch (ex) {
-    return client.logger.error(ex.msg);
+    message.channel.send("An error occurred running this command. Please try again later.");
+    return client.logger.error(`An error occurred with the command:\n${JSON.stringify(ex)}`);
   }
   var vnresults = results.items;
   if (!vnresults[0]) {
