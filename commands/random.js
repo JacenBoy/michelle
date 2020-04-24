@@ -35,7 +35,7 @@ exports.run = async (client, message, args, level) => {
               { "name": "Status:", "value": aniresult.status == "tba" ? "TBA" : `${aniresult.status.charAt(0).toUpperCase()}${aniresult.status.substr(1).toLowerCase()}`, "inline": true }
             ]
           };
-          client.logger.log(`Anime sucesfully generated: ${embed.embed.title}`);
+          client.logger.log(`Anime sucesfully generated: ${embed.title}`);
           found = true;
         } catch (ex) {
           // ¯\_(ツ)_/¯
@@ -70,7 +70,7 @@ exports.run = async (client, message, args, level) => {
               { "name": "Status:", "value": aniresult.status == "tba" ? "TBA" : `${aniresult.status.charAt(0).toUpperCase()}${aniresult.status.substr(1).toLowerCase()}`, "inline": true }
             ]
           };
-          client.logger.log(`Manga sucesfully generated: ${embed.embed.title}`);
+          client.logger.log(`Manga sucesfully generated: ${embed.title}`);
           found = true;
         } catch (ex) {
           // ¯\_(ツ)_/¯
@@ -89,6 +89,7 @@ exports.run = async (client, message, args, level) => {
           var results = await vndb.query(`get vn basic,details (id = ${rnd})`);
         } catch (ex) {
           message.channel.send("An error occurred running this command. Please try again later.");
+          found = true;
           return client.logger.error(`An error occurred with the command:\n${JSON.stringify(ex)}`);
         }
         try {
@@ -106,6 +107,7 @@ exports.run = async (client, message, args, level) => {
               {"name": "Platforms", "value": vnresult.platforms.join(", "), "inline": true}
             ]
           };
+          client.logger.log(`VN sucesfully generated: ${embed.title}`);
           found = true;
         } catch (ex) {
           // ¯\_(ツ)_/¯

@@ -14,6 +14,9 @@ All notable changes to this project will be documented in this file.
 - Updating error responses
 - Code cleanup
 
+### 5.1.3
+- Fixed error causing `m-random` to fail to ever generate an anime or manga
+
 ## 5.0 - Version 12 Update (2020-03-03)
 - Code updates to `discord.js` v12
 - Removed API endpoint
