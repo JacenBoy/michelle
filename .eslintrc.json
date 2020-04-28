@@ -41,13 +41,6 @@
         "classes": "always"
       }
     ],
-    "space-before-function-paren": [
-      "error", {
-        "anonymous": "never",
-        "named": "never",
-        "asyncArrow": "always"
-      }
-    ],
     "prefer-const": [
       "error", {
         "destructuring": "any",
@@ -57,6 +50,7 @@
     "no-unused-vars": "off",
     "no-redeclare": "off",
     "require-atomic-updates": "off",
-    "no-case-declarations": "off"
+    "no-case-declarations": "off",
+    "space-before-function-paren": "off"
   }
 }

@@ -243,6 +243,7 @@ module.exports = (client) => {
     if (! /\S/.test(synin)) {
       return "No synopsis provided";
     }
+    synin = synin.replace(/(<p>)?(<\/p>)?(<a.*>)?(<\/a>)?/g, "");
     if (synin.length >= 512) {
       return synin.substring(0, synin.lastIndexOf(" ", 502)) + "... (more)";
     }
