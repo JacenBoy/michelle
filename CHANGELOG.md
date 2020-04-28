@@ -1,6 +1,10 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
+## 5.2 - The Quadfecta (2020-04-28)
+- Added custom module for WLN Updates API requests
+- `m-ln` command added
+
 ## 5.1 - Are Visual Novels Games? (2020-04-22)
 - [vndb-api](https://www.npmjs.com/package/vndb-api) package added
 - `m-vn` command added
