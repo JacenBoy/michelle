@@ -5,6 +5,7 @@ exports.run = async (client, message, args, level) => {
   if (!args[0]) return message.channel.send("Please specify an anime name.");
   else var aniname = args.join(" ");
   try {
+    client.logger.debug(`Search term: ${aniname}`);
     var results = await kitsu.searchAnime(aniname, 0);
   } catch (ex) {
     if (ex.message.indexOf("ERR_UNESCAPED_CHARACTERS") != -1) {
