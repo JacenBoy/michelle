@@ -9,6 +9,10 @@ All notable changes to this project will be documented in this file.
 - Removed workaround for [WLN Updates trailing slash issue](https://github.com/fake-name/wlnupdates/issues/665)
 - Package updates
 
+### 5.2.2
+- Improved error checking for `m-eval`
+- Package updates
+
 ## 5.1 - Are Visual Novels Games? (2020-04-22)
 - [vndb-api](https://www.npmjs.com/package/vndb-api) package added
 - `m-vn` command added
