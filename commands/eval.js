@@ -19,6 +19,7 @@ exports.run = async (client, message, args, level) => {
           body: clean,
           headers: {"Content-Type": "application/json"}
         }).then(res => res.json());
+        if (!key) throw "Error posting the response";
         message.channel.send(`\`\`\`\nResponse too long. Uploaded output to https://hasteb.in/${key}.js.\n\`\`\``);
       } catch (ex) {
         client.logger.debug(clean);
