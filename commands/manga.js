@@ -14,12 +14,12 @@ exports.run = async (client, message, args, level) => {
     }
     return client.logger.error(`${ex}`);
   }
-  var aniresult = results[0].attributes;
-  if (!aniresult.titles) {
+  if (!results[0]) {
     message.channel.send("No results found");
     client.logger.warn(`No manga found for search term "${aniname}"`);
     return;
   }
+  var aniresult = results[0].attributes;
   message.channel.send({"embed": {
     "title": aniresult.titles.en || aniresult.canonicalTitle || aniresult.titles.en_jp,
     "url": `https://kitsu.io/manga/${aniresult.slug}`,
