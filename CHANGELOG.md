@@ -15,6 +15,7 @@ All notable changes to this project will be documented in this file.
 
 ## 5.2.3
 - Fixed improper handling of non-existent media in `m-anime`, `m-manga`, `m-animesearch`, and `m-mangasearch`
+- Fixed issue with Safebooru scores showing as "null" in `m-booru`
 - Package updates
 
 ## 5.1 - Are Visual Novels Games? (2020-04-22)

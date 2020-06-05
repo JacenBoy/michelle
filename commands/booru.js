@@ -21,7 +21,7 @@ exports.run = async (client, message, args, level) => {
     "url": `https://${site == "sb" ? "safebooru.org" : "gelbooru.com"}/index.php?page=post&s=view&id=${img[0].id}`,
     "color": client.colorInt(site == "sb" ? "#84a8b9" : "#006ffa"),
     "image": {"url": img[0].file_url},
-    "footer": {"text":`Score: ${img[0].score}`}
+    "footer": {"text":`Score: ${img[0].score || 0}`}
   }});
   client.logger.log(`${site == "gb" ? "Gelbooru" : "Safebooru"} #${img[0].id} found for tags: ${tagarray.join(", ")}`);
 };
