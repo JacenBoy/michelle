@@ -13,6 +13,10 @@ All notable changes to this project will be documented in this file.
 - Improved error checking for `m-eval`
 - Package updates
 
+## 5.2.3
+- Fixed improper handling of non-existent media in `m-anime`, `m-manga`, `m-animesearch`, and `m-mangasearch`
+- Package updates
+
 ## 5.1 - Are Visual Novels Games? (2020-04-22)
 - [vndb-api](https://www.npmjs.com/package/vndb-api) package added
 - `m-vn` command added
