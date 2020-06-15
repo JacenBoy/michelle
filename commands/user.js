@@ -14,7 +14,7 @@ exports.run = async (client, message, args, level) => {
     }
     return client.logger.error(`${ex}`);
   }
-  if (!results[0]) {
+  if (!results) {
     message.channel.send("No results found");
     client.logger.warn(`No Kitsu user found with the username ${aniname}`);
     return;

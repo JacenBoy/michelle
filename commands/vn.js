@@ -18,6 +18,17 @@ exports.run = async (client, message, args, level) => {
     client.logger.warn(`No VN results found for ${vnname}`);
     return;
   }
+
+  vnresult.languages.forEach((l, i) => {
+    const lang = client.getLanguage(l);
+    if (!lang) vnresult.languages[i] = l;
+    else vnresult.languages[i] = lang;
+  });
+  vnresult.platforms.forEach((p, i) => {
+    const platform = client.getPlatform(p);
+    vnresult.platforms[i] = platform;
+  });
+
   message.channel.send({"embed":{
     "title": vnresult.title,
     "url": `https://vndb.org/v${vnresult.id}`,
@@ -25,9 +36,9 @@ exports.run = async (client, message, args, level) => {
     "color": client.colorInt("#071c30"),
     "image": {"url": vnresult.image_nsfw ? (message.channel.nsfw ? vnresult.image : "https://michelle.jacenboy.com/assets/nsfw-overlay.png") : vnresult.image},
     "fields": [
-      {"name": "Release Date", "value": moment(vnresult.released).format("MMM D[,] YYYY"), "inline": true},
-      {"name": "Languages", "value": vnresult.languages.join(", "), "inline": true},
-      {"name": "Platforms", "value": vnresult.platforms.join(", "), "inline": true}
+      {"name": "Release Date", "value": moment(vnresult.released).format("MMM D[,] YYYY")},
+      {"name": "Languages", "value": vnresult.languages.join(" ")},
+      {"name": "Platforms", "value": vnresult.platforms.join(" ")}
     ]
   }});
   client.logger.log(`Result found for search term "${vnname}": "${vnresult.title}"`);

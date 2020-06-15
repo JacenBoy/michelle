@@ -1,6 +1,6 @@
 {
   "name": "michelle",
-  "version": "5.2.3",
+  "version": "5.2.4",
   "description": "A Discord bot heavily based on GuideBot",
   "main": "index.js",
   "scripts": {
@@ -28,18 +28,18 @@
   "dependencies": {
     "better-sqlite-pool": "^0.3.0",
     "booru": "^2.2.3",
-    "chalk": "^4.0.0",
+    "chalk": "^4.1.0",
     "dblapi.js": "^2.4.0",
     "discord.js": "^12.2.0",
-    "enmap": "^5.2.9",
+    "enmap": "^5.3.1",
     "is-image-url": "^1.1.8",
     "mal-scraper": "^2.6.9",
     "moment": "^2.26.0",
     "moment-duration-format": "^2.3.2",
-    "mongoose": "^5.9.17",
+    "mongoose": "^5.9.18",
     "node-fetch": "^2.6.0",
     "node-kitsu": "^1.1.1",
-    "sagiri": "^3.0.9",
+    "sagiri": "^3.1.0",
     "vndb-api": "^1.0.3",
     "xmlhttprequest": "^1.8.0"
   }
