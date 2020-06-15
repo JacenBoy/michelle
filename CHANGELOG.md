@@ -19,6 +19,8 @@ All notable changes to this project will be documented in this file.
 - Package updates
 
 ### 5.2.4
+- Adding emojis to languages and platforms
+- Fixed improper handling of non-existent media in `m-anime`, `m-manga`, `m-animesearch`, and `m-mangasearch`
 - Package updates
 
 ## 5.1 - Are Visual Novels Games? (2020-04-22)
