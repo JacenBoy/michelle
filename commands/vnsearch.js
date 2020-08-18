@@ -19,7 +19,7 @@ exports.run = async (client, message, args, level) => {
     return;
   }
   var fieldarry = [];
-  for (var i=0;i<vnresults.length;i++) {
+  for (let i=0;i<vnresults.length;i++) {
     var vnresult = vnresults[i];
     await vnresult.languages.forEach(async (l, j) => {
       const lang = await client.getEmoji(l);
