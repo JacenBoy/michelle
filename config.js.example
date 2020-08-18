@@ -24,6 +24,12 @@ const config = {
     "password": ""
   },
 
+  // Pixiv user login for the same reason as above
+  "pixiv": {
+    "username": "",
+    "password": ""
+  },
+
   // Streamable login for use with the Streamable API
   "streamable": {
     "username": "",

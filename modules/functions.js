@@ -253,120 +253,13 @@ module.exports = (client) => {
     return synin;
   };
 
-  // getPlatform - Convert a string to an emoji, specifically for the VN commands.
-  client.getPlatform = (platform) => {
-    switch (platform.toLowerCase()) {
-      case "win":
-        return client.emojis.cache.get("722099110487916545");
-      case "mac":
-        return client.emojis.cache.get("722099110571933726");
-      case "lin":
-        return client.emojis.cache.get("722099110177538100");
-      case "and":
-        return client.emojis.cache.get("722099110144114909");
-      case "ios":
-        return client.emojis.cache.get("722099110349373480");
-      case "web":
-        return client.emojis.cache.get("722099110580191262");
-      case "dos":
-        return client.emojis.cache.get("722099110232195102");
-      case "dvd":
-        return client.emojis.cache.get("722099110374670367");
-      case "bdp":
-        return client.emojis.cache.get("722099109992988793");
-      default:
-        return client.emojis.cache.get("722099110248972409");
-    }
-  };
+  client.getEmoji = async (search) => {
+    const emojis = require("../models/emoji.js");
+    const emoji = await emojis.findOne({"idString": search.toLowerCase()});
+    if (!emoji) return false;
 
-  client.getLanguage = (lang) => {
-    switch (lang.toLowerCase()) {
-      case "ar":
-        return "🇪🇬";
-      case "bg":
-        return "🇧🇬";
-      case "ca":
-        return "🇦🇩";
-      case "cs":
-        return "🇨🇿";
-      case "da":
-        return "🇩🇰";
-      case "de":
-        return "🇩🇪";
-      case "el":
-        return "🇬🇷";
-      case "en":
-        return "🇺🇸";
-      case "eo":
-        // No flag currently available
-        return false;
-      case "es":
-        return "🇪🇸";
-      case "fi":
-        return "🇫🇮";
-      case "fr":
-        return "🇫🇷";
-      case "gd":
-        // This emoji is bad and also broken
-        return false
-      case "he":
-        return "🇮🇱";
-      case "hr":
-        // No Croation VNs currently on VNDB, so unconfirmed country code
-        return "🇭🇷";
-      case "hu":
-        return "🇭🇺";
-      case "id":
-        return "🇮🇩";
-      case "it":
-        return "🇮🇹";
-      case "ja":
-        return "🇯🇵";
-      case "ko":
-        return "🇰🇷";
-      case "lt":
-        return "🇱🇹";
-      case "lv":
-        return "🇱🇻";
-      case "mk":
-        return "🇲🇰";
-      case "ms":
-        return "🇲🇾";
-      case "nl":
-        return "🇳🇱";
-      case "no":
-        return "🇳🇴";
-      case "pl":
-        return "🇵🇱";
-      case "pt-br":
-        return "🇧🇷";
-      case "pt-pt":
-        return "🇵🇹";
-      case "ro":
-        return "🇷🇴";
-      case "ru":
-        return "🇷🇺";
-      case "sk":
-        return "🇸🇰";
-      case "sl":
-        return "🇸🇮";
-      case "sv":
-        return "🇸🇪";
-      case "ta":
-        return "🇵🇭";
-      case "th":
-        return "🇹🇭";
-      case "tk":
-        return "🇹🇷";
-      case "uk":
-        return "🇺🇦";
-      case "vi":
-        return "🇻🇳";
-      case "zh":
-        return "🇨🇳";
-      default:
-        return false;
-    }
+    if (emoji.isCustom) return client.emojis.cache.get(emoji.emoji);
+    else return emoji.emoji;
   };
 
   // colorInt - Turn a standard hex color code into a decinal for embeds.

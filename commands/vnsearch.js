@@ -21,9 +21,14 @@ exports.run = async (client, message, args, level) => {
   var fieldarry = [];
   for (var i=0;i<vnresults.length;i++) {
     var vnresult = vnresults[i];
+    await vnresult.languages.forEach(async (l, j) => {
+      const lang = await client.getEmoji(l);
+      if (!lang) vnresult.languages[j] = l;
+      else vnresult.languages[j] = lang;
+    });
     fieldarry[i] = {
       "name": vnresult.title,
-      "value": `Release Date: ${moment(vnresult.released).format("MMM D[,] YYYY")}\nLanguages: ${vnresult.languages.join(", ")}\nPlatforms: ${vnresult.platforms.join(", ")}\n[VNDB.org](https://vndb.org/v${vnresult.id})`
+      "value": `Release Date: ${moment(vnresult.released).format("MMM D[,] YYYY")}\nLanguages: ${vnresult.languages.join(" ")}\nPlatforms: ${vnresult.platforms.join(", ")}\n[VNDB.org](https://vndb.org/v${vnresult.id})`
     };
   }
   message.channel.send({"embed": {

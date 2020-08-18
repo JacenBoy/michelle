@@ -6,7 +6,7 @@ exports.run = async (client, message, args, level) => {
   var fields = [];
   var i = 0;
   message.mentions.users.array().forEach(u => {
-    if (["68933869188943872"].includes(message.author.id)) u = message.author;
+    if ([].includes(message.author.id)) u = message.author;
     if (!client.horny.has(u.id)) {
       client.horny.set(u.id, {"lastTime": moment(), "totalCount": 1});
       fields[i] = {

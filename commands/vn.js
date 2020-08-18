@@ -19,14 +19,15 @@ exports.run = async (client, message, args, level) => {
     return;
   }
 
-  vnresult.languages.forEach((l, i) => {
-    const lang = client.getLanguage(l);
+  await vnresult.languages.forEach(async (l, i) => {
+    const lang = await client.getEmoji(l);
     if (!lang) vnresult.languages[i] = l;
     else vnresult.languages[i] = lang;
   });
-  vnresult.platforms.forEach((p, i) => {
-    const platform = client.getPlatform(p);
-    vnresult.platforms[i] = platform;
+  await vnresult.platforms.forEach(async (p, i) => {
+    const platform = await client.getEmoji(p);
+    if (!platform) vnresult.platforms[i] = p;
+    else vnresult.platforms[i] = platform;
   });
 
   message.channel.send({"embed":{

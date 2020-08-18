@@ -12,7 +12,7 @@ exports.conf = {
   enabled: true,
   guildOnly: false,
   special: false,
-  aliases: ["kofi","funding"],
+  aliases: ["kofi","funding", "donate"],
   permLevel: "User"
 };
 
