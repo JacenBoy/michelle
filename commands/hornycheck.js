@@ -22,7 +22,8 @@ exports.run = async (client, message, args, level) => {
   });
   message.channel.send({"embed": {
     "fields": fields, 
-    "color": client.colorInt("#ff0000")
+    "color": client.colorInt("#ff0000"),
+    "footer": {"text": "This command is going away. Use m-check instead."}
   }});
 };
 
