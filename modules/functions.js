@@ -269,8 +269,8 @@ module.exports = (client) => {
 
   // pad - Zero pad a number
   client.pad = (n, width, z) => {
-    z = z || '0';
-    n = n + '';
+    z = z || "0";
+    n = n + "";
     return n.length >= width ? n : new Array(width - n.length + 1).join(z) + n;
   };
 };
