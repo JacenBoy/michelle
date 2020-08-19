@@ -19,16 +19,18 @@ exports.run = async (client, message, args, level) => {
     return;
   }
 
-  await vnresult.languages.forEach(async (l, i) => {
-    const lang = await client.getEmoji(l);
-    if (!lang) vnresult.languages[i] = l;
-    else vnresult.languages[i] = lang;
-  });
-  await vnresult.platforms.forEach(async (p, i) => {
-    const platform = await client.getEmoji(p);
-    if (!platform) vnresult.platforms[i] = p;
-    else vnresult.platforms[i] = platform;
-  });
+  var langs = [];
+  var plats = [];
+  for (let i = 0; i < vnresult.languages.length; i++) {
+    const lang = await client.getEmoji(vnresult.languages[i]);
+    if (!lang) langs[i] = vnresult.languages[i];
+    else langs[i] = lang;
+  }
+  for (let i = 0; i < vnresult.platforms.length; i++) {
+    const platform = await client.getEmoji(vnresult.platforms[i]);
+    if (!platform) plats[i] = vnresult.platforms[i];
+    else plats[i] = platform;
+  }
 
   message.channel.send({"embed":{
     "title": vnresult.title,
@@ -38,8 +40,8 @@ exports.run = async (client, message, args, level) => {
     "image": {"url": vnresult.image_nsfw ? (message.channel.nsfw ? vnresult.image : "https://michelle.jacenboy.com/assets/nsfw-overlay.png") : vnresult.image},
     "fields": [
       {"name": "Release Date", "value": moment(vnresult.released).format("MMM D[,] YYYY")},
-      {"name": "Languages", "value": vnresult.languages.join(" ")},
-      {"name": "Platforms", "value": vnresult.platforms.join(" ")}
+      {"name": "Languages", "value": langs.join(" ")},
+      {"name": "Platforms", "value": plats.join(" ")}
     ]
   }});
   client.logger.log(`Result found for search term "${vnname}": "${vnresult.title}"`);

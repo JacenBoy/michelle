@@ -19,16 +19,23 @@ exports.run = async (client, message, args, level) => {
     return;
   }
   var fieldarry = [];
-  for (let i=0;i<vnresults.length;i++) {
+  var langs = [];
+  var plats = [];
+  for (let i = 0; i < vnresults.length; i++) {
     var vnresult = vnresults[i];
-    await vnresult.languages.forEach(async (l, j) => {
-      const lang = await client.getEmoji(l);
-      if (!lang) vnresult.languages[j] = l;
-      else vnresult.languages[j] = lang;
-    });
+    for (let j = 0; j < vnresult.languages.length; j++) {
+      const lang = await client.getEmoji(vnresult.languages[j]);
+      if (!lang) langs[j] = vnresult.languages[j];
+      else langs[j] = lang;
+    }
+    for (let j = 0; j < vnresult.platforms.length; j++) {
+      const platform = await client.getEmoji(vnresult.platforms[j]);
+      if (!platform) plats[j] = vnresult.platforms[j];
+      else plats[j] = platform;
+    }
     fieldarry[i] = {
       "name": vnresult.title,
-      "value": `Release Date: ${moment(vnresult.released).format("MMM D[,] YYYY")}\nLanguages: ${vnresult.languages.join(" ")}\nPlatforms: ${vnresult.platforms.join(", ")}\n[VNDB.org](https://vndb.org/v${vnresult.id})`
+      "value": `Release Date: ${moment(vnresult.released).format("MMM D[,] YYYY")}\nLanguages: ${langs.join(" ")}\nPlatforms: ${plats.join(", ")}\n[VNDB.org](https://vndb.org/v${vnresult.id})`
     };
   }
   message.channel.send({"embed": {
