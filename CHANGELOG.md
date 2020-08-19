@@ -25,6 +25,10 @@ All notable changes to this project will be documented in this file.
 - Minor background changes
 - Package updates
 
+### 5.2.5
+- Backend code fix
+- Node/NPM updates
+
 ## 5.1 - Are Visual Novels Games? (2020-04-22)
 - [vndb-api](https://www.npmjs.com/package/vndb-api) package added
 - `m-vn` command added
