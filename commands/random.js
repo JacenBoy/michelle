@@ -95,6 +95,20 @@ exports.run = async (client, message, args, level) => {
         try {
           var vnresult = results.items[0];
           if (!vnresult.title) throw "No result found";
+
+          var langs = [];
+          var plats = [];
+          for (let i = 0; i < vnresult.languages.length; i++) {
+            const lang = await client.getEmoji(vnresult.languages[i]);
+            if (!lang) langs[i] = vnresult.languages[i];
+            else langs[i] = lang;
+          }
+          for (let i = 0; i < vnresult.platforms.length; i++) {
+            const platform = await client.getEmoji(vnresult.platforms[i]);
+            if (!platform) plats[i] = vnresult.platforms[i];
+            else plats[i] = platform;
+          }
+
           embed = {
             "title": vnresult.title,
             "url": `https://vndb.org/v${vnresult.id}`,
@@ -102,9 +116,9 @@ exports.run = async (client, message, args, level) => {
             "color": client.colorInt("#071c30"),
             "image": {"url": vnresult.image_nsfw ? (message.channel.nsfw ? vnresult.image : "https://michelle.jacenboy.com/assets/nsfw-overlay.png") : vnresult.image},
             "fields": [
-              {"name": "Release Date", "value": moment(vnresult.released).format("MMM D[,] YYYY"), "inline": true},
-              {"name": "Languages", "value": vnresult.languages.join(", "), "inline": true},
-              {"name": "Platforms", "value": vnresult.platforms.join(", "), "inline": true}
+              {"name": "Release Date", "value": moment(vnresult.released).format("MMM D[,] YYYY")},
+              {"name": "Languages", "value": langs.join(" ")},
+              {"name": "Platforms", "value": plats.join(" ")}
             ]
           };
           client.logger.log(`VN sucesfully generated: ${embed.title}`);
