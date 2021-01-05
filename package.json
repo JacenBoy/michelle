@@ -33,7 +33,6 @@
     "discord.js": "^12.3.1",
     "enmap": "^5.7.1",
     "is-image-url": "^1.1.8",
-    "mal-scraper": "^2.8.0",
     "moment": "^2.27.0",
     "moment-duration-format": "^2.3.2",
     "mongoose": "^5.10.3",
