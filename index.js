@@ -1,7 +1,7 @@
 // This will check if the node version you are running is the required
 // Node version, if it isn't it will throw the following error to inform
 // you.
-if (Number(process.version.slice(1).split(".")[0]) < 8) throw new Error("Node 8.0.0 or higher is required. Update Node on your system.");
+if (Number(process.version.slice(1).split(".")[0]) < 12) throw new Error("Node 8.0.0 or higher is required. Update Node on your system.");
 
 // Load up the discord.js library
 const Discord = require("discord.js");
@@ -14,7 +14,7 @@ const DBL = require("dblapi.js");
 // This is your client. Some people call it `bot`, some people call it `self`,
 // some might call it `cootchie`. Either way, when you see `client.something`,
 // or `bot.something`, this is what we're refering to. Your client.
-const client = new Discord.Client({disableEveryone: true});
+const client = new Discord.Client({ws: {intents: Discord.Intents.NON_PRIVILEGED}, disableEveryone: true});
 
 // Here we load the config file that contains our token and our prefix values.
 client.config = require("./config.js");
@@ -32,14 +32,9 @@ require("./modules/functions.js")(client);
 
 // Aliases and commands are put in collections where they can be read from,
 // catalogued, listed, etc.
-client.commands = new Enmap();
-client.aliases = new Enmap();
-client.endpoints = new Enmap();
-
-// Now we integrate the use of Evie's awesome Enhanced Map module, which
-// essentially saves a collection to disk. This is great for per-server configs,
-// and makes things extremely easy for this purpose.
-client.settings = new Enmap({name: "settings"});
+client.commands = new Discord.Collection();
+client.aliases = new Discord.Collection();
+client.endpoints = new Discord.Collection();
 
 // Include other custom Enmap collections.
 client.profiles = new Enmap({name: "profiles"});
@@ -54,7 +49,7 @@ client.owners = new Enmap({name: "owners"});
 const mongoose = require("mongoose");
 client.mongoose = mongoose.connect(client.config.mongouri, {useNewUrlParser: true});
 
-// Require http to allow simle and dirty uptime monitoring
+// Require http to allow simple and dirty uptime monitoring
 var http = require("http");
 
 // We're doing real fancy node 8 async/await stuff here, and to do that

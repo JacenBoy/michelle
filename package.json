@@ -1,6 +1,6 @@
 {
   "name": "michelle",
-  "version": "5.2.7",
+  "version": "5.2.8",
   "description": "A Discord bot heavily based on GuideBot",
   "main": "index.js",
   "scripts": {
@@ -8,8 +8,8 @@
     "start": "node index.js"
   },
   "engines": {
-    "node": "12.18.3",
-    "npm": "6.14.8"
+    "node": ">=12",
+    "npm": ">=6"
   },
   "repository": {
     "type": "git",
@@ -33,10 +33,14 @@
     "discord.js": "^12.3.1",
     "enmap": "^5.7.1",
     "is-image-url": "^1.1.8",
-    "mal-scraper": "^2.7.2",
+    "mal-scraper": "^2.8.0",
     "moment": "^2.27.0",
     "moment-duration-format": "^2.3.2",
+<<<<<<< Updated upstream
     "mongoose": "^5.10.2",
+=======
+    "mongoose": "^5.10.3",
+>>>>>>> Stashed changes
     "node-fetch": "^2.6.1",
     "node-kitsu": "^1.1.1",
     "sagiri": "^3.1.0",

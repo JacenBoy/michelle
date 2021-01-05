@@ -36,12 +36,8 @@ module.exports = (client) => {
   // getSettings merges the client defaults with the guild settings. guild settings in
   // enmap should only have *unique* overrides that are different from defaults.
   client.getSettings = (guild) => {
-    client.settings.ensure("default", client.config.defaultSettings);
-    if(!guild) return client.settings.get("default");
-    const guildConf = client.settings.get(guild.id) || {};
-    // This "..." thing is the "Spread Operator". It's awesome!
-    // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_syntax
-    return ({...client.settings.get("default"), ...guildConf});
+    // Temporary workaround while phasing out Enmap
+    return client.config.defaultSettings;
   };
 
   /*
@@ -145,7 +141,7 @@ module.exports = (client) => {
     xhttp.open("POST", `https://discordbotlist.com/api/bots/${client.user.id}/stats`, true);
     xhttp.setRequestHeader("Content-Type", "application/json; charset=utf-8");
     xhttp.setRequestHeader("Authorization", `Bot ${token}`);
-    const data = {"guilds": client.guilds.cache.array().length, "users": client.users.cache.array().length};
+    const data = {"guilds": client.guilds.cache.array().length};
     xhttp.send(JSON.stringify(data));
   };
 
