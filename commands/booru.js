@@ -4,9 +4,13 @@ const booru = require("booru");
 exports.run = async (client, message, args, level) => {
   var site = (! ["dm","group"].includes(message.channel.type) ? (message.channel.nsfw ? "gb" : "sb") : "sb");
   var taglist = args.join(" ");
-  var tagarray = taglist.split(", ");
-  for (var i=0;i<tagarray.length;i++) {
-    tagarray[i] = tagarray[i].replace(/\s/g, "_");
+  if (taglist.indexOf("_") != -1) {
+    var tagarray = taglist.split(/\s+/g);
+  } else {
+    var tagarray = taglist.split(/(?:,(?:\s+)?)/g);
+    for (var i=0;i<tagarray.length;i++) {
+      tagarray[i] = tagarray[i].replace(/\s+/g, "_");
+    }
   }
   //if (site == "sb") { tagarray.push("-bikini", "-underwear"); }
   if (site == "gb") tagarray.push("-webm", "-mp4");

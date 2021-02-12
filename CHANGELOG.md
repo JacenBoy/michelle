@@ -46,6 +46,9 @@ All notable changes to this project will be documented in this file.
 - Fix error on guild join
 - Package updates
 
+### 5.2.10
+- Update `m-booru` to allow either spaces or underscores within tags
+
 ## 5.1 - Are Visual Novels Games? (2020-04-22)
 - [vndb-api](https://www.npmjs.com/package/vndb-api) package added
 - `m-vn` command added
