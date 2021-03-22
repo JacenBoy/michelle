@@ -4,6 +4,7 @@ const kitsu = require("node-kitsu");
 exports.run = async (client, message, args, level) => {
   if (!args[0]) return message.channel.send("Please specify a manga name.");
   else var aniname = args.join(" ");
+  client.logger.debug(`Search started for search term "${aniname}"`);
   try {
     var results = await kitsu.searchManga(aniname, 0);
   } catch (ex) {

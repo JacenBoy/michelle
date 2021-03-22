@@ -3,6 +3,8 @@
 exports.run = async (client, message, args, level) => {
   if (message.mentions.users.first()) var owner = message.mentions.users.first();
   else var owner = message.guild.owner;
+
+  if (owner.id == message.author.id) return;
   
   if (!client.owners.has(owner.id)) client.owners.set(owner.id, {"gratitude": 0, "abuse": 0});
 
