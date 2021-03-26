@@ -15,7 +15,7 @@ exports.run = async (client, message, args, level) => {
     }
     return client.logger.error(`${ex}`);
   }
-  if (!results) {
+  if (!results || !results[0]) {
     message.channel.send("No results found");
     client.logger.warn(`No manga found for search term "${aniname}"`);
     return;

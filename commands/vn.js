@@ -32,6 +32,18 @@ exports.run = async (client, message, args, level) => {
     else plats[i] = platform;
   }
 
+  client.logger.debug(JSON.stringify({"embed":{
+    "title": vnresult.title,
+    "url": `https://vndb.org/v${vnresult.id}`,
+    "description": client.cleanSyn(vnresult.description),
+    "color": client.colorInt("#071c30"),
+    "image": {"url": vnresult.image_nsfw ? (message.channel.nsfw ? vnresult.image : "https://michelle.jacenboy.com/assets/nsfw-overlay.png") : vnresult.image},
+    "fields": [
+      {"name": "Release Date", "value": moment(vnresult.released).format("MMM D[,] YYYY")},
+      {"name": "Languages", "value": langs.join(" ") || "\u200b"},
+      {"name": "Platforms", "value": plats.join(" ") || "\u200b"}
+    ]
+  }}));
   message.channel.send({"embed":{
     "title": vnresult.title,
     "url": `https://vndb.org/v${vnresult.id}`,
@@ -40,8 +52,8 @@ exports.run = async (client, message, args, level) => {
     "image": {"url": vnresult.image_nsfw ? (message.channel.nsfw ? vnresult.image : "https://michelle.jacenboy.com/assets/nsfw-overlay.png") : vnresult.image},
     "fields": [
       {"name": "Release Date", "value": moment(vnresult.released).format("MMM D[,] YYYY")},
-      {"name": "Languages", "value": langs.join(" ")},
-      {"name": "Platforms", "value": plats.join(" ")}
+      {"name": "Languages", "value": langs.join(" ") || "\u200b"},
+      {"name": "Platforms", "value": plats.join(" ") || "\u200b"}
     ]
   }});
   client.logger.log(`Result found for search term "${vnname}": "${vnresult.title}"`);
