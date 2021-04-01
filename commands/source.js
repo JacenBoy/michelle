@@ -5,14 +5,15 @@ const Sagiri = require("sagiri");
 exports.run = async (client, message, args, level) => {
   args[1] = args[1] == "list" ? 5 : 1;
   const saucenao = Sagiri(client.config.saucetoken, {"results": args[1]});
+  const img = message.attachments.first() ? message.attachments.first().proxyURL : args[0];
 
-  if (!checkImage(args[0])) {
+  if (!checkImage(img)) {
     message.channel.send("The URL you specified is not an image. Please check your URL.");
     client.logger.warn("Invalid URL specified.");
     return;
   }
 
-  var results = await saucenao(args[0]);
+  var results = await saucenao(img);
   message.channel.send({"embed": {
     "title": results[0].raw.data.title || `Image from ${results[0].site}`,
     "url": results[0].url,
@@ -20,10 +21,10 @@ exports.run = async (client, message, args, level) => {
     "image": { "url": results[0].thumbnail },
     "fields": [
       { "name": "Similarity", "value": `${results[0].similarity}` },
-      { "name": "Artist", "value": `${results[0].raw.data.creator || `${results[0].raw.data.member_name} (${results[0].raw.data.member_id})`}` }
+      { "name": results[0].raw.data.anidb_aid ? "Anime" : "Artist", "value": `${results[0].raw.data.anidb_aid ? results[0].raw.data.source : results[0].raw.data.creator || `${results[0].raw.data.member_name} (${results[0].raw.data.member_id})`}` }
     ]
   }});
-  client.logger.log(`Result from ${results[0].site} found for ${args[0]}`);
+  client.logger.log(`Result from ${results[0].site} found for ${img}`);
 };
 
 exports.conf = {

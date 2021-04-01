@@ -58,6 +58,11 @@ All notable changes to this project will be documented in this file.
 - Fixed issue with `m-anime`, `m-animesearch`, `m-manga`, `m-mangasearch`, and `m-user` not properly handling returning no results
 - Patched issue with `m-vn` not returning output
 
+### 5.2.13
+- Added support for file uploads in `m-source`
+- Fixed support for AniDB results with `m-source`
+- Package updates
+
 ## 5.1 - Are Visual Novels Games? (2020-04-22)
 - [vndb-api](https://www.npmjs.com/package/vndb-api) package added
 - `m-vn` command added
