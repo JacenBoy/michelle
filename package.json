@@ -1,6 +1,6 @@
 {
   "name": "michelle",
-  "version": "5.2.13",
+  "version": "5.2.14",
   "description": "A Discord bot heavily based on GuideBot",
   "main": "index.js",
   "scripts": {

@@ -63,6 +63,11 @@ All notable changes to this project will be documented in this file.
 - Fixed support for AniDB results with `m-source`
 - Package updates
 
+### 5.2.14
+- Added framework for exceptions to the bot filter
+- Minor text fixes
+- Package updates
+
 ## 5.1 - Are Visual Novels Games? (2020-04-22)
 - [vndb-api](https://www.npmjs.com/package/vndb-api) package added
 - `m-vn` command added
