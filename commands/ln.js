@@ -2,7 +2,7 @@
 const WLNUpdates = require("../modules/WLNUpdates.js");
 
 exports.run = async (client, message, args, level) => {
-  if (!args[0]) return message.channel.send("Please specify an anime name.");
+  if (!args[0]) return message.channel.send("Please specify a light novel name.");
   else var lnname = args.join(" ");
   const wln = new WLNUpdates();
   try {

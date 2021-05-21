@@ -3,7 +3,7 @@ const VNDB = require("vndb-api");
 const moment = require("moment");
 
 exports.run = async (client, message, args, level) => {
-  if (!args[0]) return message.channel.send("Please specify an visual novel title.");
+  if (!args[0]) return message.channel.send("Please specify a visual novel title.");
   else var vnname = args.join(" ");
   try {
     const vndb = new VNDB("michelle-vndb");

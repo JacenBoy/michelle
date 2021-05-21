@@ -3,7 +3,7 @@ const VNDB = require("vndb-api");
 const moment = require("moment");
 
 exports.run = async (client, message, args, level) => {
-  if (!args[0]) return message.channel.send("Please specify an visual novel title.");
+  if (!args[0]) return message.channel.send("Please specify a visual novel title.");
   else var vnname = args.join(" ");
   try {
     const vndb = new VNDB("michelle-vndb");
@@ -32,18 +32,6 @@ exports.run = async (client, message, args, level) => {
     else plats[i] = platform;
   }
 
-  client.logger.debug(JSON.stringify({"embed":{
-    "title": vnresult.title,
-    "url": `https://vndb.org/v${vnresult.id}`,
-    "description": client.cleanSyn(vnresult.description),
-    "color": client.colorInt("#071c30"),
-    "image": {"url": vnresult.image_nsfw ? (message.channel.nsfw ? vnresult.image : "https://michelle.jacenboy.com/assets/nsfw-overlay.png") : vnresult.image},
-    "fields": [
-      {"name": "Release Date", "value": moment(vnresult.released).format("MMM D[,] YYYY")},
-      {"name": "Languages", "value": langs.join(" ") || "\u200b"},
-      {"name": "Platforms", "value": plats.join(" ") || "\u200b"}
-    ]
-  }}));
   message.channel.send({"embed":{
     "title": vnresult.title,
     "url": `https://vndb.org/v${vnresult.id}`,
