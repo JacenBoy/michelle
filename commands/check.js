@@ -1,3 +1,6 @@
+const Special = require("../models/special.js");
+const { DateTime } = require("luxon");
+
 exports.run = async (client, message, args, level) => {
   if (!args[0]) return message.channel.send(`Improper usage. Use \`${client.getSettings(message.guild.id).prefix}help check\` for assistance.`);
   switch (args[0].toLowerCase()) {
@@ -9,21 +12,28 @@ exports.run = async (client, message, args, level) => {
       const moment = require("moment");
       require("moment-duration-format");
 
-      users.forEach(u => {
-        if (!client.horny.has(u.id)) {
+      for (const u of users) {
+        const profile = await Special.findById(u.id);
+        if (!profile) {
+          fields[i] = {
+            "name": `${u.username} horny count: 0`, 
+            "value": `There have been no recorded instances of ${u.username} being horny`
+          };
+        }
+        else if (!profile.horny) {
           fields[i] = {
             "name": `${u.username} horny count: 0`, 
             "value": `There have been no recorded instances of ${u.username} being horny`
           };
         } else {
-          const udata = client.horny.get(u.id);
+          const diff = DateTime.now().diff(DateTime.fromISO(profile.horny.lastTime), ["days", "hours", "minutes", "seconds", "milliseconds"]);
           fields[i] = {
-            "name": `${u.username} horny count: ${udata.totalCount}`, 
-            "value": `It has been ${moment.duration(moment().diff(udata.lastTime)).format("D [days] H [hours] m [minutes] s [seconds]")} since ${u.username} was last horny`
+            "name": `${u.username} horny count: ${profile.horny.totalCount}`, 
+            "value": `It has been ${diff.days ? diff.days + " days " : ""}${diff.hours ? diff.hours + " hours " : ""}${diff.minutes ? diff.minutes + " minutes " : ""}${diff.seconds ? diff.seconds + " seconds " : ""}since ${u.username} was last horny`
           };
         }
         i++;
-      });
+      }
       message.channel.send({"embed": {
         "fields": fields, 
         "color": client.colorInt("#ff0000")
@@ -35,15 +45,15 @@ exports.run = async (client, message, args, level) => {
       var fields = [];
       var i = 0;
 
-      users.forEach(u => {
-        if (!client.owners.has(u.id)) {
+      for (const u of users) {
+        const profile = await Special.findById(u.id);
+        if (!profile) {
           fields[i] = {
             "name": "\u200b", 
             "value": `<@${u.id}> has never been accused of abuse`
           };
         } else {
-          const udata = client.owners.get(u.id);
-          if (udata.abuse == 0) {
+          if (!profile.abuse) {
             fields[i] = {
               "name": "\u200b", 
               "value": `<@${u.id}> has never been accused of abuse`
@@ -52,12 +62,12 @@ exports.run = async (client, message, args, level) => {
           else {
             fields[i] = {
               "name": "\u200b", 
-              "value": `<@${u.id}> has been accused of abuse ${udata.abuse} time${udata.abuse > 1 ? "s" : "" }`
+              "value": `<@${u.id}> has been accused of abuse ${profile.abuse} time${profile.abuse > 1 ? "s" : "" }`
             };
           }
         }
         i++;
-      });
+      }
       message.channel.send({"embed": {
         "fields": fields, 
         "color": client.colorInt("#ff0000")
@@ -69,15 +79,15 @@ exports.run = async (client, message, args, level) => {
       var fields = [];
       var i = 0;
 
-      users.forEach(u => {
-        if (!client.owners.has(u.id)) {
+      for (const u of users) {
+        const profile = await Special.findById(u.id);
+        if (!profile) {
           fields[i] = {
             "name": "\u200b", 
             "value": `<@${u.id}> has never been thanked`
           };
         } else {
-          const udata = client.owners.get(u.id);
-          if (udata.gratitude == 0) {
+          if (!profile.gratitude) {
             fields[i] = {
               "name": "\u200b", 
               "value": `<@${u.id}> has never been thanked`
@@ -86,12 +96,12 @@ exports.run = async (client, message, args, level) => {
           else {
             fields[i] = {
               "name": "\u200b", 
-              "value": `<@${u.id}> has been thanked ${udata.gratitude} time${udata.gratitude > 1 ? "s" : "" }`
+              "value": `<@${u.id}> has been thanked ${profile.gratitude} time${profile.gratitude > 1 ? "s" : "" }`
             };
           }
         }
         i++;
-      });
+      }
       message.channel.send({"embed": {
         "fields": fields, 
         "color": client.colorInt("#00ff00")

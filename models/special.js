@@ -6,10 +6,8 @@ const specialSchema = new mongoose.Schema({
     "lastTime": String,
     "totalCount": Number
   },
-  "servers": {
-    "abuse": Number,
-    "gratitude": Number
-  }
+  "abuse": Number,
+  "gratitude": Number
 });
 
-module.exports = mongoose.Model("Special", specialSchema, {collection: "special"});
+module.exports = mongoose.model("Special", specialSchema, "special");

@@ -1,6 +1,11 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
+## 5.3 - I'm Too Dependent (In Progress)
+- Replacing `enmap` dependency with `mongoose`
+- Replacing `moment` dependency with `luxon`
+- Package Updates
+
 ## 5.2 - The Quadfecta (2020-04-28)
 - Added custom module for WLN Updates API requests
 - `m-ln` command added

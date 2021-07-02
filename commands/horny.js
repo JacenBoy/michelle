@@ -1,29 +1,33 @@
 const moment = require("moment");
 require("moment-duration-format");
+const { DateTime } = require("luxon");
+const Special = require("../models/special.js");
 
 exports.run = async (client, message, args, level) => {
   if (!message.mentions.users.first()) return;
   var fields = [];
   var i = 0;
-  message.mentions.users.array().forEach(u => {
+  var users = message.mentions.users.array();
+  for (let u of users) {
     if ([].includes(message.author.id)) u = message.author;
-    if (!client.horny.has(u.id)) {
-      client.horny.set(u.id, {"lastTime": moment(), "totalCount": 1});
+    const profile = await Special.findById(u.id);
+    client.logger.debug(Object.keys(profile.horny).length);
+    if (!profile || !Object.keys(profile.horny).length) {
+      const res = await Special.findByIdAndUpdate(u.id, {"horny": {"totalCount": 1, "lastTime": DateTime.now().toString()}}, {upsert: true, new: true});
       fields[i] = {
-        "name": `${u.username} horny count: 1`, 
+        "name": `${u.username} horny count: ${res.horny.totalCount}`, 
         "value": `This is the first recorded time ${u.username} has been horny`
       };
     } else {
-      const udata = client.horny.get(u.id);
-      udata.totalCount++;
+      const res = await Special.findByIdAndUpdate(u.id, {"horny": {"totalCount": profile.horny.totalCount + 1, "lastTime": DateTime.now().toString()}}, {upsert: true, new: true});
+      const diff = DateTime.now().diff(DateTime.fromISO(profile.horny.lastTime), ["days", "hours", "minutes", "seconds", "milliseconds"]);
       fields[i] = {
-        "name": `${u.username} horny count: ${udata.totalCount}`,
-        "value": `It has been ${moment.duration(moment().diff(udata.lastTime)).format("D [days] H [hours] m [minutes] s [seconds]")} since ${u.username} was last horny`
+        "name": `${u.username} horny count: ${res.horny.totalCount}`,
+        "value": `It has been ${diff.days ? diff.days + " days " : ""}${diff.hours ? diff.hours + " hours " : ""}${diff.minutes ? diff.minutes + " minutes " : ""}${diff.seconds ? diff.seconds + " seconds " : ""}since ${u.username} was last horny`
       };
-      client.horny.set(u.id, {"lastTime": moment(), "totalCount": udata.totalCount});
     }
     i++;
-  });
+  }
   message.channel.send({"embed": {
     "fields": fields,
     "color": client.colorInt("#ff0000")
