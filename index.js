@@ -1,7 +1,7 @@
 // This will check if the node version you are running is the required
 // Node version, if it isn't it will throw the following error to inform
 // you.
-if (Number(process.version.slice(1).split(".")[0]) < 12) throw new Error("Node 8.0.0 or higher is required. Update Node on your system.");
+if (Number(process.version.slice(1).split(".")[0]) < 12) throw new Error("Node 12.0.0 or higher is required. Update Node on your system.");
 
 // Load up the discord.js library
 const Discord = require("discord.js");
@@ -35,15 +35,6 @@ require("./modules/functions.js")(client);
 client.commands = new Discord.Collection();
 client.aliases = new Discord.Collection();
 client.endpoints = new Discord.Collection();
-
-// Include other custom Enmap collections.
-client.profiles = new Enmap({name: "profiles"});
-client.horny = new Enmap({name: "horny"});
-client.owners = new Enmap({name: "owners"});
-
-// Import the quotes and clips files to allow the quote and clip systems to work properly.
-//client.quotes = require("./modules/quotes.json");
-//client.clips = require("./modules/clips.json");
 
 // Open connection to MongoDB
 const mongoose = require("mongoose");

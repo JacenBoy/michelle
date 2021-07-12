@@ -9,8 +9,6 @@ exports.run = async (client, message, args, level) => {
       else var users = message.mentions.users.array();
       var fields = [];
       var i = 0;
-      const moment = require("moment");
-      require("moment-duration-format");
 
       for (const u of users) {
         const profile = await Special.findById(u.id);

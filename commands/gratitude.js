@@ -5,16 +5,10 @@ exports.run = async (client, message, args, level) => {
   if (message.mentions.users.first()) var owner = message.mentions.users.first();
   else var owner = message.guild.owner;
 
-  //if (owner.id == message.author.id) return;
-  
-  if (!client.owners.has(owner.id)) client.owners.set(owner.id, {"gratitude": 0, "abuse": 0});
+  if (owner.id == message.author.id) return;
 
   const profile = await Special.findById(owner.id) || {"gratitude": 0};
   const res = await Special.findByIdAndUpdate(owner.id, {"gratitude": profile.gratitude ? profile.gratitude + 1 : 1}, {upsert: true, new: true});
-
-  const odata = client.owners.get(owner.id);
-  odata.gratitude++;
-  client.owners.set(owner.id, odata);
 
   message.channel.send({"embed": {
     "description": `Thank you <@${owner.id}> for everything you do! <@${owner.id}> has been thanked ${res.gratitude} time${res.gratitude > 1 ? "s" : "" }`,
