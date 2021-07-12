@@ -1,7 +1,7 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
-## 5.3 - I'm Too Dependent (In Progress)
+## 5.3 - I'm Too Dependent (2021-07-12)
 - Replacing `enmap` dependency with `mongoose`
 - Replacing `moment` dependency with `luxon`
 - Package Updates
