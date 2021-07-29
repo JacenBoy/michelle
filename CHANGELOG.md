@@ -1,10 +1,17 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
+## 6.0 - Classy (In Progress)
+- Upgrades for `discord.js` v13
+- Implementing new Client builder
+- Implementing new command handler
+- Node/NPM updates
+- Package updates
+
 ## 5.3 - I'm Too Dependent (2021-07-12)
 - Replacing `enmap` dependency with `mongoose`
 - Replacing `moment` dependency with `luxon`
-- Package Updates
+- Package updates
 
 ## 5.2 - The Quadfecta (2020-04-28)
 - Added custom module for WLN Updates API requests
