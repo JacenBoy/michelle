@@ -1,6 +1,6 @@
 // Search for a visual novel on VNDB
 const VNDB = require("vndb-api");
-//const moment = require("moment");
+const { DateTime } = require("luxon");
 
 exports.run = async (client, message, args, level) => {
   if (!args[0]) return message.channel.send("Please specify a visual novel title.");
@@ -39,7 +39,7 @@ exports.run = async (client, message, args, level) => {
     "color": client.colorInt("#071c30"),
     "image": {"url": vnresult.image_nsfw ? (message.channel.nsfw ? vnresult.image : "https://michelle.jacenboy.com/assets/nsfw-overlay.png") : vnresult.image},
     "fields": [
-      //{"name": "Release Date", "value": moment(vnresult.released).format("MMM D[,] YYYY")},
+      {"name": "Release Date", "value": DateTime.fromISO(vnresult.released).toFormat("MMM d',' yyyy")},
       {"name": "Languages", "value": langs.join(" ") || "\u200b"},
       {"name": "Platforms", "value": plats.join(" ") || "\u200b"}
     ]
