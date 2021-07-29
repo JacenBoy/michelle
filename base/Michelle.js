@@ -17,7 +17,7 @@ class Michelle extends Client {
     this.endpoints = new Collection();
 
     // Require the logger module for persistent logging
-    this.logger = require("./modules/Logger.js");
+    this.logger = require("../modules/Logger.js");
 
     // We'll use promisify around setTimeout in order to simulate "sleep" functionality
     this.wait = require("util").promisify(setTimeout);

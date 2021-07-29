@@ -1,7 +1,7 @@
 // Get a random anime
 const kitsu = require("node-kitsu");
 const VNDB = require("vndb-api");
-const moment = require("moment");
+//const moment = require("moment");
 
 exports.run = async (client, message, args, level) => {
   if (!args[0]) return message.channel.send("Missing argument. Please specify \"anime\", \"manga\", or \"VN\".");
@@ -116,7 +116,7 @@ exports.run = async (client, message, args, level) => {
             "color": client.colorInt("#071c30"),
             "image": {"url": vnresult.image_nsfw ? (message.channel.nsfw ? vnresult.image : "https://michelle.jacenboy.com/assets/nsfw-overlay.png") : vnresult.image},
             "fields": [
-              {"name": "Release Date", "value": moment(vnresult.released).format("MMM D[,] YYYY")},
+              //{"name": "Release Date", "value": moment(vnresult.released).format("MMM D[,] YYYY")},
               {"name": "Languages", "value": langs.join(" ")},
               {"name": "Platforms", "value": plats.join(" ")}
             ]

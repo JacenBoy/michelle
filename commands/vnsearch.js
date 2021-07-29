@@ -1,6 +1,6 @@
 // Search for a visual novel on VNDB
 const VNDB = require("vndb-api");
-const moment = require("moment");
+//const moment = require("moment");
 
 exports.run = async (client, message, args, level) => {
   if (!args[0]) return message.channel.send("Please specify a visual novel title.");
@@ -35,7 +35,8 @@ exports.run = async (client, message, args, level) => {
     }
     fieldarry[i] = {
       "name": vnresult.title,
-      "value": `Release Date: ${moment(vnresult.released).format("MMM D[,] YYYY")}\nLanguages: ${langs.join(" ")}\nPlatforms: ${plats.join(", ")}\n[VNDB.org](https://vndb.org/v${vnresult.id})`
+      //"value": `Release Date: ${moment(vnresult.released).format("MMM D[,] YYYY")}\nLanguages: ${langs.join(" ")}\nPlatforms: ${plats.join(", ")}\n[VNDB.org](https://vndb.org/v${vnresult.id})`
+      "value": `Languages: ${langs.join(" ")}\nPlatforms: ${plats.join(", ")}\n[VNDB.org](https://vndb.org/v${vnresult.id})`
     };
   }
   message.channel.send({"embed": {
