@@ -16,7 +16,7 @@ const http = require("http");
 // some might call it `cootchie`. Either way, when you see `client.something`,
 // or `bot.something`, this is what we're refering to. Your client.
 //const client = new Discord.Client({ws: {intents: Discord.Intents.NON_PRIVILEGED}, disableEveryone: true});
-const client = new Michelle({ws: {intents: Intents.NON_PRIVILEGED}, disableEveryone: true}, require("./config.js"));
+const client = new Michelle({intents: [Intents.NON_PRIVILEGED], allowedMentions: {repliedUser: true}}, require("./config.js"));
 
 if (client.config.dbltoken) { client.dbl = new DBL(client.config.dbltoken, client); }
 
