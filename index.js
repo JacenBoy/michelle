@@ -17,7 +17,23 @@ const http = require("http");
 // or `bot.something`, this is what we're refering to. Your client.
 
 // Use all non-privileged intents to spite people
-const nonPrivilegedIntents = [Intents.GUILDS, Intents.GUILD_BANS, Intents.GUILD_EMOJIS_AND_STICKERS, Intents.GUILD_INTEGRATIONS, Intents.GUILD_WEBHOOKS, Intents.GUILD_INVITES, Intents.GUILD_VOICE_STATES, Intents.GUILD_MESSAGES, Intents.GUILD_MESSAGE_REACTIONS, Intents.GUILD_MESSAGE_TYPING, Intents.DIRECT_MESSAGES, Intents.DIRECT_MESSAGE_REACTIONS, Intents.DIRECT_MESSAGE_TYPING];
+const nonPrivilegedIntents = [
+  Intents.FLAGS.GUILDS, 
+  Intents.FLAGS.GUILD_MEMBERS, 
+  Intents.FLAGS.GUILD_BANS, 
+  Intents.FLAGS.GUILD_EMOJIS_AND_STICKERS, 
+  Intents.FLAGS.GUILD_INTEGRATIONS, 
+  Intents.FLAGS.GUILD_WEBHOOKS, 
+  Intents.FLAGS.GUILD_INVITES, 
+  Intents.FLAGS.GUILD_VOICE_STATES, 
+  Intents.FLAGS.GUILD_PRESENCES, 
+  Intents.FLAGS.GUILD_MESSAGES, 
+  Intents.FLAGS.GUILD_MESSAGE_REACTIONS, 
+  Intents.FLAGS.GUILD_MESSAGE_TYPING, 
+  Intents.FLAGS.DIRECT_MESSAGES, 
+  Intents.FLAGS.DIRECT_MESSAGE_REACTIONS, 
+  Intents.FLAGS.DIRECT_MESSAGE_TYPING
+];
 
 const client = new Michelle({intents: nonPrivilegedIntents, allowedMentions: {repliedUser: true}}, require("./config.js"));
 

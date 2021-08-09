@@ -32,7 +32,7 @@ exports.run = async (client, message, args, level) => {
     else plats[i] = platform;
   }
 
-  const embed = {"embed":{
+  const embed = {
     "title": vnresult.title,
     "url": `https://vndb.org/v${vnresult.id}`,
     "description": client.cleanSyn(vnresult.description),
@@ -43,7 +43,7 @@ exports.run = async (client, message, args, level) => {
       {"name": "Languages", "value": langs.join(" ") || "\u200b"},
       {"name": "Platforms", "value": plats.join(" ") || "\u200b"}
     ]
-  }};
+  };
   message.channel.send({"embeds": [embed]});
   client.logger.log(`Result found for search term "${vnname}": "${vnresult.title}"`);
 };

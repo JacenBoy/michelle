@@ -31,11 +31,11 @@ exports.run = async (client, message, args, level) => {
         i++;
       }
 
-      const embed = {"embed": {
+      const embed = {
         "title": `${usermention.username}'s Anime Lists`,
         "thumbnail": { "url": usermention.avatarURL() || usermention.defaultAvatarURL() },
         "fields": fieldarray
-      }};
+      };
       message.channel.send({"embeds": [embed]});
     });
   } else {

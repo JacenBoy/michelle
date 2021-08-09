@@ -25,13 +25,13 @@ exports.run = async (client, message, args, level) => {
     return;
   }
   if (!lnresult.covers[0]) lnresult.covers[0] = {"url": "://via.placeholder.com/350x500.png?text=No+image+provided/"};
-  const embed = {"embed": {
+  const embed = {
     "title": lnresult.title,
     "description": client.cleanSyn(lnresult.description),
     "url": `https://www.wlnupdates.com/series-id/${lnresult.id}`,
     "color": client.colorInt("#f0f0f0"),
     "image": {"url": `https${lnresult.covers[0].url}`}
-  }};
+  };
   message.channel.send({"embeds": [embed]});
   client.logger.log(`Result found for search term "${lnname}": "${lnresult.title}"`);
 };
