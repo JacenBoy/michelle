@@ -15,8 +15,11 @@ const http = require("http");
 // This is your client. Some people call it `bot`, some people call it `self`,
 // some might call it `cootchie`. Either way, when you see `client.something`,
 // or `bot.something`, this is what we're refering to. Your client.
-//const client = new Discord.Client({ws: {intents: Discord.Intents.NON_PRIVILEGED}, disableEveryone: true});
-const client = new Michelle({intents: [Intents.NON_PRIVILEGED], allowedMentions: {repliedUser: true}}, require("./config.js"));
+
+// Use all non-privileged intents to spite people
+const nonPrivilegedIntents = [Intents.GUILDS, Intents.GUILD_BANS, Intents.GUILD_EMOJIS_AND_STICKERS, Intents.GUILD_INTEGRATIONS, Intents.GUILD_WEBHOOKS, Intents.GUILD_INVITES, Intents.GUILD_VOICE_STATES, Intents.GUILD_MESSAGES, Intents.GUILD_MESSAGE_REACTIONS, Intents.GUILD_MESSAGE_TYPING, Intents.DIRECT_MESSAGES, Intents.DIRECT_MESSAGE_REACTIONS, Intents.DIRECT_MESSAGE_TYPING];
+
+const client = new Michelle({intents: nonPrivilegedIntents, allowedMentions: {repliedUser: true}}, require("./config.js"));
 
 if (client.config.dbltoken) { client.dbl = new DBL(client.config.dbltoken, client); }
 
