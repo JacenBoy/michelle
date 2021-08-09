@@ -7,6 +7,10 @@ All notable changes to this project will be documented in this file.
 - Node/NPM updates
 - Package updates
 
+### 6.0.1
+- Fix issue with logger filename formatting
+- Fix issue with privileged intents
+
 ## 5.3 - I'm Too Dependent (2021-07-12)
 - Replacing `enmap` dependency with `mongoose`
 - Replacing `moment` dependency with `luxon`
