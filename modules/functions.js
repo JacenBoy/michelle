@@ -141,7 +141,7 @@ module.exports = (client) => {
     xhttp.open("POST", `https://discordbotlist.com/api/bots/${client.user.id}/stats`, true);
     xhttp.setRequestHeader("Content-Type", "application/json; charset=utf-8");
     xhttp.setRequestHeader("Authorization", `Bot ${token}`);
-    const data = {"guilds": client.guilds.cache.array().length};
+    const data = {"guilds": client.guilds.cache.values().length};
     xhttp.send(JSON.stringify(data));
   };
 
@@ -153,7 +153,7 @@ module.exports = (client) => {
     xhttp.open("POST", `https://bots.ondiscord.xyz/bot-api/bots/${client.user.id}/guilds`, true);
     xhttp.setRequestHeader("Content-Type", "application/json; charset=utf-8");
     xhttp.setRequestHeader("Authorization", `${token}`);
-    const data = {"guildCount": client.guilds.cache.array().length};
+    const data = {"guildCount": client.guilds.cache.values().length};
     xhttp.send(JSON.stringify(data));
   };
 
@@ -165,7 +165,7 @@ module.exports = (client) => {
     xhttp.open("POST", `https://discord.bots.gg/api/v1/bots/${client.user.id}/stats`, true);
     xhttp.setRequestHeader("Content-Type", "application/json; charset=utf-8");
     xhttp.setRequestHeader("Authorization", `${token}`);
-    const data = {"guildCount": client.guilds.cache.array().length};
+    const data = {"guildCount": client.guilds.cache.values().length};
     xhttp.send(JSON.stringify(data));
   };
 

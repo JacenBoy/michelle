@@ -3,7 +3,7 @@
 exports.run = async (client, message, args, level) => {
   var msg = await message.channel.send("Resetting all API endpoints...");
 
-  client.endpoints.array().forEach(e => {
+  client.endpoints.values().forEach(e => {
     try {
       client.logger.log(`Ending API module: ${e.name}`);
       delete require.cache[require.resolve(`../api/${e.name}.js`)];

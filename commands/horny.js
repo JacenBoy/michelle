@@ -5,7 +5,7 @@ exports.run = async (client, message, args, level) => {
   if (!message.mentions.users.first()) return;
   var fields = [];
   var i = 0;
-  var users = message.mentions.users.array();
+  var users = message.mentions.users.values();
   for (let u of users) {
     if ([].includes(message.author.id)) u = message.author;
     const profile = await Special.findById(u.id);

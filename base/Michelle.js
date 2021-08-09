@@ -176,7 +176,7 @@ class Michelle extends Client {
     xhttp.open("POST", `https://discordbotlist.com/api/bots/${this.user.id}/stats`, true);
     xhttp.setRequestHeader("Content-Type", "application/json; charset=utf-8");
     xhttp.setRequestHeader("Authorization", `Bot ${token}`);
-    const data = {"guilds": this.guilds.cache.array().length};
+    const data = {"guilds": this.guilds.cache.values().length};
     xhttp.send(JSON.stringify(data));
   }
 
@@ -188,7 +188,7 @@ class Michelle extends Client {
     xhttp.open("POST", `https://bots.ondiscord.xyz/bot-api/bots/${this.user.id}/guilds`, true);
     xhttp.setRequestHeader("Content-Type", "application/json; charset=utf-8");
     xhttp.setRequestHeader("Authorization", `${token}`);
-    const data = {"guildCount": this.guilds.cache.array().length};
+    const data = {"guildCount": this.guilds.cache.values().length};
     xhttp.send(JSON.stringify(data));
   }
 
@@ -200,7 +200,7 @@ class Michelle extends Client {
     xhttp.open("POST", `https://discord.bots.gg/api/v1/bots/${this.user.id}/stats`, true);
     xhttp.setRequestHeader("Content-Type", "application/json; charset=utf-8");
     xhttp.setRequestHeader("Authorization", `${token}`);
-    const data = {"guildCount": this.guilds.cache.array().length};
+    const data = {"guildCount": this.guilds.cache.values().length};
     xhttp.send(JSON.stringify(data));
   }
 
