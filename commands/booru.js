@@ -2,7 +2,7 @@
 const booru = require("booru");
 
 exports.run = async (client, message, args, level) => {
-  var site = (! ["dm","group"].includes(message.channel.type) ? (message.channel.nsfw ? "gb" : "sb") : "sb");
+  var site = (! ["DM","GROUP_DM"].includes(message.channel.type) ? (message.channel.nsfw ? "gb" : "sb") : "sb");
   var taglist = args.join(" ");
   if (taglist.indexOf("_") != -1) {
     var tagarray = taglist.split(/\s+/g);
