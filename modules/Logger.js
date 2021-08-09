@@ -10,7 +10,7 @@ class Logger {
     const time = DateTime.now();
     const timestamp = {
       full: time.toFormat("yyyy-MM-dd HH:mm:ss"),
-      date: time.toFormat("yyyy-MM-dd"),
+      date: time.toFormat("yyyyMMdd"),
       time: time.toFormat("HH:mm:ss")
     };
 
