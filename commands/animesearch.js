@@ -29,12 +29,12 @@ exports.run = async (client, message, args, level) => {
     };
   }
   
-  const embed = {"embed": {
+  const embed = {
     "title": "Search Results",
     "description": "\u200b",
     "color": client.colorInt("#fd8320"),
     "fields": fieldarry
-  }}
+  };
   message.channel.send({"embeds": [embed]});
   client.logger.log(`Results found for search term "${aniname}"`);
 };

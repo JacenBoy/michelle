@@ -133,7 +133,7 @@ exports.run = async (client, message, args, level) => {
     default:
       return message.channel.send("Invalid argument. Please specify \"anime\", \"manga\", or \"VN\".");
   }
-  msg.edit({"content": "", "embeds": [embed]});
+  msg.edit({"content": "\u200b", "embeds": [embed]});
 };
 
 exports.conf = {

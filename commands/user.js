@@ -28,10 +28,10 @@ exports.run = async (client, message, args, level) => {
     "url": `https://kitsu.io/users/${aniresult.slug}`,
     "thumbnail": { "url": aniresult.avatar.large },
     "fields": [
-      { "name": "Followers:", "value": aniresult.followersCount || 0, "inline": true },
-      { "name": "Following:", "value": aniresult.followingCount || 0, "inline": true },
-      { "name": "Posts:", "value": aniresult.postsCount || 0, "inline": true },
-      { "name": "Reactions:", "value": aniresult.mediaReactionsCount || 0, "inline": true }
+      { "name": "Followers:", "value": `${aniresult.followersCount || 0}`, "inline": true },
+      { "name": "Following:", "value": `${aniresult.followingCount || 0}`, "inline": true },
+      { "name": "Posts:", "value": `${aniresult.postsCount || 0}`, "inline": true },
+      { "name": "Reactions:", "value": `${aniresult.mediaReactionsCount || 0}`, "inline": true }
     ]
   };
   message.channel.send({"embeds": [embed]});

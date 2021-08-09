@@ -1,10 +1,9 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
-## 6.0 - Classy (In Progress)
+## 6.0 - v13 Update (2021-08-09)
 - Upgrades for `discord.js` v13
 - Implementing new Client builder
-- Implementing new command handler
 - Node/NPM updates
 - Package updates
 
