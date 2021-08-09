@@ -26,10 +26,12 @@ exports.run = async (client, message, args, level) => {
     }
     i++;
   }
-  message.channel.send({"embed": {
+
+  const embed = {"embed": {
     "fields": fields,
     "color": client.colorInt("#ff0000")
-  }});
+  }};
+  message.channel.send({"embeds": [embed]});
 };
 
 exports.conf = {

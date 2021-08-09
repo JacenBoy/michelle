@@ -28,12 +28,14 @@ exports.run = async (client, message, args, level) => {
       "value": `Rating: ${aniresult.averageRating || 0}%\nChapters: ${aniresult.chapterCount || 0}\nStatus: ${aniresult.status == "tba" ? "TBA" : `${aniresult.status.charAt(0).toUpperCase()}${aniresult.status.substr(1).toLowerCase()}`}\n[Kitsu.io](https://kitsu.io/manga/${aniresult.slug})`
     };
   }
-  message.channel.send({"embed": { 
+
+  const embed = {"embed": { 
     "title": "Search Results", 
     "description": "\u200b", 
     "color": client.colorInt("#fd8320"), 
     "fields": fieldarry 
-  }});
+  }};
+  message.channel.send({"embeds": [embed]});
   client.logger.log(`Results found for search term "${aniname}"`);
 };
   

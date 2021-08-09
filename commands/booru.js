@@ -20,13 +20,15 @@ exports.run = async (client, message, args, level) => {
     client.logger.warn(`No results found for tags: ${tagarray.join(", ")}`);
     return;
   }
-  message.channel.send({"embed": {
+
+  const embed = {"embed": {
     "title": `${site == "gb" ? "Gelbooru" : "Safebooru"} #${img[0].id}`,
     "url": `https://${site == "sb" ? "safebooru.org" : "gelbooru.com"}/index.php?page=post&s=view&id=${img[0].id}`,
     "color": client.colorInt(site == "sb" ? "#84a8b9" : "#006ffa"),
     "image": {"url": img[0].fileUrl},
     "footer": {"text":`Score: ${img[0].score || 0}`}
-  }});
+  }};
+  message.channel.send({"embeds": [embed]});
   client.logger.log(`${site == "gb" ? "Gelbooru" : "Safebooru"} #${img[0].id} found for tags: ${tagarray.join(", ")}`);
 };
 

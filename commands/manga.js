@@ -21,7 +21,8 @@ exports.run = async (client, message, args, level) => {
     return;
   }
   var aniresult = results[0].attributes;
-  message.channel.send({"embed": {
+
+  const embed = {"embed": {
     "title": aniresult.titles.en || aniresult.canonicalTitle || aniresult.titles.en_jp,
     "url": `https://kitsu.io/manga/${aniresult.slug}`,
     "description": client.cleanSyn(aniresult.synopsis),
@@ -32,7 +33,8 @@ exports.run = async (client, message, args, level) => {
       { "name": "Chapters:", "value":  `${aniresult.chapterCount || 0} (${aniresult.subtype})`, "inline": true },
       { "name": "Status:", "value": aniresult.status == "tba" ? "TBA" : `${aniresult.status.charAt(0).toUpperCase()}${aniresult.status.substr(1).toLowerCase()}`, "inline": true }
     ]
-  }});
+  }};
+  message.channel.send({"embeds": [embed]});
   client.logger.log(`Result found for search term "${aniname}": "${aniresult.titles.en || aniresult.canonicalTitle || aniresult.titles.en_jp}"`);
 };
   

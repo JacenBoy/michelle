@@ -3,6 +3,7 @@ const { DateTime } = require("luxon");
 
 exports.run = async (client, message, args, level) => {
   if (!args[0]) return message.channel.send(`Improper usage. Use \`${client.getSettings(message.guild.id).prefix}help check\` for assistance.`);
+  var embed;
   switch (args[0].toLowerCase()) {
     case "horny":
       if (!message.mentions.users.first()) var users = [message.author];
@@ -32,10 +33,11 @@ exports.run = async (client, message, args, level) => {
         }
         i++;
       }
-      message.channel.send({"embed": {
+      embed = {"embed": {
         "fields": fields, 
         "color": client.colorInt("#ff0000")
-      }});
+      }};
+      message.channel.send({"embeds": [embed]});
       break;
     case "abuse":
       if (!message.mentions.users.first()) var users = [message.guild.owner];
@@ -66,10 +68,11 @@ exports.run = async (client, message, args, level) => {
         }
         i++;
       }
-      message.channel.send({"embed": {
+      embed = {"embed": {
         "fields": fields, 
         "color": client.colorInt("#ff0000")
-      }});
+      }};
+      message.channel.send({"embeds": [embed]});
       break;
     case "gratitude":
       if (!message.mentions.users.first()) var users = [message.guild.owner];
@@ -100,10 +103,12 @@ exports.run = async (client, message, args, level) => {
         }
         i++;
       }
-      message.channel.send({"embed": {
+
+      embed = {"embed": {
         "fields": fields, 
         "color": client.colorInt("#00ff00")
-      }});
+      }};
+      message.channel.send({"embeds": [embed]});
       break;
     default:
       return message.channel.send(`Improper usage. Use \`${client.getSettings(message.guild.id).prefix}help check\` for assistance.`);

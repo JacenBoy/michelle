@@ -38,12 +38,14 @@ exports.run = async (client, message, args, level) => {
       "value": `Release Date: ${DateTime.fromISO(vnresult.released).toFormat("MMM d',' yyyy")}\nLanguages: ${langs.join(" ")}\nPlatforms: ${plats.join(", ")}\n[VNDB.org](https://vndb.org/v${vnresult.id})`
     };
   }
-  message.channel.send({"embed": {
+
+  const embed = {"embed": {
     "title": "Search Results",
     "description": "\u200b",
     "color": client.colorInt("#071c30"),
     "fields": fieldarry
-  }});
+  }};
+  message.channel.send({"embeds": [embed]});
   client.logger.log(`Result found for search term "${vnname}"`);
 };
 
