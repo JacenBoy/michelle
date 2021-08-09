@@ -5,7 +5,7 @@ exports.run = async (client, message, args, level) => {
   if (!message.mentions.users.first()) return;
   var fields = [];
   var i = 0;
-  var users = message.mentions.users.array();
+  var users = message.mentions.users.values();
   for (let u of users) {
     if ([].includes(message.author.id)) u = message.author;
     const profile = await Special.findById(u.id);
@@ -26,10 +26,12 @@ exports.run = async (client, message, args, level) => {
     }
     i++;
   }
-  message.channel.send({"embed": {
+
+  const embed = {
     "fields": fields,
     "color": client.colorInt("#ff0000")
-  }});
+  };
+  message.channel.send({"embeds": [embed]});
 };
 
 exports.conf = {

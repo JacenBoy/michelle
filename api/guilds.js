@@ -5,9 +5,9 @@ exports.run = async (client, req, res, args) => {
     var response = {};
     response.count = client.guilds.cache.size;
     response.guilds = [];
-    client.guilds.cache.array().forEach(async g => {
+    client.guilds.cache.values().forEach(async g => {
       if (!g.available || g.deleted) return;
-      const owner = await g.members.fetch(g.ownerID);
+      const owner = await g.members.fetch(g.ownerId);
       response.guilds.push({
         "id": g.id,
         "name": g.name,

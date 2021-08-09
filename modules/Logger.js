@@ -2,46 +2,65 @@
 Logger class for easy and aesthetically pleasing console logging 
 */
 const chalk = require("chalk");
-const moment = require("moment");
+const { DateTime } = require("luxon");
 const fs = require("fs");
 
-exports.log = (content, type = "log") => {
-  const timestamp = `[${moment().format("YYYY-MM-DD HH:mm:ss")}]:`;
-  if (!fs.existsSync("./logs")) fs.mkdirSync("./logs");
-  const stream = fs.createWriteStream(`./logs/${moment().format("YYYYMMDD")}.log`, {flags: "a"});
-  switch (type) {
-    case "log": {
-      stream.end(`${timestamp} ${type.toUpperCase()} - ${content} \n`);
-      return console.log(`${timestamp} ${chalk.bgBlue(type.toUpperCase())} ${content} `);
+class Logger {
+  static log (content, type = "log") {
+    const time = DateTime.now();
+    const timestamp = {
+      full: time.toFormat("yyyy-MM-dd HH:mm:ss"),
+      date: time.toFormat("yyyy-MM-dd"),
+      time: time.toFormat("HH:mm:ss")
+    };
+
+    if (!fs.existsSync("./logs")) fs.mkdirSync("./logs");
+    const stream = fs.createWriteStream(`./logs/${timestamp.date}.log`, {flags: "a"});
+
+    switch (type) {
+      case "log": {
+        stream.end(`[${timestamp.full}]: ${type.toUpperCase()} - ${content} \n`);
+        return console.log(`[${timestamp.full}]: ${chalk.bgBlue(type.toUpperCase())} ${content} `);
+      }
+      case "warn": {
+        stream.end(`[${timestamp.full}]: ${type.toUpperCase()} - ${content} \n`);
+        return console.log(`[${timestamp.full}]: ${chalk.black.bgYellow(type.toUpperCase())} ${content} `);
+      }
+      case "error": {
+        stream.end(`[${timestamp.full}]: ${type.toUpperCase()} - ${content} \n`);
+        return console.log(`[${timestamp.full}]: ${chalk.bgRed(type.toUpperCase())} ${content} `);
+      }
+      case "debug": {
+        stream.end(`[${timestamp.full}]: ${type.toUpperCase()} - ${content} \n`);
+        return console.log(`[${timestamp.full}]: ${chalk.green(type.toUpperCase())} ${content} `);
+      }
+      case "cmd": {
+        stream.end(`[${timestamp.full}]: ${type.toUpperCase()} - ${content} \n`);
+        return console.log(`[${timestamp.full}]: ${chalk.black.bgWhite(type.toUpperCase())} ${content}`);
+      }
+      case "ready": {
+        stream.end(`[${timestamp.full}]: ${type.toUpperCase()} - ${content} \n`);
+        return console.log(`[${timestamp.full}]: ${chalk.black.bgGreen(type.toUpperCase())} ${content}`);
+      }
+      default: throw new TypeError("Logger type must be either warn, debug, log, ready, cmd or error.");
     }
-    case "warn": {
-      stream.end(`${timestamp} ${type.toUpperCase()} - ${content} \n`);
-      return console.log(`${timestamp} ${chalk.black.bgYellow(type.toUpperCase())} ${content} `);
-    }
-    case "error": {
-      stream.end(`${timestamp} ${type.toUpperCase()} - ${content} \n`);
-      return console.log(`${timestamp} ${chalk.bgRed(type.toUpperCase())} ${content} `);
-    }
-    case "debug": {
-      stream.end(`${timestamp} ${type.toUpperCase()} - ${content} \n`);
-      return console.log(`${timestamp} ${chalk.green(type.toUpperCase())} ${content} `);
-    }
-    case "cmd": {
-      stream.end(`${timestamp} ${type.toUpperCase()} - ${content} \n`);
-      return console.log(`${timestamp} ${chalk.black.bgWhite(type.toUpperCase())} ${content}`);
-    }
-    case "ready": {
-      stream.end(`${timestamp} ${type.toUpperCase()} - ${content} \n`);
-      return console.log(`${timestamp} ${chalk.black.bgGreen(type.toUpperCase())} ${content}`);
-    }
-    default: throw new TypeError("Logger type must be either warn, debug, log, ready, cmd or error.");
   }
-}; 
 
-exports.error = (...args) => this.log(...args, "error");
+  static error (content) {
+    return this.log(content, "error");
+  }
+  
+  static warn (content) {
+    return this.log(content, "warn");
+  }
+  
+  static debug (content) {
+    return this.log(content, "debug");
+  } 
+  
+  static cmd (content) {
+    return this.log(content, "cmd");
+  } 
+}
 
-exports.warn = (...args) => this.log(...args, "warn");
-
-exports.debug = (...args) => this.log(...args, "debug");
-
-exports.cmd = (...args) => this.log(...args, "cmd");
+module.exports = Logger;

@@ -20,19 +20,21 @@ exports.run = async (client, message, args, level) => {
     return;
   }
   var aniresult = results[0].attributes;
-  message.channel.send({"embed": {
+
+  const embed = {
     "title": aniresult.name,
     "description": aniresult.about || "No bio provided.",
     "color": client.colorInt("#fd8320"),
     "url": `https://kitsu.io/users/${aniresult.slug}`,
     "thumbnail": { "url": aniresult.avatar.large },
     "fields": [
-      { "name": "Followers:", "value": aniresult.followersCount || 0, "inline": true },
-      { "name": "Following:", "value": aniresult.followingCount || 0, "inline": true },
-      { "name": "Posts:", "value": aniresult.postsCount || 0, "inline": true },
-      { "name": "Reactions:", "value": aniresult.mediaReactionsCount || 0, "inline": true }
+      { "name": "Followers:", "value": `${aniresult.followersCount || 0}`, "inline": true },
+      { "name": "Following:", "value": `${aniresult.followingCount || 0}`, "inline": true },
+      { "name": "Posts:", "value": `${aniresult.postsCount || 0}`, "inline": true },
+      { "name": "Reactions:", "value": `${aniresult.mediaReactionsCount || 0}`, "inline": true }
     ]
-  }});
+  };
+  message.channel.send({"embeds": [embed]});
   client.logger.log(`User ${aniresult.name} found on Kitsu`);
 };
   

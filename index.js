@@ -1,47 +1,43 @@
 // This will check if the node version you are running is the required
 // Node version, if it isn't it will throw the following error to inform
 // you.
-if (Number(process.version.slice(1).split(".")[0]) < 12) throw new Error("Node 12.0.0 or higher is required. Update Node on your system.");
+if (Number(process.version.slice(1).split(".")[0]) < 16) throw new Error("Node 16.0.0 or higher is required. Update Node on your system.");
 
 // Load up the discord.js library
-const Discord = require("discord.js");
+const Michelle = require("./base/Michelle");
+const {Intents} = require("discord.js");
 // We also load the rest of the things we need in this file:
 const { promisify } = require("util");
 const readdir = promisify(require("fs").readdir);
-const Enmap = require("enmap");
 const DBL = require("dblapi.js");
+const http = require("http");
 
 // This is your client. Some people call it `bot`, some people call it `self`,
 // some might call it `cootchie`. Either way, when you see `client.something`,
 // or `bot.something`, this is what we're refering to. Your client.
-const client = new Discord.Client({ws: {intents: Discord.Intents.NON_PRIVILEGED}, disableEveryone: true});
 
-// Here we load the config file that contains our token and our prefix values.
-client.config = require("./config.js");
-// client.config.token contains the bot's token
-// client.config.prefix contains the message prefix
+// Use all non-privileged intents to spite people
+const nonPrivilegedIntents = [
+  Intents.FLAGS.GUILDS, 
+  Intents.FLAGS.GUILD_MEMBERS, 
+  Intents.FLAGS.GUILD_BANS, 
+  Intents.FLAGS.GUILD_EMOJIS_AND_STICKERS, 
+  Intents.FLAGS.GUILD_INTEGRATIONS, 
+  Intents.FLAGS.GUILD_WEBHOOKS, 
+  Intents.FLAGS.GUILD_INVITES, 
+  Intents.FLAGS.GUILD_VOICE_STATES, 
+  Intents.FLAGS.GUILD_PRESENCES, 
+  Intents.FLAGS.GUILD_MESSAGES, 
+  Intents.FLAGS.GUILD_MESSAGE_REACTIONS, 
+  Intents.FLAGS.GUILD_MESSAGE_TYPING, 
+  Intents.FLAGS.DIRECT_MESSAGES, 
+  Intents.FLAGS.DIRECT_MESSAGE_REACTIONS, 
+  Intents.FLAGS.DIRECT_MESSAGE_TYPING
+];
 
-if (client.config.dbltoken) { const dbl = new DBL(client.config.dbltoken, client); }
+const client = new Michelle({intents: nonPrivilegedIntents, allowedMentions: {repliedUser: true}}, require("./config.js"));
 
-// Require our logger
-client.logger = require("./modules/Logger");
-
-// Let's start by getting some useful functions that we'll use throughout
-// the bot, like logs and elevation features.
-require("./modules/functions.js")(client);
-
-// Aliases and commands are put in collections where they can be read from,
-// catalogued, listed, etc.
-client.commands = new Discord.Collection();
-client.aliases = new Discord.Collection();
-client.endpoints = new Discord.Collection();
-
-// Open connection to MongoDB
-const mongoose = require("mongoose");
-client.mongoose = mongoose.connect(client.config.mongouri, {useNewUrlParser: true});
-
-// Require http to allow simple and dirty uptime monitoring
-var http = require("http");
+if (client.config.dbltoken) { client.dbl = new DBL(client.config.dbltoken, client); }
 
 // We're doing real fancy node 8 async/await stuff here, and to do that
 // we need to wrap stuff in an anonymous function. It's annoying but it works.
@@ -99,7 +95,7 @@ const init = async () => {
   // Create the HTTP listener for our API
   http.createServer(async (req, res) => {
     var url = require("url");
-    var u = url.parse(req.url);
+    var u = new url.URL(req.url);
     var args = u.pathname.toLowerCase().split("/");
     args.shift(); // Remove empty argument
     if (!args[0]) {
@@ -135,3 +131,39 @@ const init = async () => {
 };
 
 init();
+
+/* MISCELANEOUS NON-CRITICAL FUNCTIONS */
+
+// EXTENDING NATIVE TYPES IS BAD PRACTICE. Why? Because if JavaScript adds this
+// later, this conflicts with native code. Also, if some other lib you use does
+// this, a conflict also occurs. KNOWING THIS however, the following 2 methods
+// are, we feel, very useful in code. 
+
+// <String>.toProperCase() returns a proper-cased string such as: 
+// "Mary had a little lamb".toProperCase() returns "Mary Had A Little Lamb"
+Object.defineProperty(String.prototype, "toProperCase", {
+  value: function() {
+    return this.replace(/([^\W_]+[^\s-]*) */g, (txt) => txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase());
+  }
+});
+
+// <Array>.random() returns a single random element from an array
+// [1, 2, 3, 4, 5].random() can return 1, 2, 3, 4 or 5.
+Object.defineProperty(Array.prototype, "random", {
+  value: function() {
+    return this[Math.floor(Math.random() * this.length)];
+  }
+});
+
+// These 2 process methods will catch exceptions and give *more details* about the error and stack trace.
+process.on("uncaughtException", (err) => {
+  const errorMsg = err.stack.replace(new RegExp(`${__dirname}/`, "g"), "./");
+  client.logger.error(`Uncaught Exception: ${errorMsg}`);
+  // Always best practice to let the code crash on uncaught exceptions. 
+  // Because you should be catching them anyway.
+  //process.exit(1);
+});
+
+process.on("unhandledRejection", (reason, p) => {
+  client.logger.error(`Unhandled rejection: \n${reason}\nStack:\n${reason.stack}\nPromise:\n${require("util").inspect(p, { depth: 2 })}`);
+});
