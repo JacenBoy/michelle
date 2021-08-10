@@ -92,9 +92,7 @@ const init = async () => {
 
   // Create the HTTP listener for our API
   http.createServer(async (req, res) => {
-    var url = require("url");
-    var u = new url.URL(req.url);
-    var args = u.pathname.toLowerCase().split("/");
+    var args = req.url.toLowerCase().split("/");
     args.shift(); // Remove empty argument
     if (!args[0]) {
       const getEndpoints = async () => {
