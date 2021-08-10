@@ -11,6 +11,9 @@ All notable changes to this project will be documented in this file.
 - Fix issue with logger filename formatting
 - Fix issue with privileged intents
 
+### 6.0.2
+- Fix issue with uptime monitoring
+
 ## 5.3 - I'm Too Dependent (2021-07-12)
 - Replacing `enmap` dependency with `mongoose`
 - Replacing `moment` dependency with `luxon`
