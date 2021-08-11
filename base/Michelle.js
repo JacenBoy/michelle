@@ -13,6 +13,7 @@ class Michelle extends Client {
     // Aliases and commands are put in collections where they can be read from,
     // catalogued, listed, etc.
     this.commands = new Collection();
+    this.slashCommands = new Collection();
     this.aliases = new Collection();
     this.endpoints = new Collection();
 
@@ -26,20 +27,31 @@ class Michelle extends Client {
     this.mongoose = mongoose.connect(this.config.mongouri, {useNewUrlParser: true});
   }
 
-  loadCommand (commandName) {
-    try {
-      this.logger.log(`Loading Command: ${commandName.split(".")[0]}`);
-      const props = require(`../commands/${commandName}`);
-      if (props.init) {
-        props.init(this);
+  loadCommand (commandName, isSlash = false) {
+    if (isSlash) {
+      try {
+        this.logger.log(`Loading Command: ${commandName.split(".")[0]}`);
+        const props = require(`../slashCommands/${commandName}`);
+        this.slashCommands.set(props.help.name, props);
+        return false;
+      } catch (e) {
+        return `Unable to load command ${commandName}: ${e}`;
       }
-      this.commands.set(props.help.name, props);
-      props.conf.aliases.forEach(alias => {
-        this.aliases.set(alias, props.help.name);
-      });
-      return false;
-    } catch (e) {
-      return `Unable to load command ${commandName}: ${e}`;
+    } else {
+      try {
+        this.logger.log(`Loading Command: ${commandName.split(".")[0]}`);
+        const props = require(`../commands/${commandName}`);
+        if (props.init) {
+          props.init(this);
+        }
+        this.commands.set(props.help.name, props);
+        props.conf.aliases.forEach(alias => {
+          this.aliases.set(alias, props.help.name);
+        });
+        return false;
+      } catch (e) {
+        return `Unable to load command ${commandName}: ${e}`;
+      }
     }
   }
 
