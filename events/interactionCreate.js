@@ -7,20 +7,16 @@ module.exports = async (client, interaction) => {
   // Ignore if the command doesn't exist
   if (!cmd) return;
 
-  // Get the server settings
-  const settings = client.config.defaultSettings;
-
-  // If the member on a guild is invisible or not cached, fetch them.
+  // If the member on a guild is invisible or not cached, fetch them
   if (interaction.guild && !interaction.member) await interaction.guild.members.fetch(interaction.user);
-  // Get the user or member's permission level from the elevation
-  const level = client.permlevel(interaction);
-  if (level < client.levelCache[cmd.conf.permLevel]) {
+  // Check to make sure the user has the permissions to run the command
+  if (!client.checkPermissions(cmd.conf.permLevel, interaction.user.id)) {
     return interaction.reply({content: "You do not have sufficient permissions to run this command", ephemeral: true});
   }
 
   // Try to run the command
   try {
-    client.logger.cmd(`[CMD] ${client.config.permLevels.find(l => l.level === level).name} ${interaction.user.username} (${interaction.user.id}) ran command ${cmd.help.name}`);
+    client.logger.cmd(`[CMD] ${interaction.user.username} (${interaction.user.id}) ran command ${cmd.help.name}`);
     await cmd.run(interaction);
   } catch (ex) {
     client.logger.error(ex);

@@ -11,7 +11,7 @@ exports.conf = {
   global: false,
   special: false,
   aliases: ["stop", "shutdown", "restart"],
-  permLevel: "Bot Admin",
+  permLevel: "Admin",
   options: []
 };
 

@@ -51,6 +51,7 @@
     "no-redeclare": "off",
     "require-atomic-updates": "off",
     "no-case-declarations": "off",
-    "space-before-function-paren": "off"
+    "space-before-function-paren": "off",
+    "no-fallthrough": "off"
   }
 }

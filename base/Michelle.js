@@ -117,6 +117,28 @@ class Michelle extends Client {
     return permlvl;
   }
 
+  // Replacement permissions check module to support interactions
+  // Uses a switch/case and fallthroughs to identify the correct permissions
+  checkPermissions (permLevel, userId) {
+    switch (permLevel) {
+      case "User":
+        // Always return true for the user check
+        return true;
+      case "Support":
+        // Check if the user is in the support list
+        if (this.config.support.includes(userId)) return true;
+      case "Admin":
+        // Check if the user is in the admins list
+        if (this.config.admins.includes(userId)) return true;
+      case "Owner":
+        // Check if the user is the bot owner
+        if (this.config.ownerID == userId) return true;
+      default:
+        // If we've fallen through this far, the user does not have the correct permissions
+        return false;
+    }
+  }
+
   /*
   MESSAGE CLEAN FUNCTION
 
