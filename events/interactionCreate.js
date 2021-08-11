@@ -1,4 +1,4 @@
-module.exports = async (interaction) => {
+module.exports = async (client, interaction) => {
   // Ignore if the interaction isn't a command
   if (!interaction.isCommand()) return;
 
@@ -11,6 +11,6 @@ module.exports = async (interaction) => {
   try {
     await cmd.run(interaction);
   } catch (ex) {
-    interaction.client.logger.error(ex);
+    client.logger.error(ex);
   }
 };
