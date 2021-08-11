@@ -77,12 +77,17 @@ class Michelle extends Client {
     this.guilds.cache.map(guild => {
       this.slashCommands.map(async (cmd) => {
         if (!cmd.conf.enabled) return; // Do not deploy disabled commands
-        if (cmd.conf.special && !cmd.conf.special.includes(guild.id)) return; // Do not deploy server-restricted commands
-        const data = {
-          "name": cmd.help.name,
-          "description": cmd.help.description
-        };
-        await this.guilds.cache.get(guild.id)?.commands.create(data);
+        if (cmd.conf.global) {
+          // Global command deployment
+        } else {
+          if (cmd.conf.special && !cmd.conf.special.includes(guild.id)) return; // Do not deploy server-restricted commands
+          const data = {
+            "name": cmd.help.name,
+            "description": cmd.help.description,
+            "options": cmd.conf.options
+          };
+          await this.guilds.cache.get(guild.id)?.commands.create(data);
+        }
       });
     });
   }

@@ -17,7 +17,5 @@ module.exports = async client => {
   client.logger.log(`${client.user.tag}, ready to serve ${client.guilds.cache.size} servers.`, "ready");
 
   // Deploy our slash commands
-  // Global commands may take up to two hours to deploy, while guild commands are deployed immediately
-  // Therefore we'll loop through all of our guilds to deploy the commands that way
   client.deployCommands();
 };
