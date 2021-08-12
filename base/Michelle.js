@@ -55,21 +55,32 @@ class Michelle extends Client {
     }
   }
 
-  async unloadCommand (commandName) {
+  async unloadCommand (commandName, isSlash = false) {
     let command;
-    if (this.commands.has(commandName)) {
-      command = this.commands.get(commandName);
-    } else if (this.aliases.has(commandName)) {
-      command = this.commands.get(this.aliases.get(commandName));
+    if (isSlash) {
+      if (this.slashCommands.has(commandName)) {
+        command = this.slashCommands.get(commandName);
+      }
+      if (!command) return `The command \`${commandName}\` doesn"t seem to exist, nor is it an alias. Try again!`;
+      if (command.shutdown) {
+        await command.shutdown(this);
+      }
+      delete require.cache[require.resolve(`../slashCommands/${commandName}.js`)];
+      return false;
+    } else {
+      if (this.commands.has(commandName)) {
+        command = this.commands.get(commandName);
+      } else if (this.aliases.has(commandName)) {
+        command = this.commands.get(this.aliases.get(commandName));
+      }
+      if (!command) return `The command \`${commandName}\` doesn"t seem to exist, nor is it an alias. Try again!`;
+    
+      if (command.shutdown) {
+        await command.shutdown(this);
+      }
+      delete require.cache[require.resolve(`../commands/${commandName}.js`)];
+      return false;
     }
-    if (!command) return `The command \`${commandName}\` doesn"t seem to exist, nor is it an alias. Try again!`;
-  
-    if (command.shutdown) {
-      await command.shutdown(this);
-    }
-    const mod = require.cache[require.resolve(`../commands/${commandName}`)];
-    delete require.cache[require.resolve(`../commands/${commandName}.js`)];
-    return false;
   }
 
   // Function to deploy slash commands to servers
