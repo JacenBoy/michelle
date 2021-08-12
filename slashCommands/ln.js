@@ -44,10 +44,10 @@ exports.conf = {
   permLevel: "User",
   options: [
     {
-      "name": "title",
-      "description": "An anime title",
-      "type": "STRING",
-      "required": true
+      name: "title",
+      description: "An anime title",
+      type: "STRING",
+      required: true
     }
   ]
 };

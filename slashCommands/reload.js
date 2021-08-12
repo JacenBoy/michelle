@@ -20,10 +20,10 @@ exports.conf = {
   permLevel: "Admin",
   options: [
     {
-      "name": "commands",
-      "description": "The commands to reload",
-      "type": "STRING",
-      "required": true
+      name: "commands",
+      description: "The commands to reload",
+      type: "STRING",
+      required: true
     }
   ]
 };
