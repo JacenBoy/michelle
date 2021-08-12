@@ -42,9 +42,8 @@ exports.run = async (interaction) => {
   
 exports.conf = {
   enabled: true,
-  global: false,
+  global: true,
   special: false,
-  aliases: ["asearch", "as"],
   permLevel: "User",
   options: [
     {

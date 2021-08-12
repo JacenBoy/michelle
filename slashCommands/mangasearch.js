@@ -42,9 +42,8 @@ exports.run = async (interaction) => {
   
 exports.conf = {
   enabled: true,
-  guildOnly: false,
+  global: true,
   special: false,
-  aliases: ["msearch", "ms"],
   permLevel: "User",
   options: [
     {
