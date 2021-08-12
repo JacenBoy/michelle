@@ -2,7 +2,7 @@ exports.run = async (interaction) => {
   interaction.reply({"content": "Reloading commands", "ephemeral": true});
   const commands = interaction.options.getString("commands").split(" ");
   commands.forEach(async (cmd) => {
-    const command = interaction.client.commands.get(cmd);
+    const command = interaction.client.slashCommands.get(cmd);
     let response = await interaction.client.unloadCommand(command.help.name, true);
     if (response) return interaction.followUp({"content": `Error Unloading: ${response}`, "ephemeral": true});
 

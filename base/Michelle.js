@@ -83,7 +83,42 @@ class Michelle extends Client {
     }
   }
 
-  // Function to deploy slash commands to servers
+  // Function to deploy specific slash command
+  async deploy(command, guild = undefined) {
+    let cmd = this.slashCommands.get(command);
+    if (!cmd) {
+      this.logger.warn(`Command ${command} is not loaded; loading now`);
+      const res = this.loadCommand(command, true);
+      if (res) {
+        return this.logger.error(`Error loading command ${command}: ${res}`);
+      }
+      cmd = this.slashCommands.get(command);
+    }
+    if (!cmd.conf.enabled) return this.logger.warn(`Command ${cmd.help.name} is disabled`);
+    const data = {
+      "name": cmd.help.name,
+      "description": cmd.help.description,
+      "options": cmd.conf.options
+    };
+    try {
+      if (guild) {
+        await this.guilds.cache.get(guild)?.commands.create(data);
+      } else {
+        if (cmd.conf.global) {
+          await this.application?.commands.create(data);
+        } else {
+          this.guilds.cache.map(async (guild) => {
+            if (cmd.conf.special && !cmd.conf.special.includes(guild)) return; // Do not deploy server-restricted commands
+            await this.guilds.cache.get(guild)?.commands.create(data);
+          });
+        }
+      }
+    } catch (ex) {
+      this.logger.error(`Error deploying command ${cmd.help.name}: ${ex}`);
+    }
+  }
+
+  // Function to deploy all slash commands
   async deployCommands () {
     this.slashCommands.map(async (cmd) => {
       try {
@@ -94,7 +129,6 @@ class Michelle extends Client {
           "options": cmd.conf.options
         };
         if (cmd.conf.global) {
-          // Global command deployment
           await this.application?.commands.create(data);
         } else {
           this.guilds.cache.map(async (guild) => {
