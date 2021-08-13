@@ -1,6 +1,12 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
+
+## 7.0 - Slash Commands (2021-08-13)
+- Re-implementing all commands as slash commands
+- Adding `/deploy` command
+- Package updates
+
 ## 6.0 - v13 Update (2021-08-09)
 - Upgrades for `discord.js` v13
 - Implementing new Client builder
