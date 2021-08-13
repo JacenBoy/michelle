@@ -35,7 +35,7 @@ exports.run = async (interaction) => {
 
 exports.conf = {
   enabled: true,
-  guildOnly: false,
+  global: true,
   special: false,
   permLevel: "User",
   options: [
