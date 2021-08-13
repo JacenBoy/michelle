@@ -137,7 +137,7 @@ exports.run = async (interaction) => {
 
 exports.conf = {
   enabled: true,
-  global: false,
+  global: true,
   special: false,
   permLevel: "User",
   options: [
