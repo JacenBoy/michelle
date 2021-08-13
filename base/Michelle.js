@@ -13,6 +13,7 @@ class Michelle extends Client {
     // Aliases and commands are put in collections where they can be read from,
     // catalogued, listed, etc.
     this.commands = new Collection();
+    this.slashCommands = new Collection();
     this.aliases = new Collection();
     this.endpoints = new Collection();
 
@@ -26,38 +27,119 @@ class Michelle extends Client {
     this.mongoose = mongoose.connect(this.config.mongouri, {useNewUrlParser: true});
   }
 
-  loadCommand (commandName) {
-    try {
-      this.logger.log(`Loading Command: ${commandName.split(".")[0]}`);
-      const props = require(`../commands/${commandName}`);
-      if (props.init) {
-        props.init(this);
+  loadCommand (commandName, isSlash = false) {
+    if (isSlash) {
+      try {
+        this.logger.log(`Loading Command: ${commandName.split(".")[0]}`);
+        const props = require(`../slashCommands/${commandName}`);
+        this.slashCommands.set(props.help.name, props);
+        return false;
+      } catch (e) {
+        return `Unable to load command ${commandName}: ${e}`;
       }
-      this.commands.set(props.help.name, props);
-      props.conf.aliases.forEach(alias => {
-        this.aliases.set(alias, props.help.name);
-      });
-      return false;
-    } catch (e) {
-      return `Unable to load command ${commandName}: ${e}`;
+    } else {
+      try {
+        this.logger.log(`Loading Command: ${commandName.split(".")[0]}`);
+        const props = require(`../commands/${commandName}`);
+        if (props.init) {
+          props.init(this);
+        }
+        this.commands.set(props.help.name, props);
+        props.conf.aliases.forEach(alias => {
+          this.aliases.set(alias, props.help.name);
+        });
+        return false;
+      } catch (e) {
+        return `Unable to load command ${commandName}: ${e}`;
+      }
     }
   }
 
-  async unloadCommand (commandName) {
+  async unloadCommand (commandName, isSlash = false) {
     let command;
-    if (this.commands.has(commandName)) {
-      command = this.commands.get(commandName);
-    } else if (this.aliases.has(commandName)) {
-      command = this.commands.get(this.aliases.get(commandName));
+    if (isSlash) {
+      if (this.slashCommands.has(commandName)) {
+        command = this.slashCommands.get(commandName);
+      }
+      if (!command) return `The command \`${commandName}\` doesn"t seem to exist, nor is it an alias. Try again!`;
+      if (command.shutdown) {
+        await command.shutdown(this);
+      }
+      delete require.cache[require.resolve(`../slashCommands/${commandName}.js`)];
+      return false;
+    } else {
+      if (this.commands.has(commandName)) {
+        command = this.commands.get(commandName);
+      } else if (this.aliases.has(commandName)) {
+        command = this.commands.get(this.aliases.get(commandName));
+      }
+      if (!command) return `The command \`${commandName}\` doesn"t seem to exist, nor is it an alias. Try again!`;
+    
+      if (command.shutdown) {
+        await command.shutdown(this);
+      }
+      delete require.cache[require.resolve(`../commands/${commandName}.js`)];
+      return false;
     }
-    if (!command) return `The command \`${commandName}\` doesn"t seem to exist, nor is it an alias. Try again!`;
-  
-    if (command.shutdown) {
-      await command.shutdown(this);
+  }
+
+  // Function to deploy specific slash command
+  async deploy(command, guild = undefined) {
+    let cmd = this.slashCommands.get(command);
+    if (!cmd) {
+      this.logger.warn(`Command ${command} is not loaded; loading now`);
+      const res = this.loadCommand(command, true);
+      if (res) {
+        return this.logger.error(`Error loading command ${command}: ${res}`);
+      }
+      cmd = this.slashCommands.get(command);
     }
-    const mod = require.cache[require.resolve(`../commands/${commandName}`)];
-    delete require.cache[require.resolve(`../commands/${commandName}.js`)];
-    return false;
+    if (!cmd.conf.enabled) return this.logger.warn(`Command ${cmd.help.name} is disabled`);
+    const data = {
+      "name": cmd.help.name,
+      "description": cmd.help.description,
+      "options": cmd.conf.options
+    };
+    try {
+      if (guild) {
+        await this.guilds.cache.get(guild)?.commands.create(data);
+      } else {
+        if (cmd.conf.global) {
+          await this.application?.commands.create(data);
+        } else {
+          this.guilds.cache.map(async (guild) => {
+            if (cmd.conf.special && !cmd.conf.special.includes(guild)) return; // Do not deploy server-restricted commands
+            await this.guilds.cache.get(guild)?.commands.create(data);
+          });
+        }
+      }
+    } catch (ex) {
+      this.logger.error(`Error deploying command ${cmd.help.name}: ${ex}`);
+    }
+  }
+
+  // Function to deploy all slash commands
+  async deployCommands () {
+    this.slashCommands.map(async (cmd) => {
+      try {
+        if (!cmd.conf.enabled) return; // Do not deploy disabled commands
+        const data = {
+          "name": cmd.help.name,
+          "description": cmd.help.description,
+          "options": cmd.conf.options
+        };
+        if (cmd.conf.global) {
+          await this.application?.commands.create(data);
+        } else {
+          this.guilds.cache.map(async (guild) => {
+            if (cmd.conf.special && !cmd.conf.special.includes(guild.id)) return; // Do not deploy server-restricted commands
+            await this.guilds.cache.get(guild.id)?.commands.create(data);
+          });
+        }
+      } catch (ex) {
+        this.logger.error(`Error deploying command ${cmd.help.name}: ${ex}`);
+      }
+    });
   }
 
   /*
@@ -83,6 +165,28 @@ class Michelle extends Client {
       }
     }
     return permlvl;
+  }
+
+  // Replacement permissions check module to support interactions
+  // Uses a switch/case and fallthroughs to identify the correct permissions
+  checkPermissions (permLevel, userId) {
+    switch (permLevel) {
+      case "User":
+        // Always return true for the user check
+        return true;
+      case "Support":
+        // Check if the user is in the support list
+        if (this.config.support.includes(userId)) return true;
+      case "Admin":
+        // Check if the user is in the admins list
+        if (this.config.admins.includes(userId)) return true;
+      case "Owner":
+        // Check if the user is the bot owner
+        if (this.config.ownerID == userId) return true;
+      default:
+        // If we've fallen through this far, the user does not have the correct permissions
+        return false;
+    }
   }
 
   /*
