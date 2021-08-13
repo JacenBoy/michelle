@@ -2,11 +2,11 @@ exports.run = async (interaction) => {
   interaction.reply({"content": "Deploying commands", "ephemeral": true});
   const commands = interaction.options.getString("commands").split(" ");
   const guildId = interaction.options.getString("guild") ? interaction.options.getString("guild") : undefined;
-  commands.forEach(async (cmd) => {
-    const command = interaction.client.commands.get(cmd);
+  for (const cmd of commands) {
     await interaction.client.deploy(cmd, guildId);
+    const command = interaction.client.commands.get(cmd);
     await interaction.followUp({"content": `The command \`${command.help.name}\` has been deployed`, "ephemeral": true});
-  });
+  }
 };
 
 exports.conf = {
