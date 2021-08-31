@@ -7,6 +7,11 @@ All notable changes to this project will be documented in this file.
 - Adding `/deploy` command
 - Package updates
 
+### 7.0.1
+- Update logging for deprecated message-based commands
+- Update logging for API endpoints
+- Package updates
+
 ## 6.0 - v13 Update (2021-08-09)
 - Upgrades for `discord.js` v13
 - Implementing new Client builder
