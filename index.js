@@ -121,7 +121,7 @@ const init = async () => {
       res.end();
       return;
     }
-    client.logger.cmd(`An API request was made for the endpoint: ${endpoint.name}`);
+    client.logger.cmd(`[API] An API request was made for the endpoint: ${endpoint.name}`);
     try {
       await endpoint.run(client, req, res, args);
     } catch (ex) {
