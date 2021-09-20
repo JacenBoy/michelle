@@ -12,6 +12,10 @@ All notable changes to this project will be documented in this file.
 - Update logging for API endpoints
 - Package updates
 
+### 7.0.2
+- Error handling failsafe for commands that don't already handle errors
+- Package updates
+
 ## 6.0 - v13 Update (2021-08-09)
 - Upgrades for `discord.js` v13
 - Implementing new Client builder
