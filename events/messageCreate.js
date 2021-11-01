@@ -14,7 +14,7 @@ module.exports = async (client, message) => {
   // Checks if the bot was mentioned, with no message after it, returns the prefix.
   const prefixMention = new RegExp(`^<@!?${client.user.id}>( |)$`);
   if (message.content.match(prefixMention)) {
-    return message.reply(`My prefix is \`${settings.prefix}\``);
+    return; // message.reply(`My prefix is \`${settings.prefix}\``);
   }
 
   // Also good practice to ignore any message that does not start with our prefix,
@@ -45,7 +45,7 @@ module.exports = async (client, message) => {
   // and return a friendly error message.
   if (cmd && !message.guild && cmd.conf.guildOnly) {
     //client.logger.warn(`[CMD] ${client.config.permLevels.find(l => l.level === level).name} ${message.author.username} (${message.author.id}) attempted command ${cmd.help.name} (Guild only)`);
-    message.channel.send("This command is unavailable via private message. Please run this command in a guild.");
+    //message.channel.send("This command is unavailable via private message. Please run this command in a guild.");
     return;
   }
 
@@ -53,7 +53,7 @@ module.exports = async (client, message) => {
 
   if (level < client.levelCache[cmd.conf.permLevel]) {
     //client.logger.warn(`[CMD] ${client.config.permLevels.find(l => l.level === level).name} ${message.author.username} (${message.author.id}) attempted command ${cmd.help.name} (Insufficient permissions)`);
-    message.react("❌");
+    //message.react("❌");
     return;
   }
 
@@ -68,9 +68,9 @@ module.exports = async (client, message) => {
   
   // If the command exists, **AND** the user has permission, run it.
   try {
-    client.logger.warn(`[CMD] ${client.config.permLevels.find(l => l.level === level).name} ${message.author.username} (${message.author.id}) ran deprecated command ${cmd.help.name}`);
-    message.reply(`This command will be disabled starting November 1st. Please begin using the equivalent command \`/${cmd.help.name}\``);
-    await cmd.run(client, message, args, level);
+    //client.logger.warn(`[CMD] ${client.config.permLevels.find(l => l.level === level).name} ${message.author.username} (${message.author.id}) ran deprecated command ${cmd.help.name}`);
+    message.reply(`This command is disabled. Please use the equivalent command \`/${cmd.help.name}\``);
+    //await cmd.run(client, message, args, level);
   } catch (ex) {
     message.channel.send("An error ocurred running this command");
     client.logger.error(ex);
