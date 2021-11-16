@@ -14,7 +14,7 @@ A Discord bot based on [Guide Bot](https://github.com/AnIdiotsGuide/guidebot). A
 * Reverse lookup - Find the original source to a piece of fanart.
 
 ## Inviting Michelle
-If you want to add Michelle to your server, you can do so using [this invite link](https://discordapp.com/oauth2/authorize?client_id=536935359775506444&scope=bot&permissions=379968). Use `m-help` to get started using the bot. Alternatively, you can self-host the bot if you want.
+If you want to add Michelle to your server, you can do so using [this invite link](https://discordapp.com/oauth2/authorize?client_id=536935359775506444&scope=bot%20applications.commands&permissions=379968). Use `m-help` to get started using the bot. Alternatively, you can self-host the bot if you want.
 
 ## Installing/Configuring
 Self-hosting the bot is not officially supported. For a basic overview of the install process, check the [official documentation](https://michelle.jacenboy.com/self-host).
