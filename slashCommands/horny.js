@@ -10,16 +10,16 @@ exports.run = async (interaction) => {
   if (!profile || !Object.keys(profile.horny).length) {
     const res = await Special.findByIdAndUpdate(target.id, {"horny": {"totalCount": 1, "lastTime": DateTime.now().toString()}}, {upsert: true, new: true});
     embed = {
-      "title": `${target.username} horny count: ${res.horny.totalCount}`, 
-      "description": `This is the first recorded time ${target.username} has been horny`,
+      "title": `${target.username} was caught being horny!`, 
+      "description": `${target.username} horny count: ${res.horny.totalCount}\nThis is the first recorded time ${target.username} has been horny`,
       "color": interaction.client.colorInt("#ff0000")
     };
   } else {
     const res = await Special.findByIdAndUpdate(target.id, {"horny": {"totalCount": profile.horny.totalCount + 1, "lastTime": DateTime.now().toString()}}, {upsert: true, new: true});
     const diff = DateTime.now().diff(DateTime.fromISO(profile.horny.lastTime), ["days", "hours", "minutes", "seconds", "milliseconds"]);
     embed = {
-      "title": `${target.username} horny count: ${res.horny.totalCount}`,
-      "description": `It has been ${diff.days ? diff.days + " days " : ""}${diff.hours ? diff.hours + " hours " : ""}${diff.minutes ? diff.minutes + " minutes " : ""}${diff.seconds ? diff.seconds + " seconds " : ""}since ${target.username} was last horny`,
+      "title": `${target.username} was caught being horny!`,
+      "description": `${target.username} horny count: ${res.horny.totalCount}\nIt has been ${diff.days ? diff.days + " days " : ""}${diff.hours ? diff.hours + " hours " : ""}${diff.minutes ? diff.minutes + " minutes " : ""}${diff.seconds ? diff.seconds + " seconds " : ""}since ${target.username} was last horny`,
       "color": interaction.client.colorInt("#ff0000")
     };
   }

@@ -26,6 +26,7 @@ exports.run = async (interaction) => {
     "title": `${site == "gb" ? "Gelbooru" : "Safebooru"} #${img[0].id}`,
     "url": `https://${site == "sb" ? "safebooru.org" : "gelbooru.com"}/index.php?page=post&s=view&id=${img[0].id}`,
     "color": interaction.client.colorInt(site == "sb" ? "#84a8b9" : "#006ffa"),
+    "fields": [{"name": "Tags", "value": tagarray.join(", ")}],
     "image": {"url": img[0].fileUrl},
     "footer": {"text":`Score: ${img[0].score || 0}`}
   };

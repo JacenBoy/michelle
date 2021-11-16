@@ -10,7 +10,8 @@ exports.run = async (interaction) => {
   const res = await Special.findByIdAndUpdate(target.id, {"abuse": profile.abuse ? profile.abuse + 1 : 1}, {upsert: true, new: true});
 
   const embed = {
-    "description": `Rise up against the tyranny of <@${target.id}>! <@${target.id}> has been accused of abuse ${res.abuse} time${res.abuse > 1 ? "s" : "" }`,
+    "title": `Rise up against the tyranny of ${target.username}!`,
+    "description": `${target.username} abuse count: ${res.abuse}`,
     "color": interaction.client.colorInt("#ff0000")
   };
   interaction.reply({"embeds": [embed]});

@@ -10,7 +10,8 @@ exports.run = async (interaction) => {
   const res = await Special.findByIdAndUpdate(target.id, {"gratitude": profile.gratitude ? profile.gratitude + 1 : 1}, {upsert: true, new: true});
 
   const embed = {
-    "description": `Thank you <@${target.id}> for everything you do! <@${target.id}> has been thanked ${res.gratitude} time${res.gratitude > 1 ? "s" : "" }`,
+    "title": `Thank you, ${target.username}, for everything you do!`,
+    "description": `${target.username} thank count: ${res.gratitude}`,
     "color": interaction.client.colorInt("#00ff00")
   };
   interaction.reply({"embeds": [embed]});
