@@ -17,7 +17,12 @@ exports.run = async (interaction) => {
   if (site == "gb") tagarray.push("-webm", "-mp4");
   var img = await booru.search(site, tagarray, {limit: 1, random: true});
   if (!img[0]) {
-    interaction.editReply("No results found.");
+    const embed = {
+      "title": "No results found",
+      "fields": [{"name": "Tags", "value": tagarray.join(", ")}],
+      "color": interaction.client.colorInt(site == "sb" ? "#84a8b9" : "#006ffa")
+    };
+    interaction.editReply({"embeds": [embed]});
     interaction.client.logger.warn(`No results found for tags: ${tagarray.join(", ")}`);
     return;
   }
