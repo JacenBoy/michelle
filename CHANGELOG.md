@@ -31,6 +31,10 @@ All notable changes to this project will be documented in this file.
 ### 7.0.6
 - Additional embed usability update
 
+### 7.0.7
+- Update for Gelbooru API
+- Package updates
+
 ## 6.0 - v13 Update (2021-08-09)
 - Upgrades for `discord.js` v13
 - Implementing new Client builder
