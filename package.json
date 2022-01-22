@@ -33,7 +33,7 @@
     "is-image-url": "^1.1.8",
     "luxon": "^2.3.0",
     "mongoose": "^6.1.5",
-    "node-fetch": "^2.6.6",
+    "node-fetch": "^3.1.1",
     "node-kitsu": "^1.1.1",
     "sagiri": "^3.1.1",
     "vndb-api": "^1.0.3",
