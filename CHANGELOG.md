@@ -35,6 +35,10 @@ All notable changes to this project will be documented in this file.
 - Update for Gelbooru API
 - Package updates
 
+### 7.0.8
+- Update `node-fetch` to address [CVE-2022-0235](https://nvd.nist.gov/vuln/detail/CVE-2022-0235)
+- Package updates
+
 ## 6.0 - v13 Update (2021-08-09)
 - Upgrades for `discord.js` v13
 - Implementing new Client builder
