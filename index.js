@@ -44,19 +44,11 @@ const init = async () => {
 
   // Here we load **commands** into memory, as a collection, so they're accessible
   // here and everywhere else.
-  const cmdFiles = await readdir("./commands/");
-  client.logger.log(`Loading a total of ${cmdFiles.length} commands`);
-  cmdFiles.forEach(f => {
-    if (!f.endsWith(".js")) return;
-    const response = client.loadCommand(f);
-    if (response) console.log(response);
-  });
-  // Also load slash commands into a collection
-  const slashCmds = await readdir("./slashCommands/");
-  client.logger.log(`Loading a total of ${slashCmds.length} slash commands`);
-  slashCmds.forEach(c => {
+  const cmds = await readdir("./commands/");
+  client.logger.log(`Loading a total of ${cmds.length} slash commands`);
+  cmds.forEach(c => {
     if (!c.endsWith(".js")) return;
-    const response = client.loadCommand(c, true); // Pass "true" as the second argument for slash command processing
+    const response = client.loadCommand(c); // Pass "true" as the second argument for slash command processing
     if (response) console.log(response);
   });
 

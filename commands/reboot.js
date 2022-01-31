@@ -1,17 +1,17 @@
-exports.run = async (client, message, args, level) => {
-  await message.channel.send("The bot is shutting down.");
-  await Promise.all(client.commands.map(cmd =>
-    client.unloadCommand(cmd)
+exports.run = async (interaction) => {
+  await interaction.reply("The bot is shutting down.");
+  await Promise.all(interaction.client.commands.map(cmd =>
+    interaction.client.unloadCommand(cmd)
   ));
   process.exit(0);
 };
 
 exports.conf = {
   enabled: true,
-  guildOnly: false,
+  global: true,
   special: false,
-  aliases: ["stop", "shutdown", "restart"],
-  permLevel: "Bot Admin"
+  permLevel: "Admin",
+  options: []
 };
 
 exports.help = {

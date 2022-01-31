@@ -1,20 +1,18 @@
-exports.run = async (client, message, args, level) => {
-  const msg = await message.channel.send("Pinging Discord");
-  var pmsg = await msg.edit(`Reply from Discord: time=${msg.createdTimestamp - message.createdTimestamp}ms api-latency=${Math.round(client.ws.ping)}ms`);
-  client.logger.debug(pmsg.content);
+exports.run = async (interaction) => {
+  await interaction.deferReply();
+  const reply = await interaction.editReply("Pinging Discord");
+  await interaction.editReply(`Reply from Discord: time=${reply.createdTimestamp - interaction.createdTimestamp}ms api-latency=${Math.round(interaction.client.ws.ping)}ms`);
 };
 
 exports.conf = {
   enabled: true,
-  guildOnly: false,
+  global: true,
   special: false,
-  aliases: [],
-  permLevel: "User"
+  permLevel: "User",
+  options: []
 };
 
 exports.help = {
-  name: "ping",
-  category: "System",
-  description: "Tests latency between the bot and Discord.",
-  usage: "ping"
+  "name": "ping",
+  "description": "Tests latency between the bot and Discord."
 };

@@ -1,23 +1,24 @@
 // Search Kitsu for multiple manga
 const kitsu = require("node-kitsu");
 
-exports.run = async (client, message, args, level) => {
-  if (!args[0]) return message.channel.send("Please specify a manga name.");
-  else var aniname = args.join(" ");
-  client.logger.debug(`Search started for search term "${aniname}"`);
+exports.run = async (interaction) => {
+  const aniname = interaction.options.getString("title");
+  if (!aniname) return interaction.reply({"content": "Please specify a manga name.", "ephemeral": true});
+  await interaction.deferReply();
+  interaction.client.logger.debug(`Search started for search term "${aniname}"`);
   try {
     var results = await kitsu.searchManga(aniname, 0);
   } catch (ex) {
     if (ex.message.indexOf("ERR_UNESCAPED_CHARACTERS") != -1) {
-      message.channel.send("This command only accepts English and Romaji titles. Please translate the title and try again.");
+      interaction.editReply("This command only accepts English and Romaji titles. Please translate the title and try again.");
     } else {
-      message.channel.send("An error occurred running this command. Please try again later.");
+      interaction.editReply("An error occurred running this command. Please try again later.");
     }
-    return client.logger.error(`${ex}`);
+    return interaction.client.logger.error(`${ex}`);
   }
   if (!results || !results[0]) {
-    message.channel.send("No results found");
-    client.logger.warn(`No manga found for search term "${aniname}"`);
+    interaction.editReply("No results found");
+    interaction.client.logger.warn(`No manga found for search term "${aniname}"`);
     return;
   }
   var fieldarry = [];
@@ -32,19 +33,26 @@ exports.run = async (client, message, args, level) => {
   const embed = { 
     "title": "Search Results", 
     "description": "\u200b", 
-    "color": client.colorInt("#fd8320"), 
+    "color": interaction.client.colorInt("#fd8320"), 
     "fields": fieldarry 
   };
-  message.channel.send({"embeds": [embed]});
-  client.logger.log(`Results found for search term "${aniname}"`);
+  interaction.editReply({"embeds": [embed]});
+  interaction.client.logger.log(`Results found for search term "${aniname}"`);
 };
   
 exports.conf = {
   enabled: true,
-  guildOnly: false,
+  global: true,
   special: false,
-  aliases: ["msearch", "ms"],
-  permLevel: "User"
+  permLevel: "User",
+  options: [
+    {
+      name: "title",
+      description: "An anime title",
+      type: "STRING",
+      required: true
+    }
+  ]
 };
   
 exports.help = {

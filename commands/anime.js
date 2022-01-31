@@ -1,23 +1,24 @@
 // Search Kitsu for an anime
 const kitsu = require("node-kitsu");
 
-exports.run = async (client, message, args, level) => {
-  if (!args[0]) return message.channel.send("Please specify an anime name.");
-  else var aniname = args.join(" ");
-  client.logger.debug(`Search started for search term "${aniname}"`);
+exports.run = async (interaction) => {
+  const aniname = interaction.options.getString("title");
+  if (!aniname) return interaction.reply({"content": "Please specify an anime name.", "ephemeral": true});
+  await interaction.deferReply();
+  interaction.client.logger.debug(`Search started for search term "${aniname}"`);
   try {
     var results = await kitsu.searchAnime(aniname, 0);
   } catch (ex) {
     if (ex.message.indexOf("ERR_UNESCAPED_CHARACTERS") != -1) {
-      message.channel.send("This command only accepts English and Romaji titles. Please translate the title and try again.");
+      interaction.editReply("This command only accepts English and Romaji titles. Please translate the title and try again.");
     } else {
-      message.channel.send("An error occurred running this command. Please try again later.");
+      interaction.editReply("An error occurred running this command. Please try again later.");
     }
-    return client.logger.error(`${ex}`);
+    return interaction.client.logger.error(`${ex}`);
   }
   if (!results || !results[0]) {
-    message.channel.send("No results found");
-    client.logger.warn(`No anime found for search term "${aniname}"`);
+    interaction.editReply("No results found");
+    interaction.client.logger.warn(`No anime found for search term "${aniname}"`);
     return;
   }
   var aniresult = results[0].attributes;
@@ -25,8 +26,8 @@ exports.run = async (client, message, args, level) => {
   const embed = {
     "title": aniresult.titles.en || aniresult.canonicalTitle || aniresult.titles.en_jp,
     "url": `https://kitsu.io/anime/${aniresult.slug}`,
-    "description": client.cleanSyn(aniresult.synopsis),
-    "color": client.colorInt("#fd8320"),
+    "description": interaction.client.cleanSyn(aniresult.synopsis),
+    "color": interaction.client.colorInt("#fd8320"),
     "image": { "url": aniresult.posterImage.small },
     "fields": [
       { "name": "Rating:", "value": `${aniresult.averageRating || 0}% Approval`, "inline": true },
@@ -34,16 +35,23 @@ exports.run = async (client, message, args, level) => {
       { "name": "Status:", "value": aniresult.status == "tba" ? "TBA" : `${aniresult.status.charAt(0).toUpperCase()}${aniresult.status.substr(1).toLowerCase()}`, "inline": true }
     ]
   };
-  message.channel.send({"embeds": [embed]});
-  client.logger.log(`Result found for search term "${aniname}": "${aniresult.titles.en || aniresult.canonicalTitle || aniresult.titles.en_jp}"`);
+  interaction.editReply({"embeds": [embed]});
+  interaction.client.logger.log(`Result found for search term "${aniname}": "${aniresult.titles.en || aniresult.canonicalTitle || aniresult.titles.en_jp}"`);
 };
 
 exports.conf = {
-  enabled: false,
-  guildOnly: false,
+  enabled: true,
+  global: true,
   special: false,
-  aliases: [],
-  permLevel: "User"
+  permLevel: "User",
+  options: [
+    {
+      name: "title",
+      description: "An anime title",
+      type: "STRING",
+      required: true
+    }
+  ]
 };
 
 exports.help = {

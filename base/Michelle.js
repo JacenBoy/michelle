@@ -13,7 +13,6 @@ class Michelle extends Client {
     // Aliases and commands are put in collections where they can be read from,
     // catalogued, listed, etc.
     this.commands = new Collection();
-    this.slashCommands = new Collection();
     this.aliases = new Collection();
     this.endpoints = new Collection();
 
@@ -27,72 +26,40 @@ class Michelle extends Client {
     this.mongoose = mongoose.connect(this.config.mongouri, {useNewUrlParser: true});
   }
 
-  loadCommand (commandName, isSlash = false) {
-    if (isSlash) {
-      try {
-        this.logger.log(`Loading Command: ${commandName.split(".")[0]}`);
-        const props = require(`../slashCommands/${commandName}`);
-        this.slashCommands.set(props.help.name, props);
-        return false;
-      } catch (e) {
-        return `Unable to load command ${commandName}: ${e}`;
-      }
-    } else {
-      try {
-        this.logger.log(`Loading Command: ${commandName.split(".")[0]}`);
-        const props = require(`../commands/${commandName}`);
-        if (props.init) {
-          props.init(this);
-        }
-        this.commands.set(props.help.name, props);
-        props.conf.aliases.forEach(alias => {
-          this.aliases.set(alias, props.help.name);
-        });
-        return false;
-      } catch (e) {
-        return `Unable to load command ${commandName}: ${e}`;
-      }
+  loadCommand (commandName) {
+    try {
+      this.logger.log(`Loading Command: ${commandName.split(".")[0]}`);
+      const props = require(`../commands/${commandName}`);
+      this.commands.set(props.help.name, props);
+      return false;
+    } catch (e) {
+      return `Unable to load command ${commandName}: ${e}`;
     }
   }
 
-  async unloadCommand (commandName, isSlash = false) {
+  async unloadCommand (commandName) {
     let command;
-    if (isSlash) {
-      if (this.slashCommands.has(commandName)) {
-        command = this.slashCommands.get(commandName);
-      }
-      if (!command) return `The command \`${commandName}\` doesn"t seem to exist, nor is it an alias. Try again!`;
-      if (command.shutdown) {
-        await command.shutdown(this);
-      }
-      delete require.cache[require.resolve(`../slashCommands/${commandName}.js`)];
-      return false;
-    } else {
-      if (this.commands.has(commandName)) {
-        command = this.commands.get(commandName);
-      } else if (this.aliases.has(commandName)) {
-        command = this.commands.get(this.aliases.get(commandName));
-      }
-      if (!command) return `The command \`${commandName}\` doesn"t seem to exist, nor is it an alias. Try again!`;
-    
-      if (command.shutdown) {
-        await command.shutdown(this);
-      }
-      delete require.cache[require.resolve(`../commands/${commandName}.js`)];
-      return false;
+    if (this.commands.has(commandName)) {
+      command = this.commands.get(commandName);
     }
+    if (!command) return `The command \`${commandName}\` doesn"t seem to exist, nor is it an alias. Try again!`;
+    if (command.shutdown) {
+      await command.shutdown(this);
+    }
+    delete require.cache[require.resolve(`../commands/${commandName}.js`)];
+    return false;
   }
 
   // Function to deploy specific slash command
   async deploy(command, guild = undefined) {
-    let cmd = this.slashCommands.get(command);
+    let cmd = this.commands.get(command);
     if (!cmd) {
       this.logger.warn(`Command ${command} is not loaded; loading now`);
       const res = this.loadCommand(command, true);
       if (res) {
         return this.logger.error(`Error loading command ${command}: ${res}`);
       }
-      cmd = this.slashCommands.get(command);
+      cmd = this.commands.get(command);
     }
     if (!cmd.conf.enabled) return this.logger.warn(`Command ${cmd.help.name} is disabled`);
     const data = {
@@ -120,7 +87,7 @@ class Michelle extends Client {
 
   // Function to deploy all slash commands
   async deployCommands () {
-    this.slashCommands.map(async (cmd) => {
+    this.commands.map(async (cmd) => {
       try {
         if (!cmd.conf.enabled) return; // Do not deploy disabled commands
         const data = {

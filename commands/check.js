@@ -1,126 +1,131 @@
 const Special = require("../models/special.js");
 const { DateTime } = require("luxon");
 
-exports.run = async (client, message, args, level) => {
-  if (!args[0]) return message.channel.send(`Improper usage. Use \`${client.getSettings(message.guild.id).prefix}help check\` for assistance.`);
-  var embed;
-  switch (args[0].toLowerCase()) {
-    case "horny":
-      if (!message.mentions.users.first()) var users = [message.author];
-      else var users = message.mentions.users.values();
-      var fields = [];
-      var i = 0;
-
-      for (const u of users) {
-        const profile = await Special.findById(u.id);
-        if (!profile) {
-          fields[i] = {
-            "name": `${u.username} horny count: 0`, 
-            "value": `There have been no recorded instances of ${u.username} being horny`
-          };
-        }
-        else if (!profile.horny) {
-          fields[i] = {
-            "name": `${u.username} horny count: 0`, 
-            "value": `There have been no recorded instances of ${u.username} being horny`
-          };
-        } else {
-          const diff = DateTime.now().diff(DateTime.fromISO(profile.horny.lastTime), ["days", "hours", "minutes", "seconds", "milliseconds"]);
-          fields[i] = {
-            "name": `${u.username} horny count: ${profile.horny.totalCount}`, 
-            "value": `It has been ${diff.days ? diff.days + " days " : ""}${diff.hours ? diff.hours + " hours " : ""}${diff.minutes ? diff.minutes + " minutes " : ""}${diff.seconds ? diff.seconds + " seconds " : ""}since ${u.username} was last horny`
-          };
-        }
-        i++;
+exports.run = async (interaction) => {
+  const mode = interaction.options.getString("mode");
+  let target = interaction.options.getUser("user");
+  if (!mode) return;
+  let embed;
+  switch (mode) {
+    case "horny": {
+      if (!target) target = interaction.username;
+      const profile = await Special.findById(target.id);
+      if (!profile) {
+        embed = {
+          "title": `${target.username} horny count: 0`, 
+          "description": `There have been no recorded instances of ${target.username} being horny`,
+          "color": interaction.client.colorInt("#ff0000")
+        };
       }
-      embed = {
-        "fields": fields, 
-        "color": client.colorInt("#ff0000")
-      };
-      message.channel.send({"embeds": [embed]});
-      break;
-    case "abuse":
-      if (!message.mentions.users.first()) var users = [message.guild.owner];
-      else var users = message.mentions.users.values();
-      var fields = [];
-      var i = 0;
-
-      for (const u of users) {
-        const profile = await Special.findById(u.id);
-        if (!profile) {
-          fields[i] = {
-            "name": "\u200b", 
-            "value": `<@${u.id}> has never been accused of abuse`
-          };
-        } else {
-          if (!profile.abuse) {
-            fields[i] = {
-              "name": "\u200b", 
-              "value": `<@${u.id}> has never been accused of abuse`
-            };
-          }
-          else {
-            fields[i] = {
-              "name": "\u200b", 
-              "value": `<@${u.id}> has been accused of abuse ${profile.abuse} time${profile.abuse > 1 ? "s" : "" }`
-            };
-          }
-        }
-        i++;
-      }
-      embed = {
-        "fields": fields, 
-        "color": client.colorInt("#ff0000")
-      };
-      message.channel.send({"embeds": [embed]});
-      break;
-    case "gratitude":
-      if (!message.mentions.users.first()) var users = [message.guild.owner];
-      else var users = message.mentions.users.values();
-      var fields = [];
-      var i = 0;
-
-      for (const u of users) {
-        const profile = await Special.findById(u.id);
-        if (!profile) {
-          fields[i] = {
-            "name": "\u200b", 
-            "value": `<@${u.id}> has never been thanked`
-          };
-        } else {
-          if (!profile.gratitude) {
-            fields[i] = {
-              "name": "\u200b", 
-              "value": `<@${u.id}> has never been thanked`
-            };
-          }
-          else {
-            fields[i] = {
-              "name": "\u200b", 
-              "value": `<@${u.id}> has been thanked ${profile.gratitude} time${profile.gratitude > 1 ? "s" : "" }`
-            };
-          }
-        }
-        i++;
+      else if (!profile.horny) {
+        embed = {
+          "title": `${target.username} horny count: 0`, 
+          "description": `There have been no recorded instances of ${target.username} being horny`,
+          "color": interaction.client.colorInt("#ff0000")
+        };
+      } else {
+        const diff = DateTime.now().diff(DateTime.fromISO(profile.horny.lastTime), ["days", "hours", "minutes", "seconds", "milliseconds"]);
+        embed = {
+          "title": `${target.username} horny count: ${profile.horny.totalCount}`, 
+          "description": `It has been ${diff.days ? diff.days + " days " : ""}${diff.hours ? diff.hours + " hours " : ""}${diff.minutes ? diff.minutes + " minutes " : ""}${diff.seconds ? diff.seconds + " seconds " : ""}since ${target.username} was last horny`,
+          "color": interaction.client.colorInt("#ff0000")
+        };
       }
 
-      embed = {
-        "fields": fields, 
-        "color": client.colorInt("#00ff00")
-      };
-      message.channel.send({"embeds": [embed]});
+      interaction.reply({"embeds": [embed]});
       break;
+    }
+    case "abuse": {
+      if (!target) target = await interaction.client.users.fetch(interaction.guild.ownerId);
+
+      const profile = await Special.findById(target.id);
+      if (!profile) {
+        embed = {
+          "description": `<@${target.id}> has never been accused of abuse`,
+          "color": interaction.client.colorInt("#ff0000")
+        };
+      } else {
+        if (!profile.abuse) {
+          embed = {
+            "description": `<@${target.id}> has never been accused of abuse`,
+            "color": interaction.client.colorInt("#ff0000")
+          };
+        }
+        else {
+          embed = {
+            "description": `<@${target.id}> has been accused of abuse ${profile.abuse} time${profile.abuse > 1 ? "s" : "" }`,
+            "color": interaction.client.colorInt("#ff0000")
+          };
+        }
+      }
+
+      interaction.reply({"embeds": [embed]});
+      break;
+    }
+    case "gratitude": {
+      if (!target) target = await interaction.client.users.fetch(interaction.guild.ownerId);
+
+      const profile = await Special.findById(target.id);
+      if (!profile) {
+        embed = {
+          "description": `<@${target.id}> has never been thanked`,
+          "color": interaction.client.colorInt("#00ff00")
+        };
+      } else {
+        if (!profile.gratitude) {
+          embed = {
+            "description": `<@${target.id}> has never been thanked`,
+            "color": interaction.client.colorInt("#00ff00")
+          };
+        }
+        else {
+          embed = {
+            "description": `<@${target.id}> has been thanked ${profile.gratitude} time${profile.gratitude > 1 ? "s" : "" }`,
+            "color": interaction.client.colorInt("#00ff00")
+          };
+        }
+      }
+
+      interaction.reply({"embeds": [embed]});
+      break;
+    }
     default:
-      return message.channel.send(`Improper usage. Use \`${client.getSettings(message.guild.id).prefix}help check\` for assistance.`);
+      return interaction.reply("Improper usage. Use `/help check` for assistance.");
   }
 };
 
 exports.conf = {
   enabled: true,
-  guildOnly: true,
-  special: true,
-  aliases: [],
-  permLevel: "User"
+  global: false,
+  special: ["411027224389615617", "140308655856680960"],
+  permLevel: "User",
+  options: [
+    {
+      name: "mode",
+      description: "The information to check (abuse/gratitude/horny)",
+      type: "STRING",
+      required: true,
+      choices: [
+        {
+          name: "Horny",
+          value: "horny"
+        },
+        {
+          name: "Abuse",
+          value: "abuse"
+        },
+        {
+          name: "Gratitude",
+          value: "gratitude"
+        }
+      ]
+    },
+    {
+      name: "user",
+      description: "The user to target",
+      type: "USER"
+    }
+  ]
 };
   
 exports.help = {

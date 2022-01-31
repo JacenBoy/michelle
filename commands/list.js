@@ -2,20 +2,14 @@
 const mongoose = require("mongoose");
 const List = require("../models/list.js");
 
-exports.run = async (client, message, args, level) => {
-  if (!args[0]) return message.channel.send(`Improper format. Use \`${client.getSettings(message.guild.id).prefix}help list\` for assistance.`);
-  if (message.mentions.users.first()) {
-    var mode = "view";
-    var usermention = message.mentions.users.first();
-  }
-  else {
-    var mode = "add";
-  }
-
+exports.run = async (interaction) => {
+  const mode = interaction.options.getSubcommand();
+  if (!mode) return interaction.reply("Improper format. Use `/help list` for assistance.");
   if (mode == "view") {
     // View mode - Return the mentioned user's lists, if available
-    List.findById(usermention.id).exec((err, result) => {
-      if (!result) return message.channel.send(`No profile found for ${usermention.username}`);
+    const target = interaction.options.getUser("user");
+    List.findById(target.id).exec((err, result) => {
+      if (!result) return interaction.reply(`No profile found for ${target.username}`);
       var fieldarray = [];
       var i = 0;
       if (result.kitsu) {
@@ -32,39 +26,86 @@ exports.run = async (client, message, args, level) => {
       }
 
       const embed = {
-        "title": `${usermention.username}'s Anime Lists`,
-        "thumbnail": { "url": usermention.avatarURL() || usermention.defaultAvatarURL() },
+        "title": `${target.username}'s Anime Lists`,
+        "thumbnail": { "url": target.avatarURL() || target.defaultAvatarURL() },
         "fields": fieldarray
       };
-      message.channel.send({"embeds": [embed]});
+      interaction.reply({"embeds": [embed]});
     });
   } else {
     // Add mode - Add a list to the user's profile
-    switch (args[0].toLowerCase()) {
+    const site = interaction.options.getString("site");
+    const uname = interaction.options.getString("username");
+    switch (site) {
       case "kitsu":
-      case "hummingbird":
-        await List.updateOne({"_id": message.author.id}, {"kitsu": `${args[1].toLowerCase() == "clear" ? "" : args[1]}`}, {upsert: true});
+        await List.updateOne({"_id": interaction.user.id}, {"kitsu": `${uname.toLowerCase() == "clear" ? "" : uname}`}, {upsert: true});
         break;
       case "mal":
-      case "myanimelist":
-        await List.updateOne({"_id": message.author.id}, {"mal": `${args[1].toLowerCase() == "clear" ? "" : args[1]}`}, {upsert: true});
+        await List.updateOne({"_id": interaction.user.id}, {"mal": `${uname.toLowerCase() == "clear" ? "" : uname}`}, {upsert: true});
         break;
       case "anilist":
-        await List.updateOne({"_id": message.author.id}, {"anilist": `${args[1].toLowerCase() == "clear" ? "" : args[1]}`}, {upsert: true});
+        await List.updateOne({"_id": interaction.user.id}, {"anilist": `${uname.toLowerCase() == "clear" ? "" : uname}`}, {upsert: true});
         break;
       default:
-        return message.channel.send(`Improper format. Use \`${client.getSettings(message.guild.id).prefix}help list\` for assistance.`);
+        return interaction.reply("Improper format. Use `/help list` for assistance.");
     }
-    message.channel.send("Anime list has been updated.");
+    interaction.reply("Anime list has been updated.");
   }
 };
   
 exports.conf = {
   enabled: true,
-  guildOnly: true,
+  global: true,
   special: false,
-  aliases: ["animelist","anilist"],
-  permLevel: "User"
+  permLevel: "User",
+  options: [
+    {
+      name: "view",
+      description: "View the links to another user's anime lists",
+      type: "SUB_COMMAND",
+      options: [
+        {
+          name: "user",
+          description: "The user whose links you want to retrieve",
+          type: "USER",
+          required: true
+        }
+      ]
+    },
+    {
+      name: "update",
+      description: "Add or update links to your anime lists",
+      type: "SUB_COMMAND",
+      options: [
+        {
+          name: "site",
+          description: "The site you want to add a link to",
+          type: "STRING",
+          required: true,
+          choices: [
+            {
+              name: "Kitsu.io",
+              value: "kitsu"
+            },
+            {
+              name: "MyAnimeList",
+              value: "mal"
+            },
+            {
+              name: "AniList",
+              value: "anilist"
+            }
+          ]
+        },
+        {
+          name: "username",
+          description: "Your username on the site",
+          type: "STRING",
+          required: true
+        }
+      ]
+    }
+  ]
 };
   
 exports.help = {

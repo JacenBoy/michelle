@@ -5,12 +5,13 @@
 
 // However it's, like, super ultra useful for troubleshooting and doing stuff
 // you don't want to put in a command.
-exports.run = async (client, message, args, level) => {
+exports.run = async (interaction) => {
   const fetch = require("node-fetch");
-  const code = args.join(" ");
+  const code = interaction.options.getString("code");
+  await interaction.deferReply();
   try {
     const evaled = eval(code);
-    const clean = await client.clean(client, evaled);
+    const clean = await interaction.client.clean(interaction.client, evaled);
     if (clean.length > 1090) { 
       try {
         const {key} = await fetch("https://hasteb.in/documents", {
@@ -19,26 +20,33 @@ exports.run = async (client, message, args, level) => {
           headers: {"Content-Type": "application/json"}
         }).then(res => res.json());
         if (!key) throw "Error posting the response";
-        message.channel.send(`\`\`\`\nResponse too long. Uploaded output to https://hasteb.in/${key}.js.\n\`\`\``);
+        interaction.editReply(`\`\`\`\nResponse too long. Uploaded output to https://hasteb.in/${key}.js.\n\`\`\``);
       } catch (ex) {
-        client.logger.debug(clean);
-        message.channel.send("```\nResponse too long. Check the console for full output.\n```");
+        interaction.client.logger.debug(clean);
+        interaction.editReply("```\nResponse too long. Check the console for full output.\n```");
       }
       
     } else {
-      message.channel.send(`\`\`\`js\n${clean}\n\`\`\``);
+      interaction.editReply(`\`\`\`js\n${clean}\n\`\`\``);
     }
   } catch (err) {
-    message.channel.send(`\`ERROR\` \`\`\`xl\n${await client.clean(client, err)}\n\`\`\``);
+    interaction.editReply(`\`ERROR\` \`\`\`xl\n${await interaction.client.clean(interaction.client, err)}\n\`\`\``);
   }
 };
 
 exports.conf = {
   enabled: true,
-  guildOnly: false,
+  global: true,
   special: false,
-  aliases: [],
-  permLevel: "Bot Owner"
+  permLevel: "Owner",
+  options: [
+    {
+      name: "code",
+      description: "The code to evaluate",
+      type: "STRING",
+      required: true
+    }
+  ]
 };
 
 exports.help = {

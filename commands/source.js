@@ -2,39 +2,46 @@
 const checkImage = require("is-image-url");
 const Sagiri = require("sagiri");
 
-exports.run = async (client, message, args, level) => {
-  args[1] = args[1] == "list" ? 5 : 1;
-  const saucenao = Sagiri(client.config.saucetoken, {"results": args[1]});
-  const img = message.attachments.first() ? message.attachments.first().proxyURL : args[0];
+exports.run = async (interaction) => {
+  const saucenao = Sagiri(interaction.client.config.saucetoken, {"results": 1});
+  const img = interaction.options.getString("link");
 
   if (!checkImage(img)) {
-    message.channel.send("The URL you specified is not an image. Please check your URL.");
-    client.logger.warn("Invalid URL specified.");
+    interaction.reply({content: "The URL you specified is not an image. Please check your URL.", ephemeral: true});
+    interaction.client.logger.warn("Invalid URL specified.");
     return;
   }
+  await interaction.deferReply();
 
   var results = await saucenao(img);
 
   const embed = {
     "title": results[0].raw.data.title || `Image from ${results[0].site}`,
     "url": results[0].url,
-    "color": client.colorInt("#1d1d1d"),
+    "color": interaction.client.colorInt("#1d1d1d"),
     "image": { "url": results[0].thumbnail },
     "fields": [
       { "name": "Similarity", "value": `${results[0].similarity}` },
       { "name": results[0].raw.data.anidb_aid ? "Anime" : "Artist", "value": `${results[0].raw.data.anidb_aid ? results[0].raw.data.source : results[0].raw.data.creator || `${results[0].raw.data.member_name} (${results[0].raw.data.member_id})`}` }
     ]
   };
-  message.channel.send({"embeds": [embed]});
-  client.logger.log(`Result from ${results[0].site} found for ${img}`);
+  interaction.editReply({"embeds": [embed]});
+  interaction.client.logger.log(`Result from ${results[0].site} found for ${img}`);
 };
 
 exports.conf = {
   enabled: true,
-  guildOnly: false,
+  global: true,
   special: false,
-  aliases: ["sauce"],
-  permLevel: "User"
+  permLevel: "User",
+  options: [
+    {
+      name: "link",
+      description: "The link to an image",
+      type: "STRING",
+      required: true
+    }
+  ]
 };
 
 exports.help = {

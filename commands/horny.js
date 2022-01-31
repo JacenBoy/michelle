@@ -1,45 +1,44 @@
 const { DateTime } = require("luxon");
 const Special = require("../models/special.js");
 
-exports.run = async (client, message, args, level) => {
-  if (!message.mentions.users.first()) return;
-  var fields = [];
-  var i = 0;
-  var users = message.mentions.users.values();
-  for (let u of users) {
-    if ([].includes(message.author.id)) u = message.author;
-    const profile = await Special.findById(u.id);
-    client.logger.debug(Object.keys(profile.horny).length);
-    if (!profile || !Object.keys(profile.horny).length) {
-      const res = await Special.findByIdAndUpdate(u.id, {"horny": {"totalCount": 1, "lastTime": DateTime.now().toString()}}, {upsert: true, new: true});
-      fields[i] = {
-        "name": `${u.username} horny count: ${res.horny.totalCount}`, 
-        "value": `This is the first recorded time ${u.username} has been horny`
-      };
-    } else {
-      const res = await Special.findByIdAndUpdate(u.id, {"horny": {"totalCount": profile.horny.totalCount + 1, "lastTime": DateTime.now().toString()}}, {upsert: true, new: true});
-      const diff = DateTime.now().diff(DateTime.fromISO(profile.horny.lastTime), ["days", "hours", "minutes", "seconds", "milliseconds"]);
-      fields[i] = {
-        "name": `${u.username} horny count: ${res.horny.totalCount}`,
-        "value": `It has been ${diff.days ? diff.days + " days " : ""}${diff.hours ? diff.hours + " hours " : ""}${diff.minutes ? diff.minutes + " minutes " : ""}${diff.seconds ? diff.seconds + " seconds " : ""}since ${u.username} was last horny`
-      };
-    }
-    i++;
+exports.run = async (interaction) => {
+  let target = interaction.options.getUser("user");
+  if (!target) return;
+  if ([].includes(interaction.user.id)) target = interaction.user;
+  const profile = await Special.findById(target.id);
+  let embed;
+  if (!profile || !Object.keys(profile.horny).length) {
+    const res = await Special.findByIdAndUpdate(target.id, {"horny": {"totalCount": 1, "lastTime": DateTime.now().toString()}}, {upsert: true, new: true});
+    embed = {
+      "title": `${target.username} was caught being horny!`, 
+      "description": `${target.username} horny count: ${res.horny.totalCount}\nThis is the first recorded time ${target.username} has been horny`,
+      "color": interaction.client.colorInt("#ff0000")
+    };
+  } else {
+    const res = await Special.findByIdAndUpdate(target.id, {"horny": {"totalCount": profile.horny.totalCount + 1, "lastTime": DateTime.now().toString()}}, {upsert: true, new: true});
+    const diff = DateTime.now().diff(DateTime.fromISO(profile.horny.lastTime), ["days", "hours", "minutes", "seconds", "milliseconds"]);
+    embed = {
+      "title": `${target.username} was caught being horny!`,
+      "description": `${target.username} horny count: ${res.horny.totalCount}\nIt has been ${diff.days ? diff.days + " days " : ""}${diff.hours ? diff.hours + " hours " : ""}${diff.minutes ? diff.minutes + " minutes " : ""}${diff.seconds ? diff.seconds + " seconds " : ""}since ${target.username} was last horny`,
+      "color": interaction.client.colorInt("#ff0000")
+    };
   }
-
-  const embed = {
-    "fields": fields,
-    "color": client.colorInt("#ff0000")
-  };
-  message.channel.send({"embeds": [embed]});
+  interaction.reply({"embeds": [embed]});
 };
 
 exports.conf = {
   enabled: true,
-  guildOnly: true,
-  special: true,
-  aliases: [],
-  permLevel: "User"
+  global: false,
+  special: ["411027224389615617", "140308655856680960"],
+  permLevel: "User",
+  options: [
+    {
+      name: "user",
+      description: "The user to target",
+      type: "USER",
+      required: true
+    }
+  ]
 };
 
 exports.help = {

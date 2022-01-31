@@ -1,20 +1,20 @@
 // Display the current version of the bot.
 
-exports.run = async (client, message, args, level) => {
+exports.run = async (interaction) => {
   const embed = {
-    "title": client.user.username == "Michelle" ? "Michelle" : `${client.user.username} (Based on Michelle)`,
-    "description": `Version: ${process.env.npm_package_version}\n[Changelog](https://github.com/JacenBoy/michelle/blob/master/CHANGELOG.md)`,
-    "color": client.colorInt("#fca2cd")
+    "title": interaction.client.user.username == "Michelle" ? "Michelle" : `${interaction.client.user.username} (Based on Michelle)`,
+    "description": `Version: ${require("../package.json").version}\n[Changelog](https://github.com/JacenBoy/michelle/blob/master/CHANGELOG.md)`,
+    "color": interaction.client.colorInt("#fca2cd")
   };
-  message.channel.send({"embeds": [embed]});
+  interaction.reply({"embeds": [embed], ephemeral: true});
 };
 
 exports.conf = {
   enabled: true,
-  guildOnly: false,
+  global: true,
   special: false,
-  aliases: ["ver","v"],
-  permLevel: "User"
+  permLevel: "User",
+  options: []
 };
 
 exports.help = {

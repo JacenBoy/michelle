@@ -3,7 +3,7 @@ module.exports = async (client, interaction) => {
   if (!interaction.isCommand()) return;
 
   // Check the commands collection for the command
-  const cmd = interaction.client.slashCommands.get(interaction.commandName);
+  const cmd = interaction.client.commands.get(interaction.commandName);
   // Ignore if the command doesn't exist
   if (!cmd) return;
 

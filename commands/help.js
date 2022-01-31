@@ -6,27 +6,37 @@ a command, it is not shown to them. If a command name is given with the
 help command, its extended help is shown.
 */
 
-exports.run = (client, message, args, level) => {
+exports.run = (interaction) => {
+  const command = interaction.options.getString("command");
   // If no specific command is called, show all filtered commands.
-  if (!args[0]) {
-    message.channel.send("You can find a list of commands at https://michelle.jacenboy.com/commands");
+  if (!command) {
+    interaction.reply({content: "You can find a list of commands at https://michelle.jacenboy.com/commands", ephemeral: true});
   } else {
     // Show individual command's help.
-    let command = args[0];
-    if (client.commands.has(command) || client.aliases.get(command)) {
-      command = client.commands.get(command) || client.commands.get(client.aliases.get(command));
-      if (level < client.levelCache[command.conf.permLevel]) return;
-      message.channel.send(`= ${command.help.name} = \n${command.help.description}\nusage:: ${command.help.usage}\naliases:: ${command.conf.aliases.join(", ")}\n= ${command.help.name} =`, {code:"asciidoc"});
+    if (interaction.client.commands.has(command)) {
+      const cmd = interaction.client.commands.get(command);
+      const embed = {
+        title: `/${cmd.help.name}`,
+        description: `${cmd.help.description}\n**Usage:** ${cmd.help.usage}`,
+        color: interaction.client.colorInt("#fca2cd")
+      };
+      interaction.reply({embeds: [embed], ephemeral: true});
     }
   }
 };
 
 exports.conf = {
   enabled: true,
-  guildOnly: false,
+  global: true,
   special: false,
-  aliases: ["h", "halp"],
-  permLevel: "User"
+  permLevel: "User",
+  options: [
+    {
+      name: "command",
+      description: "The name of a command",
+      type: "STRING"
+    }
+  ]
 };
 
 exports.help = {

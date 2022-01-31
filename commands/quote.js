@@ -2,9 +2,9 @@
 const mongoose = require("mongoose");
 const Quote = require("../models/quote.js");
 
-exports.run = async (client, message, args, level) => {
+exports.run = async (interaction) => {
   await Quote.countDocuments().exec((err, count) => {
-    var rnd = client.randInt(0, count-1);
+    var rnd = interaction.client.randInt(0, count-1);
     Quote.findOne().skip(rnd).exec((err, result) => {
       const embed = {
         "description": `"${result.quote}"`,
@@ -13,17 +13,17 @@ exports.run = async (client, message, args, level) => {
           "value": `${result.attribution} ${result.source ? `, *${result.source}*` : ""}`
         }]
       };
-      message.channel.send({"embeds": [embed]});
+      interaction.reply({"embeds": [embed]});
     });
   });
 };
   
 exports.conf = {
   enabled: true,
-  guildOnly: false,
+  global: true,
   special: false,
-  aliases: [],
-  permLevel: "User"
+  permLevel: "User",
+  options: []
 };
   
 exports.help = {

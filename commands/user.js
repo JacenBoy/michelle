@@ -1,22 +1,23 @@
 // Search Kitsu for a user
 const kitsu = require("node-kitsu");
 
-exports.run = async (client, message, args, level) => {
-  if (!args[0]) return message.channel.send("Please specify a username.");
-  else var aniname = args.join(" ");
+exports.run = async (interaction) => {
+  const uname = interaction.options.getString("user");
+  if (!uname) return interaction.reply("Please specify a username");
+  await interaction.deferReply();
   try {
-    var results = await kitsu.getUser(aniname, 0);
+    var results = await kitsu.getUser(uname, 0);
   } catch (ex) {
     if (ex.message.indexOf("ERR_UNESCAPED_CHARACTERS") != -1) {
-      message.channel.send("This command only accepts English and Romaji titles. Please translate the title and try again.");
+      interaction.editReply("This command only accepts English and Romaji usernames. Please translate the title and try again.");
     } else {
-      message.channel.send("An error occurred running this command. Please try again later.");
+      interaction.editReply("An error occurred running this command. Please try again later.");
     }
-    return client.logger.error(`${ex}`);
+    return interaction.client.logger.error(`${ex}`);
   }
   if (!results || !results[0]) {
-    message.channel.send("No results found");
-    client.logger.warn(`No Kitsu user found with the username ${aniname}`);
+    interaction.editReply("No results found");
+    interaction.client.logger.warn(`No Kitsu user found with the username ${uname}`);
     return;
   }
   var aniresult = results[0].attributes;
@@ -24,7 +25,7 @@ exports.run = async (client, message, args, level) => {
   const embed = {
     "title": aniresult.name,
     "description": aniresult.about || "No bio provided.",
-    "color": client.colorInt("#fd8320"),
+    "color": interaction.client.colorInt("#fd8320"),
     "url": `https://kitsu.io/users/${aniresult.slug}`,
     "thumbnail": { "url": aniresult.avatar.large },
     "fields": [
@@ -34,16 +35,23 @@ exports.run = async (client, message, args, level) => {
       { "name": "Reactions:", "value": `${aniresult.mediaReactionsCount || 0}`, "inline": true }
     ]
   };
-  message.channel.send({"embeds": [embed]});
-  client.logger.log(`User ${aniresult.name} found on Kitsu`);
+  interaction.editReply({"embeds": [embed]});
+  interaction.client.logger.log(`User ${aniresult.name} found on Kitsu`);
 };
   
 exports.conf = {
   enabled: true,
-  guildOnly: false,
+  global: true,
   special: false,
-  aliases: [],
-  permLevel: "User"
+  permLevel: "User",
+  options: [
+    {
+      name: "user",
+      description: "The Kitsu username of the user to search for",
+      type: "STRING",
+      required: true
+    }
+  ]
 };
 
 exports.help = {

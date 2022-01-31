@@ -2,6 +2,12 @@
 All notable changes to this project will be documented in this file.
 
 
+## 8.0 - Cleanup
+- Removed old text command handler
+- Removed old text commands
+- Removed references to old text commands
+- Moved slash commands into the normal command collection
+
 ## 7.0 - Slash Commands (2021-08-13)
 - Re-implementing all commands as slash commands
 - Adding `/deploy` command
