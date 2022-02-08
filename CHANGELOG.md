@@ -8,6 +8,10 @@ All notable changes to this project will be documented in this file.
 - Removed references to old text commands
 - Moved slash commands into the normal command collection
 
+### 8.0.1
+- Code style and readability changes
+- Package updates
+
 ## 7.0 - Slash Commands (2021-08-13)
 - Re-implementing all commands as slash commands
 - Adding `/deploy` command

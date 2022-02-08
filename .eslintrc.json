@@ -48,6 +48,7 @@
       }
     ],
     "no-unused-vars": "off",
+    "no-var": "warn",
     "no-redeclare": "off",
     "require-atomic-updates": "off",
     "no-case-declarations": "off",

@@ -5,8 +5,9 @@ exports.run = async (interaction) => {
   const uname = interaction.options.getString("user");
   if (!uname) return interaction.reply("Please specify a username");
   await interaction.deferReply();
+  let results;
   try {
-    var results = await kitsu.getUser(uname, 0);
+    results = await kitsu.getUser(uname, 0);
   } catch (ex) {
     if (ex.message.indexOf("ERR_UNESCAPED_CHARACTERS") != -1) {
       interaction.editReply("This command only accepts English and Romaji usernames. Please translate the title and try again.");
@@ -20,7 +21,7 @@ exports.run = async (interaction) => {
     interaction.client.logger.warn(`No Kitsu user found with the username ${uname}`);
     return;
   }
-  var aniresult = results[0].attributes;
+  const aniresult = results[0].attributes;
 
   const embed = {
     "title": aniresult.name,

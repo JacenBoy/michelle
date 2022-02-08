@@ -6,8 +6,9 @@ exports.run = async (interaction) => {
   if (!aniname) return interaction.reply({"content": "Please specify an anime name.", "ephemeral": true});
   await interaction.deferReply();
   interaction.client.logger.debug(`Search started for search term "${aniname}"`);
+  let results;
   try {
-    var results = await kitsu.searchAnime(aniname, 0);
+    results = await kitsu.searchAnime(aniname, 0);
   } catch (ex) {
     if (ex.message.indexOf("ERR_UNESCAPED_CHARACTERS") != -1) {
       interaction.editReply("This command only accepts English and Romaji titles. Please translate the title and try again.");
@@ -21,9 +22,9 @@ exports.run = async (interaction) => {
     interaction.client.logger.warn(`No anime found for search term "${aniname}"`);
     return;
   }
-  var fieldarry = [];
-  for (var i=0;i<results.length;i++) {
-    var aniresult = results[i].attributes;
+  const fieldarry = [];
+  for (let i=0;i<results.length;i++) {
+    const aniresult = results[i].attributes;
     fieldarry[i] = {
       "name": aniresult.titles.en || aniresult.canonicalTitle || aniresult.titles.en_jp,
       "value": `Rating: ${aniresult.averageRating || 0}%\nEpisodes: ${aniresult.episodeCount || 0}\nStatus: ${aniresult.status == "tba" ? "TBA" : `${aniresult.status.charAt(0).toUpperCase()}${aniresult.status.substr(1).toLowerCase()}`}\n[Kitsu.io](https://kitsu.io/anime/${aniresult.slug})`

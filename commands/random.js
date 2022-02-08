@@ -13,16 +13,18 @@ exports.run = async (interaction) => {
   switch (mediaType) {
     case "anime":
       while (!found) {
-        var rnd = interaction.client.randInt(0,100000);
+        const rnd = interaction.client.randInt(0,100000);
+        let results;
+        let aniresult;
         try {
-          var results = await kitsu.listAnime(rnd);
+          results = await kitsu.listAnime(rnd);
         } catch (ex) {
           interaction.editReply("An error occurred running this command. Please try again later.");
           found = true;
           return interaction.client.logger.error(`An error occurred with the command: ${ex}`);
         }
         try {
-          var aniresult = results[0].attributes;
+          aniresult = results[0].attributes;
           if (!aniresult.titles) throw "No result found";
           embed = {
             "title": aniresult.canonicalTitle || aniresult.titles.en || aniresult.titles.en_jp,
@@ -47,16 +49,18 @@ exports.run = async (interaction) => {
       break;
     case "manga":
       while (!found) {
-        var rnd = interaction.client.randInt(0,100000);
+        const rnd = interaction.client.randInt(0,100000);
+        let results;
+        let aniresult;
         try {
-          var results = await kitsu.listManga(rnd);
+          results = await kitsu.listManga(rnd);
         } catch (ex) {
           interaction.editReply("An error occurred running this command. Please try again later.");
           found = true;
           return interaction.client.logger.error(`An error occurred with the command: ${ex}`);
         }
         try {
-          var aniresult = results[0].attributes;
+          aniresult = results[0].attributes;
           if (!aniresult.titles) throw "No result found";
           embed = {
             "title": aniresult.canonicalTitle || aniresult.titles.en || aniresult.titles.en_jp,
@@ -81,22 +85,26 @@ exports.run = async (interaction) => {
       break;
     case "vn":
       while (!found) {
+        let results;
+        let vnresult;
+        let langs;
+        let plats;
         try {
           const vndb = new VNDB("michelle-vndb");
           const dbinfo = await vndb.query("dbstats");
-          var rnd = interaction.client.randInt(1,dbinfo.vn);
-          var results = await vndb.query(`get vn basic,details (id = ${rnd})`);
+          const rnd = interaction.client.randInt(1,dbinfo.vn);
+          results = await vndb.query(`get vn basic,details (id = ${rnd})`);
         } catch (ex) {
           interaction.editReply("An error occurred running this command. Please try again later.");
           found = true;
           return interaction.client.logger.error(`An error occurred with the command:\n${JSON.stringify(ex)}`);
         }
         try {
-          var vnresult = results.items[0];
+          vnresult = results.items[0];
           if (!vnresult.title) throw "No result found";
 
-          var langs = [];
-          var plats = [];
+          langs = [];
+          plats = [];
           for (let i = 0; i < vnresult.languages.length; i++) {
             const lang = await interaction.client.getEmoji(vnresult.languages[i]);
             if (!lang) langs[i] = vnresult.languages[i];

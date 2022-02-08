@@ -4,7 +4,7 @@ const Clip = require("../models/clip.js");
 
 exports.run = async (interaction) => {
   await Clip.countDocuments().exec((err, count) => {
-    var rnd = interaction.client.randInt(0, count-1);
+    const rnd = interaction.client.randInt(0, count-1);
     Clip.findOne().skip(rnd).exec((err, result) => {
       const embed = {
         "title": `${result.title} ${result.isSpoiler ? "(Spoiler)" : ""}`,

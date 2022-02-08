@@ -4,7 +4,7 @@ const Quote = require("../models/quote.js");
 
 exports.run = async (interaction) => {
   await Quote.countDocuments().exec((err, count) => {
-    var rnd = interaction.client.randInt(0, count-1);
+    const rnd = interaction.client.randInt(0, count-1);
     Quote.findOne().skip(rnd).exec((err, result) => {
       const embed = {
         "description": `"${result.quote}"`,

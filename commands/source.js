@@ -13,7 +13,7 @@ exports.run = async (interaction) => {
   }
   await interaction.deferReply();
 
-  var results = await saucenao(img);
+  const results = await saucenao(img);
 
   const embed = {
     "title": results[0].raw.data.title || `Image from ${results[0].site}`,

@@ -243,7 +243,7 @@ class Michelle extends Client {
   async dblcomStats (token) {
     if (!this.user) return;
     const XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;
-    var xhttp = new XMLHttpRequest();
+    const xhttp = new XMLHttpRequest();
     xhttp.open("POST", `https://discordbotlist.com/api/bots/${this.user.id}/stats`, true);
     xhttp.setRequestHeader("Content-Type", "application/json; charset=utf-8");
     xhttp.setRequestHeader("Authorization", `Bot ${token}`);
@@ -255,7 +255,7 @@ class Michelle extends Client {
   async bodStats (token) {
     if (!this.user) return;
     const XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;
-    var xhttp = new XMLHttpRequest();
+    const xhttp = new XMLHttpRequest();
     xhttp.open("POST", `https://bots.ondiscord.xyz/bot-api/bots/${this.user.id}/guilds`, true);
     xhttp.setRequestHeader("Content-Type", "application/json; charset=utf-8");
     xhttp.setRequestHeader("Authorization", `${token}`);
@@ -267,7 +267,7 @@ class Michelle extends Client {
   async dbggStats (token) {
     if (!this.user) return;
     const XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;
-    var xhttp = new XMLHttpRequest();
+    const xhttp = new XMLHttpRequest();
     xhttp.open("POST", `https://discord.bots.gg/api/v1/bots/${this.user.id}/stats`, true);
     xhttp.setRequestHeader("Content-Type", "application/json; charset=utf-8");
     xhttp.setRequestHeader("Authorization", `${token}`);
@@ -279,10 +279,10 @@ class Michelle extends Client {
   // not previously coded, or for other POST requests you might want to do.
   async postJson (url, headers, data) {
     const XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;
-    var xhttp = new XMLHttpRequest();
+    const xhttp = new XMLHttpRequest();
     xhttp.open("POST", url, true);
     xhttp.setRequestHeader("Content-Type", "application/json; charset=utf-8");
-    for (var header of headers) {
+    for (const header of headers) {
       xhttp.setRequestHeader(header.header, header.value);
     }
     return xhttp.send(JSON.stringify(data));

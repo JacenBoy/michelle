@@ -6,8 +6,9 @@ exports.run = async (interaction) => {
   if (!aniname) return interaction.reply({"content": "Please specify a manga name.", "ephemeral": true});
   await interaction.deferReply();
   interaction.client.logger.debug(`Search started for search term "${aniname}"`);
+  let results;
   try {
-    var results = await kitsu.searchManga(aniname, 0);
+    results = await kitsu.searchManga(aniname, 0);
   } catch (ex) {
     if (ex.message.indexOf("ERR_UNESCAPED_CHARACTERS") != -1) {
       interaction.editReply("This command only accepts English and Romaji titles. Please translate the title and try again.");
@@ -21,7 +22,7 @@ exports.run = async (interaction) => {
     interaction.client.logger.warn(`No manga found for search term "${aniname}"`);
     return;
   }
-  var aniresult = results[0].attributes;
+  const aniresult = results[0].attributes;
 
   const embed = {
     "title": aniresult.titles.en || aniresult.canonicalTitle || aniresult.titles.en_jp,

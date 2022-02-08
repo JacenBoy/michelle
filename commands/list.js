@@ -10,8 +10,8 @@ exports.run = async (interaction) => {
     const target = interaction.options.getUser("user");
     List.findById(target.id).exec((err, result) => {
       if (!result) return interaction.reply(`No profile found for ${target.username}`);
-      var fieldarray = [];
-      var i = 0;
+      const fieldarray = [];
+      let i = 0;
       if (result.kitsu) {
         fieldarray[i] = {"name": "Kitsu", "value": `[${result.kitsu}](https://kitsu.io/users/${result.kitsu})`};
         i++;

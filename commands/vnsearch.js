@@ -6,24 +6,25 @@ exports.run = async (interaction) => {
   const vnname = interaction.options.getString("title");
   if (!vnname) return interaction.reply({"content": "Please specify a visual novel name.", "ephemeral": true});
   await interaction.deferReply();
+  let results;
   try {
     const vndb = new VNDB("michelle-vndb");
-    var results = await vndb.query(`get vn basic,details (title~"${vnname}")`);
+    results = await vndb.query(`get vn basic,details (title~"${vnname}")`);
   } catch (ex) {
     interaction.editReply("An error occurred running this command. Please try again later.");
     return interaction.client.logger.error(`An error occurred with the command:\n${JSON.stringify(ex)}`);
   }
-  var vnresults = results.items;
+  const vnresults = results.items;
   if (!vnresults[0]) {
     interaction.editReply("No results found");
     interaction.client.logger.warn(`No VN found for search term ${vnname}`);
     return;
   }
-  var fieldarry = [];
-  var langs = [];
-  var plats = [];
+  const fieldarry = [];
+  const langs = [];
+  const plats = [];
   for (let i = 0; i < vnresults.length; i++) {
-    var vnresult = vnresults[i];
+    const vnresult = vnresults[i];
     for (let j = 0; j < vnresult.languages.length; j++) {
       const lang = await interaction.client.getEmoji(vnresult.languages[j]);
       if (!lang) langs[j] = vnresult.languages[j];

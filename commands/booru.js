@@ -3,19 +3,20 @@ const booru = require("booru");
 
 exports.run = async (interaction) => {
   await interaction.deferReply();
-  var site = (! ["DM","GROUP_DM"].includes(interaction.channel.type) ? (interaction.channel.nsfw ? "gb" : "sb") : "sb");
-  var taglist = interaction.options.getString("tags") || "";
+  const site = (! ["DM","GROUP_DM"].includes(interaction.channel.type) ? (interaction.channel.nsfw ? "gb" : "sb") : "sb");
+  const taglist = interaction.options.getString("tags") || "";
+  let tagarray;
   if (taglist.indexOf("_") != -1) {
-    var tagarray = taglist.split(/\s+/g);
+    tagarray = taglist.split(/\s+/g);
   } else {
-    var tagarray = taglist.split(/(?:,(?:\s+)?)/g);
-    for (var i=0;i<tagarray.length;i++) {
+    tagarray = taglist.split(/(?:,(?:\s+)?)/g);
+    for (let i=0;i<tagarray.length;i++) {
       tagarray[i] = tagarray[i].replace(/\s+/g, "_");
     }
   }
   //if (site == "sb") { tagarray.push("-bikini", "-underwear"); }
   if (site == "gb") tagarray.push("-webm", "-mp4");
-  var img = await booru.search(site, tagarray, {limit: 1, random: true});
+  const img = await booru.search(site, tagarray, {limit: 1, random: true});
   if (!img[0]) {
     const embed = {
       "title": "No results found",
@@ -36,7 +37,7 @@ exports.run = async (interaction) => {
     "footer": {"text":`Score: ${img[0].score || 0}`}
   };
   interaction.editReply({"embeds": [embed]});
-  interaction.client.logger.log(`${site == "gb" ? "Gelbooru" : "Safebooru"} #${img[0].id} found for tags: ${tagarray.join(", ")}`);
+  interaction.client.logger.log(`${site == "sb" ? "Safebooru" : "Gelbooru"} #${img[0].id} found for tags: ${tagarray.join(", ")}`);
 };
 
 exports.conf = {

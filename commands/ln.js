@@ -6,13 +6,14 @@ exports.run = async (interaction) => {
   if (!lnname) return interaction.reply({"content": "Please specify an anime name.", "ephemeral": true});
   await interaction.deferReply();
   const wln = new WLNUpdates();
+  let results;
   try {
-    var results =  await wln.getLN(lnname);
+    results =  await wln.getLN(lnname);
   } catch (ex) {
     interaction.editReply("An error occurred running this command. Please try again later.");
     return interaction.client.logger.error(`An error occurred with the command:\n${JSON.stringify(ex)}`);
   }
-  var title = results.results[0].match[0][1];
+  const title = results.results[0].match[0][1];
   try {
     results =  await wln.getDetails(title);
   } catch (ex) {
@@ -45,7 +46,7 @@ exports.conf = {
   options: [
     {
       name: "title",
-      description: "An anime title",
+      description: "A light novel title",
       type: "STRING",
       required: true
     }
