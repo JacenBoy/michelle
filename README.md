@@ -1,5 +1,5 @@
 # Michelle
-A Discord bot based on [Guide Bot](https://github.com/AnIdiotsGuide/guidebot). Aims to add features beneficial to anime servers.
+A Discord bot aiming to add features beneficial to anime servers.
 
 [![Discord Bots](https://top.gg/api/widget/status/536935359775506444.svg)](https://top.gg/bot/536935359775506444) [![Discord Bots](https://top.gg/api/widget/servers/536935359775506444.svg?noavatar=true)](https://top.gg/bot/536935359775506444)  [![Discord Bots](https://top.gg/api/widget/owner/536935359775506444.svg?noavatar=true)](https://top.gg/bot/536935359775506444)
 
@@ -21,3 +21,6 @@ Self-hosting the bot is not officially supported. For a basic overview of the in
 
 ## Help
 If you have trouble with the bot, you can contact me on [Twitter (@jacenboy)](https://twitter.com/jacenboy), on [my Discord server](https://discord.gg/6wgy6jE), or by opening a bug report here on GitHub.
+
+## Acknowledgements
+Thanks to the team behind [Guide Bot](https://github.com/AnIdiotsGuide/guidebot), which the initial framework as well as a few convenience functions were taken from.

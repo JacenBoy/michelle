@@ -2,7 +2,13 @@
 All notable changes to this project will be documented in this file.
 
 
-## 8.0 - Cleanup
+## 8.1 - Cleanup 2: Electric Boogaloo (2022-03-28)
+- Remove unneeded Guide Bot functions
+- Remove unneeded privileged intents in preparation for April 30.
+- Update Readme
+- Package updates
+
+## 8.0 - Cleanup (2022-01-31)
 - Removed old text command handler
 - Removed old text commands
 - Removed references to old text commands

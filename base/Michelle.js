@@ -109,32 +109,8 @@ class Michelle extends Client {
     });
   }
 
-  /*
-  PERMISSION LEVEL FUNCTION
 
-  This is a very basic permission system for commands which uses "levels"
-  "spaces" are intentionally left black so you can add them if you want.
-  NEVER GIVE ANYONE BUT OWNER THE LEVEL 10! By default this can run any
-  command including the VERY DANGEROUS `eval` and `exec` commands!
-
-  */
-  permlevel (message) {
-    let permlvl = 0;
-
-    const permOrder = this.config.permLevels.slice(0).sort((p, c) => p.level < c.level ? 1 : -1);
-
-    while (permOrder.length) {
-      const currentLevel = permOrder.shift();
-      if (message.guild && currentLevel.guildOnly) continue;
-      if (currentLevel.check(message)) {
-        permlvl = currentLevel.level;
-        break;
-      }
-    }
-    return permlvl;
-  }
-
-  // Replacement permissions check module to support interactions
+  //PERMISSION LEVEL FUNCTION
   // Uses a switch/case and fallthroughs to identify the correct permissions
   checkPermissions (permLevel, userId) {
     switch (permLevel) {
@@ -176,12 +152,6 @@ class Michelle extends Client {
       .replace(client.token, "mfa.VkO_2G4Qv3T--NO--lWetW_tjND--TOKEN--QFTm6YGtzq9PH--4U--tG0");
 
     return text;
-  }
-
-  getSettings () {
-    // Temporary workaround while phasing out Enmap
-    // Who am I kidding; this isn't going anywhere
-    return this.config.defaultSettings;
   }
 
   /* MICHELLE-SPECIFIC FUNCTIONS */

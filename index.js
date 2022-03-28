@@ -25,9 +25,6 @@ const nonPrivilegedIntents = [
   Intents.FLAGS.GUILD_WEBHOOKS, 
   Intents.FLAGS.GUILD_INVITES, 
   Intents.FLAGS.GUILD_VOICE_STATES, 
-  Intents.FLAGS.GUILD_MESSAGES, 
-  Intents.FLAGS.GUILD_MESSAGE_REACTIONS, 
-  Intents.FLAGS.GUILD_MESSAGE_TYPING, 
   Intents.FLAGS.DIRECT_MESSAGES, 
   Intents.FLAGS.DIRECT_MESSAGE_REACTIONS, 
   Intents.FLAGS.DIRECT_MESSAGE_TYPING
@@ -79,13 +76,6 @@ const init = async () => {
       client.logger.error(`Unable to load API module ${endpointname}: ${ex}`);
     }
   });
-
-  // Generate a cache of client permissions for pretty perm names in commands.
-  client.levelCache = {};
-  for (let i = 0; i < client.config.permLevels.length; i++) {
-    const thisLevel = client.config.permLevels[i];
-    client.levelCache[thisLevel.name] = thisLevel.level;
-  }
 
   // Here we login the client.
   client.login(client.config.token);
