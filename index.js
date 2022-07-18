@@ -5,31 +5,30 @@ if (Number(process.version.slice(1).split(".")[0]) < 16) throw new Error("Node 1
 
 // Load up the discord.js library
 const Michelle = require("./base/Michelle");
-const {Intents} = require("discord.js");
+const {GatewayIntentBits} = require("discord.js");
 // We also load the rest of the things we need in this file:
 const { promisify } = require("util");
 const readdir = promisify(require("fs").readdir);
 const DBL = require("dblapi.js");
 const http = require("http");
 
+// Use all non-privileged intents to spite people
+const nonPrivilegedIntents = [
+  GatewayIntentBits.Guilds, 
+  GatewayIntentBits.GuildBans, 
+  GatewayIntentBits.GuildEmojisAndStickers, 
+  GatewayIntentBits.GuildIntegrations, 
+  GatewayIntentBits.GuildWebhooks, 
+  GatewayIntentBits.GuildInvites, 
+  GatewayIntentBits.GuildVoiceStates, 
+  GatewayIntentBits.DirectMessages, 
+  GatewayIntentBits.DirectMessageReactions, 
+  GatewayIntentBits.DirectMessageTyping
+];
+
 // This is your client. Some people call it `bot`, some people call it `self`,
 // some might call it `cootchie`. Either way, when you see `client.something`,
 // or `bot.something`, this is what we're refering to. Your client.
-
-// Use all non-privileged intents to spite people
-const nonPrivilegedIntents = [
-  Intents.FLAGS.GUILDS, 
-  Intents.FLAGS.GUILD_BANS, 
-  Intents.FLAGS.GUILD_EMOJIS_AND_STICKERS, 
-  Intents.FLAGS.GUILD_INTEGRATIONS, 
-  Intents.FLAGS.GUILD_WEBHOOKS, 
-  Intents.FLAGS.GUILD_INVITES, 
-  Intents.FLAGS.GUILD_VOICE_STATES, 
-  Intents.FLAGS.DIRECT_MESSAGES, 
-  Intents.FLAGS.DIRECT_MESSAGE_REACTIONS, 
-  Intents.FLAGS.DIRECT_MESSAGE_TYPING
-];
-
 const client = new Michelle({intents: nonPrivilegedIntents, allowedMentions: {repliedUser: true}}, require("./config.js"));
 
 if (client.config.dbltoken) { client.dbl = new DBL(client.config.dbltoken, client); }
@@ -45,7 +44,7 @@ const init = async () => {
   client.logger.log(`Loading a total of ${cmds.length} slash commands`);
   cmds.forEach(c => {
     if (!c.endsWith(".js")) return;
-    const response = client.loadCommand(c); // Pass "true" as the second argument for slash command processing
+    const response = client.loadCommand(c);
     if (response) console.log(response);
   });
 

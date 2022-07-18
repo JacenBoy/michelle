@@ -1,8 +1,8 @@
 // Get a random anime
+const {ApplicationCommandOptionType} = require("discord.js");
 const kitsu = require("node-kitsu");
 const VNDB = require("vndb-api");
 const { DateTime } = require("luxon");
-//const moment = require("moment");
 
 exports.run = async (interaction) => {
   const mediaType = interaction.options.getString("type");
@@ -152,7 +152,7 @@ exports.conf = {
     {
       name: "type",
       description: "The type of media to generate",
-      type: "STRING",
+      type: ApplicationCommandOptionType.String,
       required: true,
       choices: [
         {

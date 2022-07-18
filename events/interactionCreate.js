@@ -1,6 +1,8 @@
+const {InteractionType} = require("discord.js");
+
 module.exports = async (client, interaction) => {
   // Ignore if the interaction isn't a command
-  if (!interaction.isCommand()) return;
+  if (interaction.type != InteractionType.ApplicationCommand) return;
 
   // Check the commands collection for the command
   const cmd = interaction.client.commands.get(interaction.commandName);

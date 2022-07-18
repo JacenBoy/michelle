@@ -1,4 +1,5 @@
 // Search for a visual novel on VNDB
+const {ApplicationCommandOptionType} = require("discord.js");
 const VNDB = require("vndb-api");
 const { DateTime } = require("luxon");
 
@@ -59,7 +60,7 @@ exports.conf = {
     {
       name: "title",
       description: "An anime title",
-      type: "STRING",
+      type: ApplicationCommandOptionType.String,
       required: true
     }
   ]

@@ -5,6 +5,7 @@ command is also filtered by level, so if a user does not have access to
 a command, it is not shown to them. If a command name is given with the
 help command, its extended help is shown.
 */
+const {ApplicationCommandOptionType} = require("discord.js");
 
 exports.run = (interaction) => {
   const command = interaction.options.getString("command");
@@ -34,7 +35,7 @@ exports.conf = {
     {
       name: "command",
       description: "The name of a command",
-      type: "STRING"
+      type: ApplicationCommandOptionType.String
     }
   ]
 };

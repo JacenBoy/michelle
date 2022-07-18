@@ -1,4 +1,5 @@
 // Display a random anime clip
+const {ApplicationCommandOptionType} = require("discord.js");
 const mongoose = require("mongoose");
 const Clip = require("../models/clip.js");
 

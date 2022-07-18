@@ -1,6 +1,6 @@
 {
   "name": "michelle",
-  "version": "8.1.0",
+  "version": "9.0.0",
   "description": "A Discord bot heavily based on GuideBot",
   "main": "index.js",
   "scripts": {
@@ -29,7 +29,7 @@
     "booru": "^2.5.2",
     "chalk": "^4.1.2",
     "dblapi.js": "^2.4.1",
-    "discord.js": "^13.5.1",
+    "discord.js": "^14.0.2",
     "is-image-url": "^1.1.8",
     "luxon": "^2.3.0",
     "mongoose": "^6.1.5",

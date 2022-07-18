@@ -1,4 +1,5 @@
 // Get information about a light novel from WLN Updates
+const {ApplicationCommandOptionType} = require("discord.js");
 const WLNUpdates = require("../modules/WLNUpdates.js");
 
 exports.run = async (interaction) => {
@@ -47,7 +48,7 @@ exports.conf = {
     {
       name: "title",
       description: "A light novel title",
-      type: "STRING",
+      type: ApplicationCommandOptionType.String,
       required: true
     }
   ]

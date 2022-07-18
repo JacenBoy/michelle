@@ -1,9 +1,10 @@
 // Get a random image from a booru
+const {ApplicationCommandOptionType, ChannelType} = require("discord.js");
 const booru = require("booru");
 
 exports.run = async (interaction) => {
   await interaction.deferReply();
-  const site = (! ["DM","GROUP_DM"].includes(interaction.channel.type) ? (interaction.channel.nsfw ? "gb" : "sb") : "sb");
+  const site = (interaction.channel.type == ChannelType.DM || interaction.channel.type == ChannelType.GroupDM  ? "sb" : (interaction.channel.nsfw ? "gb" : "sb"));
   const taglist = interaction.options.getString("tags") || "";
   let tagarray;
   if (taglist.indexOf("_") != -1) {
@@ -49,7 +50,7 @@ exports.conf = {
     {
       name: "tags",
       description: "A list of Booru tags to search for",
-      type: "STRING",
+      type: ApplicationCommandOptionType.String,
       required: true
     }
   ]

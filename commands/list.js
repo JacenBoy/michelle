@@ -1,4 +1,5 @@
 // Add/view anime lists
+const {ApplicationCommandOptionType} = require("discord.js");
 const mongoose = require("mongoose");
 const List = require("../models/list.js");
 
@@ -62,12 +63,12 @@ exports.conf = {
     {
       name: "view",
       description: "View the links to another user's anime lists",
-      type: "SUB_COMMAND",
+      type: ApplicationCommandOptionType.Subcommand,
       options: [
         {
           name: "user",
           description: "The user whose links you want to retrieve",
-          type: "USER",
+          type: ApplicationCommandOptionType.User,
           required: true
         }
       ]
@@ -75,12 +76,12 @@ exports.conf = {
     {
       name: "update",
       description: "Add or update links to your anime lists",
-      type: "SUB_COMMAND",
+      type: ApplicationCommandOptionType.Subcommand,
       options: [
         {
           name: "site",
           description: "The site you want to add a link to",
-          type: "STRING",
+          type: ApplicationCommandOptionType.String,
           required: true,
           choices: [
             {
@@ -100,7 +101,7 @@ exports.conf = {
         {
           name: "username",
           description: "Your username on the site",
-          type: "STRING",
+          type: ApplicationCommandOptionType.String,
           required: true
         }
       ]

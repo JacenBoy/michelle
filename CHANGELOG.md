@@ -1,6 +1,9 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
+## 9.0 - Busywork
+- Update to Discord.js v14
+- Package updates
 
 ## 8.1 - Cleanup 2: Electric Boogaloo (2022-03-28)
 - Remove unneeded Guide Bot functions

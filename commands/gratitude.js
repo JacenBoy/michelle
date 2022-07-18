@@ -1,4 +1,5 @@
 // Command Description
+const {ApplicationCommandOptionType} = require("discord.js");
 const Special = require("../models/special.js");
 
 exports.run = async (interaction) => {
@@ -26,7 +27,7 @@ exports.conf = {
     {
       name: "user",
       description: "The user to target",
-      type: "USER",
+      type: ApplicationCommandOptionType.User,
       required: true
     }
   ]

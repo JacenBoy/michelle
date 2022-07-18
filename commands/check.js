@@ -1,3 +1,4 @@
+const {ApplicationCommandOptionType} = require("discord.js");
 const Special = require("../models/special.js");
 const { DateTime } = require("luxon");
 
@@ -103,7 +104,7 @@ exports.conf = {
     {
       name: "mode",
       description: "The information to check (abuse/gratitude/horny)",
-      type: "STRING",
+      type: ApplicationCommandOptionType.String,
       required: true,
       choices: [
         {
@@ -123,7 +124,7 @@ exports.conf = {
     {
       name: "user",
       description: "The user to target",
-      type: "USER"
+      type: ApplicationCommandOptionType.User
     }
   ]
 };

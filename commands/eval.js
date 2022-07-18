@@ -5,6 +5,8 @@
 
 // However it's, like, super ultra useful for troubleshooting and doing stuff
 // you don't want to put in a command.
+const {ApplicationCommandOptionType} = require("discord.js");
+
 exports.run = async (interaction) => {
   const fetch = require("node-fetch");
   const code = interaction.options.getString("code");
@@ -43,7 +45,7 @@ exports.conf = {
     {
       name: "code",
       description: "The code to evaluate",
-      type: "STRING",
+      type: ApplicationCommandOptionType.String,
       required: true
     }
   ]

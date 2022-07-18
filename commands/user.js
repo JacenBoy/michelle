@@ -1,4 +1,5 @@
 // Search Kitsu for a user
+const {ApplicationCommandOptionType} = require("discord.js");
 const kitsu = require("node-kitsu");
 
 exports.run = async (interaction) => {
@@ -49,7 +50,7 @@ exports.conf = {
     {
       name: "user",
       description: "The Kitsu username of the user to search for",
-      type: "STRING",
+      type: ApplicationCommandOptionType.String,
       required: true
     }
   ]

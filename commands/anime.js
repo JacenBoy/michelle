@@ -1,4 +1,5 @@
 // Search Kitsu for an anime
+const {ApplicationCommandOptionType} = require("discord.js");
 const kitsu = require("node-kitsu");
 
 exports.run = async (interaction) => {
@@ -49,7 +50,7 @@ exports.conf = {
     {
       name: "title",
       description: "An anime title",
-      type: "STRING",
+      type: ApplicationCommandOptionType.String,
       required: true
     }
   ]

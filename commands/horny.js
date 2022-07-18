@@ -1,3 +1,4 @@
+const {ApplicationCommandOptionType} = require("discord.js");
 const { DateTime } = require("luxon");
 const Special = require("../models/special.js");
 
@@ -35,7 +36,7 @@ exports.conf = {
     {
       name: "user",
       description: "The user to target",
-      type: "USER",
+      type: ApplicationCommandOptionType.User,
       required: true
     }
   ]

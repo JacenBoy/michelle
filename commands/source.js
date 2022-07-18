@@ -1,4 +1,5 @@
 // Find the source of an image
+const {ApplicationCommandOptionType} = require("discord.js");
 const checkImage = require("is-image-url");
 const Sagiri = require("sagiri");
 
@@ -38,7 +39,7 @@ exports.conf = {
     {
       name: "link",
       description: "The link to an image",
-      type: "STRING",
+      type: ApplicationCommandOptionType.String,
       required: true
     }
   ]

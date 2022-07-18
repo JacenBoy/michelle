@@ -1,3 +1,5 @@
+const {ApplicationCommandOptionType} = require("discord.js");
+
 exports.run = async (interaction) => {
   interaction.reply({"content": "Deploying commands", "ephemeral": true});
   const commands = interaction.options.getString("commands").split(" ");
@@ -18,13 +20,13 @@ exports.conf = {
     {
       name: "commands",
       description: "The commands to reload",
-      type: "STRING",
+      type: ApplicationCommandOptionType.String,
       required: true
     },
     {
       name: "guild",
       description: "The guild to deploy the commands to",
-      type: "STRING"
+      type: ApplicationCommandOptionType.String
     }
   ]
 };
