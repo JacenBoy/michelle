@@ -21,7 +21,11 @@ module.exports = async (client, interaction) => {
     client.logger.cmd(`[CMD] ${interaction.user.username} (${interaction.user.id}) ran command ${cmd.help.name}`);
     await cmd.run(interaction);
   } catch (ex) {
-    interaction.reply({content: "An error occurred running this command", ephemeral: true});
+    if (interaction.deferred) {
+      interaction.editReply("An error occurred running this command");
+    } else {
+      interaction.reply({content: "An error occurred running this command", ephemeral: true});
+    }
     client.logger.error(ex);
   }
 };

@@ -6,6 +6,7 @@ const { DateTime } = require("luxon");
 exports.run = async (interaction) => {
   const vnname = interaction.options.getString("title");
   if (!vnname) return interaction.reply({"content": "Please specify a visual novel name.", "ephemeral": true});
+  interaction.client.logger.debug(`VN search string: ${vnname}`);
   await interaction.deferReply();
   let results;
   try {
