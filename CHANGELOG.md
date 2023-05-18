@@ -10,6 +10,10 @@ All notable changes to this project will be documented in this file.
 - Fixed error handling when the command has already sent a response
 - Broke the following commands: `booru`, `vn`, `vnsearch`
 
+### 9.0.2
+- Package updates
+- Fix issue with `reload` command where it cannot list reloaded commands
+
 ## 8.1 - Cleanup 2: Electric Boogaloo (2022-03-28)
 - Remove unneeded Guide Bot functions
 - Remove unneeded privileged intents in preparation for April 30.
