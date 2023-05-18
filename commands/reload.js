@@ -1,7 +1,7 @@
 const {ApplicationCommandOptionType} = require("discord.js");
 
 exports.run = async (interaction) => {
-  interaction.reply({"content": "Reloading commands", "ephemeral": true});
+  await interaction.reply({"content": "Reloading commands", "ephemeral": true});
   const commands = interaction.options.getString("commands").split(" ");
   commands.forEach(async (cmd) => {
     const command = interaction.client.commands.get(cmd);

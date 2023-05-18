@@ -8,7 +8,7 @@ exports.run = async (interaction) => {
   if ([].includes(interaction.user.id)) target = interaction.user;
   const profile = await Special.findById(target.id);
   let embed;
-  if (!profile || !Object.keys(profile.horny).length) {
+  if (!profile || !profile.horny.totalCount) {
     const res = await Special.findByIdAndUpdate(target.id, {"horny": {"totalCount": 1, "lastTime": DateTime.now().toString()}}, {upsert: true, new: true});
     embed = {
       "title": `${target.username} was caught being horny!`, 
