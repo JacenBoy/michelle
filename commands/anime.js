@@ -12,7 +12,7 @@ exports.run = async (interaction) => {
     results = await kitsu.searchAnime(aniname, 0);
   } catch (ex) {
     if (ex.message.indexOf("ERR_UNESCAPED_CHARACTERS") != -1) {
-      interaction.editReply("This command only accepts English and Romaji titles. Please translate the title and try again.");
+      return interaction.editReply("This command only accepts English and Romaji titles. Please translate the title and try again.");
     } else {
       interaction.editReply("An error occurred running this command. Please try again later.");
     }
