@@ -14,6 +14,10 @@ All notable changes to this project will be documented in this file.
 - Package updates
 - Fix issue with `reload` command where it cannot list reloaded commands
 
+### 9.0.3
+- Package updates
+- Fix processing of unsupported characters
+
 ## 8.1 - Cleanup 2: Electric Boogaloo (2022-03-28)
 - Remove unneeded Guide Bot functions
 - Remove unneeded privileged intents in preparation for April 30.
