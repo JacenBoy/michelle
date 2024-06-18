@@ -29,7 +29,7 @@
     "booru": "^2.5.2",
     "chalk": "^4.1.2",
     "dblapi.js": "^2.4.1",
-    "discord.js": "^14.14.1",
+    "discord.js": "^14.15.3",
     "is-image-url": "^1.1.8",
     "luxon": "^2.5.2",
     "mongoose": "^6.12.0",
