@@ -18,6 +18,11 @@ All notable changes to this project will be documented in this file.
 - Package updates
 - Fix processing of unsupported characters
 
+### 9.0.4
+- Begin to remove dependency on `node-kitsu` package
+- Update to new Kitsu domain
+- Package updates
+
 ## 8.1 - Cleanup 2: Electric Boogaloo (2022-03-28)
 - Remove unneeded Guide Bot functions
 - Remove unneeded privileged intents in preparation for April 30.
