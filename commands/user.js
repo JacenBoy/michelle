@@ -1,6 +1,6 @@
 // Search Kitsu for a user
-const {ApplicationCommandOptionType} = require("discord.js");
-const kitsu = require("node-kitsu");
+const { ApplicationCommandOptionType } = require("discord.js");
+const kitsu = require("../modules/node-kitsu.js");
 
 exports.run = async (interaction) => {
   const uname = interaction.options.getString("user");
@@ -37,10 +37,10 @@ exports.run = async (interaction) => {
       { "name": "Reactions:", "value": `${aniresult.mediaReactionsCount || 0}`, "inline": true }
     ]
   };
-  interaction.editReply({"embeds": [embed]});
+  interaction.editReply({ "embeds": [embed] });
   interaction.client.logger.log(`User ${aniresult.name} found on Kitsu`);
 };
-  
+
 exports.conf = {
   enabled: true,
   global: true,

@@ -1,10 +1,10 @@
 // Search Kitsu for a manga
-const {ApplicationCommandOptionType} = require("discord.js");
-const kitsu = require("node-kitsu");
+const { ApplicationCommandOptionType } = require("discord.js");
+const kitsu = require("../modules/node-kitsu.js");
 
 exports.run = async (interaction) => {
   const aniname = interaction.options.getString("title");
-  if (!aniname) return interaction.reply({"content": "Please specify a manga name.", "ephemeral": true});
+  if (!aniname) return interaction.reply({ "content": "Please specify a manga name.", "ephemeral": true });
   await interaction.deferReply();
   interaction.client.logger.debug(`Search started for search term "${aniname}"`);
   let results;
@@ -33,14 +33,14 @@ exports.run = async (interaction) => {
     "image": { "url": aniresult.posterImage.small },
     "fields": [
       { "name": "Rating:", "value": `${aniresult.averageRating || 0}% Approval`, "inline": true },
-      { "name": "Chapters:", "value":  `${aniresult.chapterCount || 0} (${aniresult.subtype})`, "inline": true },
+      { "name": "Chapters:", "value": `${aniresult.chapterCount || 0} (${aniresult.subtype})`, "inline": true },
       { "name": "Status:", "value": aniresult.status == "tba" ? "TBA" : `${aniresult.status.charAt(0).toUpperCase()}${aniresult.status.substr(1).toLowerCase()}`, "inline": true }
     ]
   };
-  interaction.editReply({"embeds": [embed]});
+  interaction.editReply({ "embeds": [embed] });
   interaction.client.logger.log(`Result found for search term "${aniname}": "${aniresult.titles.en || aniresult.canonicalTitle || aniresult.titles.en_jp}"`);
 };
-  
+
 exports.conf = {
   enabled: true,
   global: true,
@@ -55,7 +55,7 @@ exports.conf = {
     }
   ]
 };
-  
+
 exports.help = {
   name: "manga",
   category: "Kitsu",

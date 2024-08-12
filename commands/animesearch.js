@@ -1,10 +1,10 @@
 // Search Kitsu for multiple anime
-const {ApplicationCommandOptionType} = require("discord.js");
-const kitsu = require("node-kitsu");
+const { ApplicationCommandOptionType } = require("discord.js");
+const kitsu = require("../modules/node-kitsu.js");
 
 exports.run = async (interaction) => {
   const aniname = interaction.options.getString("title");
-  if (!aniname) return interaction.reply({"content": "Please specify an anime name.", "ephemeral": true});
+  if (!aniname) return interaction.reply({ "content": "Please specify an anime name.", "ephemeral": true });
   await interaction.deferReply();
   interaction.client.logger.debug(`Search started for search term "${aniname}"`);
   let results;
@@ -24,24 +24,24 @@ exports.run = async (interaction) => {
     return;
   }
   const fieldarry = [];
-  for (let i=0;i<results.length;i++) {
+  for (let i = 0; i < results.length; i++) {
     const aniresult = results[i].attributes;
     fieldarry[i] = {
       "name": aniresult.titles.en || aniresult.canonicalTitle || aniresult.titles.en_jp,
       "value": `Rating: ${aniresult.averageRating || 0}%\nEpisodes: ${aniresult.episodeCount || 0}\nStatus: ${aniresult.status == "tba" ? "TBA" : `${aniresult.status.charAt(0).toUpperCase()}${aniresult.status.substr(1).toLowerCase()}`}\n[Kitsu.io](https://kitsu.io/anime/${aniresult.slug})`
     };
   }
-  
+
   const embed = {
     "title": "Search Results",
     "description": "\u200b",
     "color": interaction.client.colorInt("#fd8320"),
     "fields": fieldarry
   };
-  interaction.editReply({"embeds": [embed]});
+  interaction.editReply({ "embeds": [embed] });
   interaction.client.logger.log(`Results found for search term "${aniname}"`);
 };
-  
+
 exports.conf = {
   enabled: true,
   global: true,
@@ -56,7 +56,7 @@ exports.conf = {
     }
   ]
 };
-  
+
 exports.help = {
   name: "animesearch",
   category: "Kitsu",

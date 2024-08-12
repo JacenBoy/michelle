@@ -1,5 +1,5 @@
 // Add/view anime lists
-const {ApplicationCommandOptionType} = require("discord.js");
+const { ApplicationCommandOptionType } = require("discord.js");
 const mongoose = require("mongoose");
 const List = require("../models/list.js");
 
@@ -14,15 +14,15 @@ exports.run = async (interaction) => {
       const fieldarray = [];
       let i = 0;
       if (result.kitsu) {
-        fieldarray[i] = {"name": "Kitsu", "value": `[${result.kitsu}](https://kitsu.io/users/${result.kitsu})`};
+        fieldarray[i] = { "name": "Kitsu", "value": `[${result.kitsu}](https://kitsu.app/users/${result.kitsu})` };
         i++;
       }
       if (result.mal) {
-        fieldarray[i] = {"name": "MyAnimeList", "value": `[${result.mal}](https://myanimelist.net/profile/${result.mal})`};
+        fieldarray[i] = { "name": "MyAnimeList", "value": `[${result.mal}](https://myanimelist.net/profile/${result.mal})` };
         i++;
       }
       if (result.anilist) {
-        fieldarray[i] = {"name": "AniList", "value": `[${result.anilist}](https://anilist.co/user/${result.kitsu})`};
+        fieldarray[i] = { "name": "AniList", "value": `[${result.anilist}](https://anilist.co/user/${result.kitsu})` };
         i++;
       }
 
@@ -31,7 +31,7 @@ exports.run = async (interaction) => {
         "thumbnail": { "url": target.avatarURL() || target.defaultAvatarURL() },
         "fields": fieldarray
       };
-      interaction.reply({"embeds": [embed]});
+      interaction.reply({ "embeds": [embed] });
     });
   } else {
     // Add mode - Add a list to the user's profile
@@ -39,13 +39,13 @@ exports.run = async (interaction) => {
     const uname = interaction.options.getString("username");
     switch (site) {
       case "kitsu":
-        await List.updateOne({"_id": interaction.user.id}, {"kitsu": `${uname.toLowerCase() == "clear" ? "" : uname}`}, {upsert: true});
+        await List.updateOne({ "_id": interaction.user.id }, { "kitsu": `${uname.toLowerCase() == "clear" ? "" : uname}` }, { upsert: true });
         break;
       case "mal":
-        await List.updateOne({"_id": interaction.user.id}, {"mal": `${uname.toLowerCase() == "clear" ? "" : uname}`}, {upsert: true});
+        await List.updateOne({ "_id": interaction.user.id }, { "mal": `${uname.toLowerCase() == "clear" ? "" : uname}` }, { upsert: true });
         break;
       case "anilist":
-        await List.updateOne({"_id": interaction.user.id}, {"anilist": `${uname.toLowerCase() == "clear" ? "" : uname}`}, {upsert: true});
+        await List.updateOne({ "_id": interaction.user.id }, { "anilist": `${uname.toLowerCase() == "clear" ? "" : uname}` }, { upsert: true });
         break;
       default:
         return interaction.reply("Improper format. Use `/help list` for assistance.");
@@ -53,7 +53,7 @@ exports.run = async (interaction) => {
     interaction.reply("Anime list has been updated.");
   }
 };
-  
+
 exports.conf = {
   enabled: true,
   global: true,
@@ -85,7 +85,7 @@ exports.conf = {
           required: true,
           choices: [
             {
-              name: "Kitsu.io",
+              name: "Kitsu",
               value: "kitsu"
             },
             {
@@ -108,7 +108,7 @@ exports.conf = {
     }
   ]
 };
-  
+
 exports.help = {
   name: "list",
   category: "Anime",

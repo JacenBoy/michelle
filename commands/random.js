@@ -1,19 +1,19 @@
 // Get a random anime
-const {ApplicationCommandOptionType} = require("discord.js");
-const kitsu = require("node-kitsu");
+const { ApplicationCommandOptionType } = require("discord.js");
+const kitsu = require("../modules/node-kitsu.js");
 const VNDB = require("vndb-api");
 const { DateTime } = require("luxon");
 
 exports.run = async (interaction) => {
   const mediaType = interaction.options.getString("type");
-  if (!mediaType) return interaction.reply({content: "Missing argument. Please specify \"anime\", \"manga\", or \"visual novel\".", ephemeral: true});
+  if (!mediaType) return interaction.reply({ content: "Missing argument. Please specify \"anime\", \"manga\", or \"visual novel\".", ephemeral: true });
   await interaction.deferReply();
   let embed;
   let found = false;
   switch (mediaType) {
     case "anime":
       while (!found) {
-        const rnd = interaction.client.randInt(0,100000);
+        const rnd = interaction.client.randInt(0, 100000);
         let results;
         let aniresult;
         try {
@@ -34,7 +34,7 @@ exports.run = async (interaction) => {
             "image": { "url": aniresult.posterImage.small },
             "fields": [
               { "name": "Rating:", "value": `${aniresult.averageRating || 0}% Approval`, "inline": true },
-              { "name": "Episodes:", "value":  `${aniresult.episodeCount || 0} (${aniresult.subtype})`, "inline": true },
+              { "name": "Episodes:", "value": `${aniresult.episodeCount || 0} (${aniresult.subtype})`, "inline": true },
               { "name": "Status:", "value": aniresult.status == "tba" ? "TBA" : `${aniresult.status.charAt(0).toUpperCase()}${aniresult.status.substr(1).toLowerCase()}`, "inline": true }
             ]
           };
@@ -49,7 +49,7 @@ exports.run = async (interaction) => {
       break;
     case "manga":
       while (!found) {
-        const rnd = interaction.client.randInt(0,100000);
+        const rnd = interaction.client.randInt(0, 100000);
         let results;
         let aniresult;
         try {
@@ -70,7 +70,7 @@ exports.run = async (interaction) => {
             "image": { "url": aniresult.posterImage.small },
             "fields": [
               { "name": "Rating:", "value": `${aniresult.averageRating || 0}% Approval`, "inline": true },
-              { "name": "Chapters:", "value":  `${aniresult.episodeCount || 0} (${aniresult.subtype})`, "inline": true },
+              { "name": "Chapters:", "value": `${aniresult.episodeCount || 0} (${aniresult.subtype})`, "inline": true },
               { "name": "Status:", "value": aniresult.status == "tba" ? "TBA" : `${aniresult.status.charAt(0).toUpperCase()}${aniresult.status.substr(1).toLowerCase()}`, "inline": true }
             ]
           };
@@ -92,7 +92,7 @@ exports.run = async (interaction) => {
         try {
           const vndb = new VNDB("michelle-vndb");
           const dbinfo = await vndb.query("dbstats");
-          const rnd = interaction.client.randInt(1,dbinfo.vn);
+          const rnd = interaction.client.randInt(1, dbinfo.vn);
           results = await vndb.query(`get vn basic,details (id = ${rnd})`);
         } catch (ex) {
           interaction.editReply("An error occurred running this command. Please try again later.");
@@ -121,11 +121,11 @@ exports.run = async (interaction) => {
             "url": `https://vndb.org/v${vnresult.id}`,
             "description": interaction.client.cleanSyn(vnresult.description),
             "color": interaction.client.colorInt("#071c30"),
-            "image": {"url": vnresult.image_nsfw ? (interaction.channel.nsfw ? vnresult.image : "https://michelle.jacenboy.com/assets/nsfw-overlay.png") : vnresult.image},
+            "image": { "url": vnresult.image_nsfw ? (interaction.channel.nsfw ? vnresult.image : "https://michelle.jacenboy.com/assets/nsfw-overlay.png") : vnresult.image },
             "fields": [
-              {"name": "Release Date", "value": DateTime.fromISO(vnresult.released).toFormat("MMM d',' yyyy")},
-              {"name": "Languages", "value": langs.join(" ")},
-              {"name": "Platforms", "value": plats.join(" ")}
+              { "name": "Release Date", "value": DateTime.fromISO(vnresult.released).toFormat("MMM d',' yyyy") },
+              { "name": "Languages", "value": langs.join(" ") },
+              { "name": "Platforms", "value": plats.join(" ") }
             ]
           };
           interaction.client.logger.log(`VN sucesfully generated: ${embed.title}`);
@@ -140,7 +140,7 @@ exports.run = async (interaction) => {
     default:
       return interaction.editReply("Invalid argument. Please specify \"anime\", \"manga\", or \"visual novel\".");
   }
-  interaction.editReply({"embeds": [embed]});
+  interaction.editReply({ "embeds": [embed] });
 };
 
 exports.conf = {
