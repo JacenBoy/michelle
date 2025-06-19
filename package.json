@@ -32,7 +32,7 @@
     "discord.js": "^14.14.1",
     "is-image-url": "^1.1.8",
     "luxon": "^2.5.2",
-    "mongoose": "^6.12.0",
+    "mongoose": "^6.13.6",
     "node-fetch": "^2.6.7",
     "node-kitsu": "^1.1.1",
     "sagiri": "^3.1.1",
